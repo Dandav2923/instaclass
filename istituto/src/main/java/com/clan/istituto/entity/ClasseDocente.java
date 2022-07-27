@@ -22,6 +22,7 @@ public class ClasseDocente {
     private Integer classeFk;
 
 
+
     public ClasseDocente(Integer studenteFk, Integer classeFk) {
         this.studenteFk = studenteFk;
         this.classeFk = classeFk;
