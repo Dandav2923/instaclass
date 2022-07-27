@@ -9,11 +9,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="shared" />
         <module name="auth-service" />
-        <module name="untitled" />
+        <module name="istituto" />
+        <module name="classi" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="CAG" target="17" />
+      <module name="untitled" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
