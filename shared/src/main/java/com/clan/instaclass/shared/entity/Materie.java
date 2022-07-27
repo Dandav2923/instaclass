@@ -21,12 +21,22 @@ public class Materie {
     private int id;
     @Column(name = "nome")
     private String nomeMateria;
-    @OneToMany(cascade =  {CascadeType.REMOVE}, mappedBy = "materieVoto")
-    private List<Voti> voti = new ArrayList<Voti>();
+    @OneToMany(mappedBy = "materiaVoto")
+    private List<Voti> listaMaterieVoti = new ArrayList<Voti>();
+
     @ManyToMany(mappedBy = "listaIstitutiMaterie")
-    private List<Istituti> listaIstituti = new ArrayList<Istituti>();
-    @ManyToMany(mappedBy = "materieDocenti")
-    private List<Docenti> listaDocenti = new ArrayList<Docenti>();
+    private List<Istituti> listaMaterieIstituti = new ArrayList<Istituti>();
+
+    @ManyToMany(mappedBy = "listaDocentiMaterie")
+    private List<Docenti> listaMaterieDocenti = new ArrayList<Docenti>();
+
+    public Materie(String nomeMateria, List<Voti> listaMaterieVoti, List<Istituti> listaMaterieIstituti, List<Docenti> listaMaterieDocenti) {
+        this.nomeMateria = nomeMateria;
+        this.listaMaterieVoti = listaMaterieVoti;
+        this.listaMaterieIstituti = listaMaterieIstituti;
+        this.listaMaterieDocenti = listaMaterieDocenti;
+    }
+
     public Materie(String nomeMateria) {
         this.nomeMateria = nomeMateria;
     }

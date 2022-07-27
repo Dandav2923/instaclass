@@ -32,4 +32,6 @@ public class Presenze {
         this.presente = presente;
         this.studentePresenze = studente;
     }
+
+
 }

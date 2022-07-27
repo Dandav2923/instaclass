@@ -29,18 +29,29 @@ public class Studenti {
     @ManyToMany(mappedBy = "listaClassiStudenti")
     private List<Classi> listaStudentiClassi = new ArrayList<Classi>();
     @ManyToMany(mappedBy = "listaIstitutiStudenti")
-    private List<Istituti> istituti = new ArrayList<Istituti>();
+    private List<Istituti> listaStudentiistituti = new ArrayList<Istituti>();
 
     @OneToMany(mappedBy = "studentePresenze")
-    private List<Presenze> presenze = new ArrayList<Presenze>();
+    private List<Presenze> listaStudentiPresenze = new ArrayList<Presenze>();
 
     @OneToMany(mappedBy = "studenteVoto")
-    private List<Voti> voti = new ArrayList<Voti>();
+    private List<Voti> listaStudentiVoti = new ArrayList<Voti>();
 
     public Studenti(String nomeStudente, String cognomeStudente, String cf, String passwordStudente) {
         this.nomeStudente = nomeStudente;
         this.cognomeStudente = cognomeStudente;
         this.codiceFiscaleStudente = cf;
         this.passwordStudente = passwordStudente;
+    }
+
+    public Studenti(String nomeStudente, String cognomeStudente, String codiceFiscaleStudente, String passwordStudente, List<Classi> listaStudentiClassi, List<Istituti> listaStudentiistituti, List<Presenze> listaStudentiPresenze, List<Voti> listaStudentiVoti) {
+        this.nomeStudente = nomeStudente;
+        this.cognomeStudente = cognomeStudente;
+        this.codiceFiscaleStudente = codiceFiscaleStudente;
+        this.passwordStudente = passwordStudente;
+        this.listaStudentiClassi = listaStudentiClassi;
+        this.listaStudentiistituti = listaStudentiistituti;
+        this.listaStudentiPresenze = listaStudentiPresenze;
+        this.listaStudentiVoti = listaStudentiVoti;
     }
 }
