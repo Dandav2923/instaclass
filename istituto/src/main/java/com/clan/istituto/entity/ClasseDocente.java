@@ -21,6 +21,7 @@ public class ClasseDocente {
     @Column(name = "classe_fk")
     private Integer classeFk;
 
+
     public ClasseDocente(Integer studenteFk, Integer classeFk) {
         this.studenteFk = studenteFk;
         this.classeFk = classeFk;
