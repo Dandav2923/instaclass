@@ -47,4 +47,9 @@ public class Classi {
         this.classeIstituto = classeIstituto;
         this.listaClassiStudenti = listaClassiStudenti;
     }
+
+    public Classi(String nomeClasse, Istituti classeIstituto) {
+        this.nomeClasse = nomeClasse;
+        this.classeIstituto = classeIstituto;
+    }
 }

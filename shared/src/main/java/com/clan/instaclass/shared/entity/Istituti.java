@@ -23,20 +23,26 @@ public class Istituti {
     private String nomeIstituto;
     @Column(name = "password")
     private String  passwordIstituto;
+
     @OneToMany(mappedBy = "classeIstituto")
     private List<Classi> listaIstitutiClassi = new ArrayList<Classi>();
+
     @ManyToMany
     @JoinTable(name = "istituti_studenti", joinColumns = @JoinColumn(name = "istituto_fk"), inverseJoinColumns = @JoinColumn(name = "studente_fk"))
     private List<Studenti> listaIstitutiStudenti = new ArrayList<Studenti>();
+
     @ManyToMany
     @JoinTable(name = "istituti_materie", joinColumns = @JoinColumn(name = "istituto_fk"), inverseJoinColumns = @JoinColumn(name = "materia_fk"))
     private List<Materie> listaIstitutiMaterie = new ArrayList<Materie>();
+
     @ManyToMany
     @JoinTable(name = "docenti_istituti", joinColumns = @JoinColumn(name = "istituto_fk"), inverseJoinColumns = @JoinColumn(name = "docente_fk"))
-    private List<Docenti> listaDocentiIstituti = new ArrayList<Docenti>();
+    private List<Docenti> listaIstitutiDocenti = new ArrayList<Docenti>();
 
     public Istituti(String nomeIstituto, String password) {
         this.nomeIstituto = nomeIstituto;
         this.passwordIstituto = password;
     }
+
+
 }

@@ -21,7 +21,7 @@ public class Voti {
 
     @ManyToOne
     @JoinColumn(name = "fk_materia")
-    private Materie materieVoto;
+    private Materie materiaVoto;
 
     @ManyToOne
     @JoinColumn(name = "fk_studente")
@@ -29,7 +29,9 @@ public class Voti {
 
     public Voti(Integer punteggio, Materie materie, Studenti studenteVoto) {
         this.punteggioVoto = punteggio;
-        this.materieVoto = materie;
+        this.materiaVoto = materie;
         this.studenteVoto = studenteVoto;
     }
+
+
 }
