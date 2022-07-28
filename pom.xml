@@ -11,8 +11,8 @@
     <modules>
         <module>auth-service</module>
         <module>shared</module>
-        <module>istituto</module>
-        <module>classi</module>
+        <module>istitutoService</module>
+        <module>classeService</module>
     </modules>
 
     <name>instaclass</name>

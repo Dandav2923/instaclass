@@ -9,8 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="shared" />
         <module name="auth-service" />
-        <module name="istituto" />
-        <module name="classi" />
+        <module name="classeService" />
+        <module name="istitutoService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
