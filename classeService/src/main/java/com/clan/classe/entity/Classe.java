@@ -32,5 +32,10 @@ public class Classe {
     @OneToMany(mappedBy = "compitoClasse")
     private List<Compito> listaClassiCompiti = new ArrayList<Compito>();
 
+    @OneToMany(mappedBy = "classeStudenteFk")
+    private List<ClasseStudente> listaClasseStudente = new ArrayList<ClasseStudente>();
+
+    @OneToMany(mappedBy = "classeDocenteFk")
+    private List<ClasseDocente> listaClasseDocente = new ArrayList<ClasseDocente>();
 
 }

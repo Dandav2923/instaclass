@@ -1,4 +1,4 @@
-package com.clan.istituto.entity;
+package com.clan.classe.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,13 +18,13 @@ public class ClasseDocente {
     private int id;
     @Column(name = "docente_fk")
     private Integer studenteFk;
-    @Column(name = "classe_fk")
-    private Integer classeFk;
+    @ManyToOne
+    @JoinColumn(name = "classe_fk")
+    private Classe classeDocenteFk;
 
 
-
-    public ClasseDocente(Integer studenteFk, Integer classeFk) {
+    public ClasseDocente(Integer studenteFk, Classe classeDocenteFk) {
         this.studenteFk = studenteFk;
-        this.classeFk = classeFk;
+        this.classeDocenteFk = classeDocenteFk;
     }
 }
