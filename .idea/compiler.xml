@@ -11,6 +11,7 @@
         <module name="auth-service" />
         <module name="classeService" />
         <module name="istitutoService" />
+        <module name="superAdminService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
