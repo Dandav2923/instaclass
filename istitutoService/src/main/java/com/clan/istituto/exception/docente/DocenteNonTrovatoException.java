@@ -1,4 +1,4 @@
-package com.clan.istituto.exception.teacher;
+package com.clan.istituto.exception.docente;
 
 public class DocenteNonTrovatoException extends Exception{
 
