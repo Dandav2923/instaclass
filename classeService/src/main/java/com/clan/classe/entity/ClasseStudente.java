@@ -17,14 +17,14 @@ public class ClasseStudente {
     @Column(name = "id_classe_studente")
     private int id;
     @Column(name = "studente_fk")
-    private Integer studenteFk;
+    private Integer studentFk;
     @ManyToOne
     @JoinColumn(name = "classe_fk")
-    private Classe classeStudenteFk;
+    private Classe classStudentFk;
 
-    public ClasseStudente(Integer studenteFk, Classe classeStudenteFk) {
-        this.studenteFk = studenteFk;
-        this.classeStudenteFk = classeStudenteFk;
+    public ClasseStudente(Integer studentFk, Classe classStudentFk) {
+        this.studentFk = studentFk;
+        this.classStudentFk = classStudentFk;
     }
 }
 

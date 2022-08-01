@@ -19,36 +19,28 @@ public class Studente {
     @Column(name = "id_studente")
     private int id;
     @Column(name = "nome_studente")
-    private String nomeStudente;
+    private String nameStudent;
     @Column(name = "cognome_studente")
-    private String  cognomeStudente;
+    private String  surnameStudent;
     @Column(name = "codice_fiscale", columnDefinition = "bpchar")
-    private String codiceFiscaleStudente;
+    private String cFStudent;
     @Column(name = "password_studente")
-    private String passwordStudente;
-    @ManyToMany(mappedBy = "listaIstitutiStudenti")
-    private List<Istituto> listaStudentiistituti = new ArrayList<Istituto>();
+    private String passwordStudent;
+    @ManyToMany(mappedBy = "listIstituteStudent")
+    private List<Istituto> listStudentIstitute = new ArrayList<Istituto>();
 
-    @OneToMany(mappedBy = "studentePresenze")
-    private List<Presenza> listaStudentiPresenze = new ArrayList<Presenza>();
-
-    @OneToMany(mappedBy = "studenteVoto")
-    private List<Voto> listaStudentiVoti = new ArrayList<Voto>();
-
-    public Studente(String nomeStudente, String cognomeStudente, String cf, String passwordStudente) {
-        this.nomeStudente = nomeStudente;
-        this.cognomeStudente = cognomeStudente;
-        this.codiceFiscaleStudente = cf;
-        this.passwordStudente = passwordStudente;
+    public Studente(String nameStudent, String surnameStudent, String cFStudent, String passwordStudent) {
+        this.nameStudent = nameStudent;
+        this.surnameStudent = surnameStudent;
+        this.cFStudent = cFStudent;
+        this.passwordStudent = passwordStudent;
     }
 
-    public Studente(String nomeStudente, String cognomeStudente, String codiceFiscaleStudente, String passwordStudente, List<Istituto> listaStudentiIstituti, List<Presenza> listaStudentiPresenze, List<Voto> listaStudentiVoti) {
-        this.nomeStudente = nomeStudente;
-        this.cognomeStudente = cognomeStudente;
-        this.codiceFiscaleStudente = codiceFiscaleStudente;
-        this.passwordStudente = passwordStudente;
-        this.listaStudentiistituti = listaStudentiIstituti;
-        this.listaStudentiPresenze = listaStudentiPresenze;
-        this.listaStudentiVoti = listaStudentiVoti;
+    public Studente(String nameStudent, String surnameStudent, String cFStudent, String passwordStudent, List<Istituto> listStudentIstituto) {
+        this.nameStudent = nameStudent;
+        this.surnameStudent = surnameStudent;
+        this.cFStudent = cFStudent;
+        this.passwordStudent = passwordStudent;
+        this.listStudentIstitute = listStudentIstituto;
     }
 }

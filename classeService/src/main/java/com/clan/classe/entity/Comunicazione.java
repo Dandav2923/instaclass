@@ -19,18 +19,19 @@ public class Comunicazione {
     @Column(name = "id_comunicazione")
     private int id;
     @Column(name = "data_comunicazione")
-    private LocalDate dataComunicazione;
+    private LocalDate communicationDate;
     @Column(name = "nome_comunicazione")
-    private String nomeComunicazione;
+    private String communicationName;
     @Column(name = "descrizione_comunicazione")
-    private String descrizioneComunicazione;
+    private String communicationDescription;
     @ManyToOne
     @JoinColumn(name = "fk_classe")
-    private Classe comunicazioneClasse;
+    private Classe communicationClasses;
 
-    public Comunicazione(LocalDate dataComunicazione, String nomeComunicazione, Classe comunicazioneClasse) {
-        this.dataComunicazione = dataComunicazione;
-        this.nomeComunicazione = nomeComunicazione;
-        this.comunicazioneClasse = comunicazioneClasse;
+    public Comunicazione(LocalDate comunicationDate, String comunicationName, String comunicationDescription, Classe comunicationClasses) {
+        this.communicationDate = comunicationDate;
+        this.communicationName = comunicationName;
+        this.communicationDescription = comunicationDescription;
+        this.communicationClasses = comunicationClasses;
     }
 }

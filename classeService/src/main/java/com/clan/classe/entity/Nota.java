@@ -19,25 +19,25 @@ public class Nota {
     @Column(name = "id_nota")
     private int id;
     @Column(name = "data_nota")
-    private LocalDate dataNota;
+    private LocalDate noteDate;
     @Column(name = "descrizione_nota")
-    private String descrizioneNota;
+    private String noteDescription;
     @Column(name = "cf_studente", columnDefinition = "bpchar")
-    private String cfStudente;
+    private String studentFiscalCode;
     @ManyToOne
     @JoinColumn(name = "fk_classe")
-    private Classe notaClasse;
+    private Classe noteClass;
 
-    public Nota(LocalDate dataNota, String descrizioneNota, String cfStudente, Classe notaClasse) {
-        this.dataNota = dataNota;
-        this.descrizioneNota = descrizioneNota;
-        this.cfStudente = cfStudente;
-        this.notaClasse = notaClasse;
+    public Nota(LocalDate noteDate, String noteDescription, String studentFiscalCode, Classe noteClasse) {
+        this.noteDate = noteDate;
+        this.noteDescription = noteDescription;
+        this.studentFiscalCode = studentFiscalCode;
+        this.noteClass = noteClasse;
     }
 
-    public Nota(LocalDate dataNota, String descrizioneNota, Classe notaClasse) {
-        this.dataNota = dataNota;
-        this.descrizioneNota = descrizioneNota;
-        this.notaClasse = notaClasse;
+    public Nota(LocalDate noteDate, String noteDescription, Classe noteClasse) {
+        this.noteDate = noteDate;
+        this.noteDescription = noteDescription;
+        this.noteClass = noteClasse;
     }
 }

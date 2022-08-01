@@ -19,25 +19,33 @@ public class Istituto {
     @Column(name = "id_istituto")
     private int id;
     @Column(name = "nome_istituto")
-    private String nomeIstituto;
+    private String nameIstitute;
     @Column(name = "password_istituto")
-    private String  passwordIstituto;
+    private String  passwordIstitute;
 
 
     @ManyToMany
     @JoinTable(name = "istituti_studenti", joinColumns = @JoinColumn(name = "istituto_fk"), inverseJoinColumns = @JoinColumn(name = "studente_fk"))
-    private List<Studente> listaIstitutiStudenti = new ArrayList<Studente>();
+    private List<Studente> listIstituteStudent = new ArrayList<Studente>();
 
     @ManyToMany
     @JoinTable(name = "istituti_materie", joinColumns = @JoinColumn(name = "istituto_fk"), inverseJoinColumns = @JoinColumn(name = "materia_fk"))
-    private List<Materia> listaIstitutiMaterie = new ArrayList<Materia>();
+    private List<Materia> listIstituteMatter = new ArrayList<Materia>();
 
     @ManyToMany
     @JoinTable(name = "docenti_istituti", joinColumns = @JoinColumn(name = "istituto_fk"), inverseJoinColumns = @JoinColumn(name = "docente_fk"))
-    private List<Docente> listaIstitutiDocenti = new ArrayList<Docente>();
+    private List<Docente> listIstituteTeacher = new ArrayList<Docente>();
 
-    public Istituto(String nomeIstituto, String passwordIstituto) {
-        this.nomeIstituto = nomeIstituto;
-        this.passwordIstituto = passwordIstituto;
+    public Istituto(String nameIstitute, String passwordIstitute) {
+        this.nameIstitute = nameIstitute;
+        this.passwordIstitute = passwordIstitute;
+    }
+
+    public Istituto(String nameIstitute, String passwordIstitute, List<Studente> listIstituteStudent, List<Materia> listIstituteMatter, List<Docente> listIstituteTeacher) {
+        this.nameIstitute = nameIstitute;
+        this.passwordIstitute = passwordIstitute;
+        this.listIstituteStudent = listIstituteStudent;
+        this.listIstituteMatter = listIstituteMatter;
+        this.listIstituteTeacher = listIstituteTeacher;
     }
 }

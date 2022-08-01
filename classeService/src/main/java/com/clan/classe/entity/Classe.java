@@ -17,25 +17,29 @@ public class Classe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_classe")
-    private int id;
+    private Integer id;
     @Column(name = "nome_classe")
-    private String nomeClasse;
+    private String className;
     @Column(name = "fk_istituto")
-    private Integer istitutoFk;
+    private Integer istituteFk;
 
-    @OneToMany(mappedBy = "calendarioClasse")
-    private List<Calendario> listaClassiCalendari = new ArrayList<Calendario>();
-    @OneToMany(mappedBy = "notaClasse")
-    private List<Nota> listaClassiNote = new ArrayList<Nota>();
-    @OneToMany(mappedBy = "comunicazioneClasse")
-    private List<Comunicazione> listaClassiComunicazioni = new ArrayList<Comunicazione>();
-    @OneToMany(mappedBy = "compitoClasse")
-    private List<Compito> listaClassiCompiti = new ArrayList<Compito>();
+    @OneToMany(mappedBy = "calendarClass")
+    private List<Calendario> listClassesCalendar = new ArrayList<Calendario>();
+    @OneToMany(mappedBy = "noteClass")
+    private List<Nota> listClassesNote = new ArrayList<Nota>();
+    @OneToMany(mappedBy = "communicationClasses")
+    private List<Comunicazione> listComunicationClasses = new ArrayList<Comunicazione>();
+    @OneToMany(mappedBy = "taskClass")
+    private List<Compito> listClassesTask = new ArrayList<Compito>();
 
-    @OneToMany(mappedBy = "classeStudenteFk")
-    private List<ClasseStudente> listaClasseStudente = new ArrayList<ClasseStudente>();
+    @OneToMany(mappedBy = "classStudentFk")
+    private List<ClasseStudente> listaClassesStudent = new ArrayList<ClasseStudente>();
 
-    @OneToMany(mappedBy = "classeDocenteFk")
-    private List<ClasseDocente> listaClasseDocente = new ArrayList<ClasseDocente>();
+    @OneToMany(mappedBy = "classTeacherFk")
+    private List<ClasseDocente> listClassesTeacher = new ArrayList<ClasseDocente>();
 
+    public Classe(String className, Integer istituteFk) {
+        this.className = className;
+        this.istituteFk = istituteFk;
+    }
 }

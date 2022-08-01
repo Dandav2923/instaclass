@@ -19,33 +19,20 @@ public class Docente {
     @Column(name = "id_docente")
     private int id;
     @Column(name = "codice_fiscale", columnDefinition = "bpchar")
-    private String codiceFiscaleDocente;
+    private String cFTeacher;
     @Column(name = "nome_docente")
-    private String  nomeDocente;
+    private String  nameTeacher;
     @Column(name = "cognome_docente")
-    private String cognomeDocente;
+    private String surnameTeacher;
     @Column(name = "password_docente")
-    private String password;
+    private String passwordTeacher;
+
     @ManyToMany
     @JoinTable(name = "docenti_materie" , joinColumns = @JoinColumn(name = "materia_fk"), inverseJoinColumns = @JoinColumn(name = "docente_fk"))
-    private List<Materia> listaDocentiMaterie = new ArrayList<Materia>();
+    private List<Materia> listTeacherMatter = new ArrayList<Materia>();
 
-    @ManyToMany(mappedBy = "listaIstitutiDocenti")
-    private List<Istituto> listaDocentiIstituti = new ArrayList<Istituto>();
+    @ManyToMany(mappedBy = "listIstituteTeacher")
+    private List<Istituto> listTeacherIstitute = new ArrayList<Istituto>();
 
-    public Docente(String codiceFiscaleDocente, String nomeDocente, String cognomeDocente, String password) {
-        this.codiceFiscaleDocente = codiceFiscaleDocente;
-        this.nomeDocente = nomeDocente;
-        this.cognomeDocente = cognomeDocente;
-        this.password = password;
-    }
 
-    public Docente(String codiceFiscaleDocente, String nomeDocente, String cognomeDocente, String password, List<Materia> listaDocentiMaterie,  List<Istituto> listaDocentiIstituti) {
-        this.codiceFiscaleDocente = codiceFiscaleDocente;
-        this.nomeDocente = nomeDocente;
-        this.cognomeDocente = cognomeDocente;
-        this.password = password;
-        this.listaDocentiMaterie = listaDocentiMaterie;
-        this.listaDocentiIstituti = listaDocentiIstituti;
-    }
 }

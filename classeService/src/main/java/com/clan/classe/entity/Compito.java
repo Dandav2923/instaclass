@@ -19,16 +19,17 @@ public class Compito {
     @Column(name = "id_compito")
     private int id;
     @Column(name = "data_consegna")
-    private LocalDate dataConsegna;
-    private String descrizione;
+    private LocalDate deliveryDate;
+    @Column(name = "descrizione")
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "fk_classe")
-    private Classe compitoClasse;
+    private Classe taskClass;
 
-    public Compito(LocalDate dataConsegna, String descrizione, Classe compitoClasse) {
-        this.dataConsegna = dataConsegna;
-        this.descrizione = descrizione;
-        this.compitoClasse = compitoClasse;
+    public Compito(LocalDate deliveryDate, String description, Classe taskClass) {
+        this.deliveryDate = deliveryDate;
+        this.description = description;
+        this.taskClass = taskClass;
     }
 }

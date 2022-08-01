@@ -20,24 +20,22 @@ public class Materia {
     @Column(name = "id_materia")
     private int id;
     @Column(name = "nome_materia")
-    private String nomeMateria;
-    @OneToMany(mappedBy = "materiaVoto")
-    private List<Voto> listaMaterieVoti = new ArrayList<Voto>();
+    private String nameMatter;
 
-    @ManyToMany(mappedBy = "listaIstitutiMaterie")
-    private List<Istituto> listaMaterieIstituti = new ArrayList<Istituto>();
+    @ManyToMany(mappedBy = "listIstituteMatter")
+    private List<Istituto> listMatterIstitute = new ArrayList<Istituto>();
 
-    @ManyToMany(mappedBy = "listaDocentiMaterie")
-    private List<Docente> listaMaterieDocenti = new ArrayList<Docente>();
+    @ManyToMany(mappedBy = "listTeacherMatter")
+    private List<Docente> listMatterTeacher = new ArrayList<Docente>();
 
-    public Materia(String nomeMateria, List<Voto> listaMaterieVoti, List<Istituto> listaMaterieIstituti, List<Docente> listaMaterieDocenti) {
-        this.nomeMateria = nomeMateria;
-        this.listaMaterieVoti = listaMaterieVoti;
-        this.listaMaterieIstituti = listaMaterieIstituti;
-        this.listaMaterieDocenti = listaMaterieDocenti;
+    public Materia(String nameMatter, List<Istituto> listMatterIstitute, List<Docente> listaMatterTeacher) {
+        this.nameMatter = nameMatter;
+        this.listMatterIstitute = listMatterIstitute;
+        this.listMatterTeacher = listaMatterTeacher;
     }
 
-    public Materia(String nomeMateria) {
-        this.nomeMateria = nomeMateria;
+    public Materia(int id, String nameMatter) {
+        this.id = id;
+        this.nameMatter = nameMatter;
     }
 }

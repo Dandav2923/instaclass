@@ -19,16 +19,16 @@ public class Calendario {
     @Column(name = "id_calendario")
     private int id;
     @Column(name = "data_evento")
-    private LocalDate dataEvento;
+    private LocalDate EventDate;
     @Column(name = "nome_evento")
-    private String nomeEvento;
+    private String EventName;
     @ManyToOne
     @JoinColumn(name = "fk_classe")
-    private Classe calendarioClasse;
+    private Classe calendarClass;
 
-    public Calendario(LocalDate dataEvento, String nomeEvento, Classe calendarioClasse) {
-        this.dataEvento = dataEvento;
-        this.nomeEvento = nomeEvento;
-        this.calendarioClasse = calendarioClasse;
+    public Calendario(LocalDate eventDate, String eventName, Classe calendaryClass) {
+        EventDate = eventDate;
+        EventName = eventName;
+        this.calendarClass = calendaryClass;
     }
 }
