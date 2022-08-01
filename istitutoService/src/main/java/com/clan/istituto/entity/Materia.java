@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -16,26 +17,18 @@ import java.util.List;
 @AllArgsConstructor
 public class Materia {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "materia_generator", sequenceName = "materia_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "materia_generator")
     @Column(name = "id_materia")
     private int id;
-    @Column(name = "nome_materia")
+    @Column(name = "nome_materia",columnDefinition = "varchar(100)",nullable = false)
     private String nameMatter;
 
-    @ManyToMany(mappedBy = "listIstituteMatter")
-    private List<Istituto> listMatterIstitute = new ArrayList<Istituto>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_istitute",nullable = false)
+    private Istituto MatterIstitute;
 
-    @ManyToMany(mappedBy = "listTeacherMatter")
-    private List<Docente> listMatterTeacher = new ArrayList<Docente>();
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "listTeacherMatter")
+    private Set<Docente> listMatterTeacher;
 
-    public Materia(String nameMatter, List<Istituto> listMatterIstitute, List<Docente> listaMatterTeacher) {
-        this.nameMatter = nameMatter;
-        this.listMatterIstitute = listMatterIstitute;
-        this.listMatterTeacher = listaMatterTeacher;
-    }
-
-    public Materia(int id, String nameMatter) {
-        this.id = id;
-        this.nameMatter = nameMatter;
-    }
 }
