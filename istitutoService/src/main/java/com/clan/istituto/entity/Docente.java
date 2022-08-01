@@ -28,7 +28,9 @@ public class Docente {
     private String passwordTeacher;
 
     @ManyToMany
-    @JoinTable(name = "docenti_materie" , joinColumns = @JoinColumn(name = "materia_fk"), inverseJoinColumns = @JoinColumn(name = "docente_fk"))
+    @JoinTable(name = "docenti_materie" , joinColumns =
+    @JoinColumn(name = "docente_fk"), inverseJoinColumns =
+    @JoinColumn(name = "materia_fk"))
     private List<Materia> listTeacherMatter = new ArrayList<Materia>();
 
     @ManyToMany(mappedBy = "listIstituteTeacher")

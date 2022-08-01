@@ -23,6 +23,7 @@ public class MateriaController {
     @Autowired
     private MateriaRepository materiaRepository;
 
+    /*
     @GetMapping("/getMatterByIstitute/{ist}")
     public ResponseEntity<List<Materia>> getMatterByIst(@PathVariable("ist") Integer istInt){
         try {
@@ -35,4 +36,5 @@ public class MateriaController {
         }
     }
 
+     */
 }
