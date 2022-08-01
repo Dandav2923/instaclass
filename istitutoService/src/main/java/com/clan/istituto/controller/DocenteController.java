@@ -1,9 +1,9 @@
 package com.clan.istituto.controller;
 
 import com.clan.istituto.entity.Docente;
-import com.clan.istituto.exception.teacher.CFNonCorrettoException;
-import com.clan.istituto.exception.teacher.DatiNonValidiException;
-import com.clan.istituto.exception.teacher.DocenteNonTrovatoException;
+import com.clan.istituto.exception.docente.CFNonCorrettoException;
+import com.clan.istituto.exception.docente.DatiNonValidiException;
+import com.clan.istituto.exception.docente.DocenteNonTrovatoException;
 import com.clan.istituto.repository.DocenteRepository;
 import com.clan.istituto.service.DocenteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/v1/teacher",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/docente",produces = MediaType.APPLICATION_JSON_VALUE)
 public class DocenteController {
 
     @Autowired

@@ -2,9 +2,9 @@ package com.clan.istituto.service;
 
 
 import com.clan.istituto.entity.Docente;
-import com.clan.istituto.exception.teacher.CFNonCorrettoException;
-import com.clan.istituto.exception.teacher.DatiNonValidiException;
-import com.clan.istituto.exception.teacher.DocenteNonTrovatoException;
+import com.clan.istituto.exception.docente.CFNonCorrettoException;
+import com.clan.istituto.exception.docente.DatiNonValidiException;
+import com.clan.istituto.exception.docente.DocenteNonTrovatoException;
 import com.clan.istituto.repository.DocenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class DocenteService {
             }else{
                Docente doc = docenteRepository.findBycFTeacher(cf);
                if (doc == null){
-                   throw new DocenteNonTrovatoException("teacher non trovato");
+                   throw new DocenteNonTrovatoException("docente non trovato");
                }
                else{
                    return doc;
