@@ -15,15 +15,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Presence {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "id_presence_generator", sequenceName = "id_presence_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_presence_generator")
     @Column(name = "id_presenza")
-    private int id;
-    @Column(name = "data_giorno")
+    private Integer id;
+    @Column(name = "data_giorno", nullable = false)
     private LocalDate day;
-    @Column(name = "presente")
+    @Column(name = "presente", nullable = false)
     private Boolean isPresent;
 
-    @Column(name = "fk_studente")
+    @Column(name = "fk_studente", nullable = false)
     private Integer studentFK;
 
     public Presence(LocalDate day, Boolean isPresent, Integer studentFK) {

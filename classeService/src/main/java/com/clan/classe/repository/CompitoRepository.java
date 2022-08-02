@@ -10,9 +10,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface CompitoRepository extends JpaRepository<Compito,Integer> {
-    public List<Compito> findByDataConsegna(LocalDate dataConsegna);
-    public List<Compito> findByDataConsegnaContains(LocalDate dataConsegna);
+    //public List<Compito> findByDataConsegna(LocalDate dataConsegna);
+    //public List<Compito> findByDataConsegnaContains(LocalDate dataConsegna);
 
-    @Query("select compito from Compito compito where compito.compitoClasse=:idClasse")
-    public List<Compito> getAllByIdClass(@Param("idClasse") Integer idClasse);
+    //@Query("select compito from Compito compito where compito.compitoClasse=:idClasse")
+    //public List<Compito> getAllByIdClass(@Param("idClasse") Integer idClasse);
 }

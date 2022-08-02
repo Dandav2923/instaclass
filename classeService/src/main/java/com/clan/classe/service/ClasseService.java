@@ -72,4 +72,12 @@ public class ClasseService {
         }
         classRepository.deleteById(id);
     }
+
+    //metodo per cancellare una classe tramite il nome ma solo di quell'istituto
+    public void deleteByClassName(Integer id, String className){
+        if (id == null && className == "" || className == null){
+            System.out.println("Non hai fornito le informazioni necessarie per la cancellazione");
+        }
+        classRepository.deleteByClassName(id, className);
+    }
 }

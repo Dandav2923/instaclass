@@ -15,15 +15,15 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Compito {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "id_task_generator", sequenceName = "id_task_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_task_generator")
     @Column(name = "id_compito")
-    private int id;
-    @Column(name = "data_consegna")
+    private Integer id;
+    @Column(name = "data_consegna", nullable = false)
     private LocalDate deliveryDate;
-    @Column(name = "descrizione")
+    @Column(name = "descrizione", nullable = false)
     private String description;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "fk_classe")
     private Classe taskClass;
 

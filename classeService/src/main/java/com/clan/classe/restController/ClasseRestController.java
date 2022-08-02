@@ -54,7 +54,7 @@ public class ClasseRestController {
             return new ResponseEntity<List<Classe>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    //metodo che espone il servizio per creare una nuova classe
     @PostMapping(path = "/createClass",consumes = "application/json")
     public ResponseEntity<Classe> createClass(@RequestBody Classe classe){
         try {
@@ -65,9 +65,37 @@ public class ClasseRestController {
             return new ResponseEntity<Classe>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    //metodo che espone il servizio per modificare una classe
+    @PutMapping(path = "/updateClass", consumes = "application/json")
+    public ResponseEntity<Classe> updateClass(@RequestBody Classe classe){
+        try {
+            Classe newClass = classeService.fullyClassUpdate(classe);
+            return new ResponseEntity<Classe>(newClass, HttpStatus.OK);
+        }
+        catch (Exception e ){
+            e.printStackTrace();
+            return new ResponseEntity<Classe>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    //metodo per cancellare una classe per id
+    @DeleteMapping(path = "/deleteById/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Integer id){
+        try {
+            classeService.deleteById(id);
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-
-
-
-
+    //metodo per cancellare una classe per nome di un istituto specifico
+    @DeleteMapping(path = "/deleteById/{id}/{name}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteByClassName(@PathVariable("id")Integer id, @PathVariable("name")String name){
+        if (id == null && name == "" || name == null){
+            System.out.println("Non hai fornito le informazioni necessarie per la cancellazione");
+        }
+        classeService.deleteByClassName(id, name);
+    }
 }

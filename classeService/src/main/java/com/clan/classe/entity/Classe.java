@@ -15,7 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 public class Classe {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "id_class_generator", sequenceName = "id_class_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_class_generator")
     @Column(name = "id_classe")
     private Integer id;
     @Column(name = "nome_classe")
@@ -23,19 +24,17 @@ public class Classe {
     @Column(name = "fk_istituto")
     private Integer istituteFk;
 
-    @OneToMany(mappedBy = "calendarClass")
+    @OneToMany(mappedBy = "calendarClass",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Calendario> listClassesCalendar = new ArrayList<Calendario>();
-    @OneToMany(mappedBy = "noteClass")
+    @OneToMany(mappedBy = "noteClass",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Nota> listClassesNote = new ArrayList<Nota>();
-    @OneToMany(mappedBy = "communicationClasses")
+    @OneToMany(mappedBy = "communicationClasses",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Comunicazione> listComunicationClasses = new ArrayList<Comunicazione>();
-    @OneToMany(mappedBy = "taskClass")
+    @OneToMany(mappedBy = "taskClass",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Compito> listClassesTask = new ArrayList<Compito>();
-
-    @OneToMany(mappedBy = "classStudentFk")
+    @OneToMany(mappedBy = "classStudentFk",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<ClasseStudente> listaClassesStudent = new ArrayList<ClasseStudente>();
-
-    @OneToMany(mappedBy = "classTeacherFk")
+    @OneToMany(mappedBy = "classTeacherFk",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<ClasseDocente> listClassesTeacher = new ArrayList<ClasseDocente>();
 
     public Classe(String className, Integer istituteFk) {

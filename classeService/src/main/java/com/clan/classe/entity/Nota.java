@@ -15,16 +15,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Nota {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "id_note_generator", sequenceName = "id_calendar_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_calendar_generator")
     @Column(name = "id_nota")
-    private int id;
-    @Column(name = "data_nota")
+    private Integer id;
+    @Column(name = "data_nota", nullable = false)
     private LocalDate noteDate;
-    @Column(name = "descrizione_nota")
+    @Column(name = "descrizione_nota", nullable = false)
     private String noteDescription;
-    @Column(name = "cf_studente", columnDefinition = "bpchar")
+    @Column(name = "cf_studente", columnDefinition = "CHAR(16)", unique = true)
     private String studentFiscalCode;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "fk_classe")
     private Classe noteClass;
 

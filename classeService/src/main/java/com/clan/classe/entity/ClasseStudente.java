@@ -13,10 +13,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class ClasseStudente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "id_classStudent_generator", sequenceName = "id_classStudent_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_classStudent_generator")
     @Column(name = "id_classe_studente")
     private int id;
-    @Column(name = "studente_fk")
+    @Column(name = "studente_fk", nullable = true)
     private Integer studentFk;
     @ManyToOne
     @JoinColumn(name = "classe_fk")

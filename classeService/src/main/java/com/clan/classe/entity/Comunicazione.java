@@ -15,16 +15,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Comunicazione {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "id_communication_generator", sequenceName = "id_communication_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_communication_generator")
     @Column(name = "id_comunicazione")
-    private int id;
-    @Column(name = "data_comunicazione")
+    private Integer id;
+    @Column(name = "data_comunicazione", nullable = false)
     private LocalDate communicationDate;
-    @Column(name = "nome_comunicazione")
+    @Column(name = "nome_comunicazione", nullable = false)
     private String communicationName;
     @Column(name = "descrizione_comunicazione")
     private String communicationDescription;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "fk_classe")
     private Classe communicationClasses;
 

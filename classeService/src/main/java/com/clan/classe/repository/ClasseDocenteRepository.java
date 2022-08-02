@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ClasseDocenteRepository extends JpaRepository<ClasseDocente,Integer> {
-    @Query("select classeDocente from ClasseDocente classeDocente where classeDocente.docenteFK = :idDocente")
-    public List<ClasseDocente> getAllByIdDocente (@Param("idDocente") Integer id);
+    //@Query("select classeDocente from ClasseDocente classeDocente where classeDocente.docenteFK = :idDocente")
+    //public List<ClasseDocente> getAllByIdDocente (@Param("idDocente") Integer id);
 }

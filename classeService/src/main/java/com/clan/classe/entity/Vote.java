@@ -13,16 +13,17 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Vote {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "id_vote_generator", sequenceName = "id_vote_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_vote_generator")
     @Column(name = "id_voto")
-    private int id;
-    @Column(name = "punteggio")
+    private Integer id;
+    @Column(name = "punteggio", nullable = false)
     private Integer punteggioVoto;
 
-    @Column(name = "fk_materia")
+    @Column(name = "fk_materia", nullable = false)
     private Integer matterFK;
 
-    @Column(name = "fk_studente")
+    @Column(name = "fk_studente", nullable = false)
     private Integer studentFK;
 
     public Vote(Integer punteggioVoto, Integer matterFK, Integer studentFK) {
