@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "studenti")
@@ -15,32 +16,20 @@ import java.util.List;
 @AllArgsConstructor
 public class Studente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "studente_generator", sequenceName = "studente_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "studente_generator")
     @Column(name = "id_studente")
     private int id;
-    @Column(name = "nome_studente")
+    @Column(name = "nome_studente",columnDefinition = "varchar(100)",nullable = false)
     private String nameStudent;
-    @Column(name = "cognome_studente")
+    @Column(name = "cognome_studente",columnDefinition = "varchar(100)",nullable = false)
     private String  surnameStudent;
-    @Column(name = "codice_fiscale", columnDefinition = "bpchar")
+    @Column(name = "codice_fiscale", columnDefinition = "CHAR(16)",nullable = false)
     private String cFStudent;
-    @Column(name = "password_studente")
+    @Column(name = "password_studente",columnDefinition = "varchar(100)",nullable = false)
     private String passwordStudent;
-    @ManyToMany(mappedBy = "listIstituteStudent")
-    private List<Istituto> listStudentIstitute = new ArrayList<Istituto>();
+    @ManyToMany(mappedBy = "listIstituteStudent",fetch = FetchType.LAZY)
+    private Set<Istituto> listStudentIstitute;
 
-    public Studente(String nameStudent, String surnameStudent, String cFStudent, String passwordStudent) {
-        this.nameStudent = nameStudent;
-        this.surnameStudent = surnameStudent;
-        this.cFStudent = cFStudent;
-        this.passwordStudent = passwordStudent;
-    }
 
-    public Studente(String nameStudent, String surnameStudent, String cFStudent, String passwordStudent, List<Istituto> listStudentIstituto) {
-        this.nameStudent = nameStudent;
-        this.surnameStudent = surnameStudent;
-        this.cFStudent = cFStudent;
-        this.passwordStudent = passwordStudent;
-        this.listStudentIstitute = listStudentIstituto;
-    }
 }

@@ -1,13 +1,10 @@
-package com.clan.superAdminService.entity;
+package com.clan.superAdmin.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Document("superAdmin")
@@ -15,8 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SuperAdmin {
-
-    private int id;
 
     private String username;
 

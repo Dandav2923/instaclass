@@ -58,7 +58,7 @@ public class DocenteController {
         }
     }
 
-    @PostMapping(path = "",consumes = "application/json" )
+    @PostMapping(path = "",consumes = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<Docente> addRegister(@RequestBody Docente doc) {
         try {
             Docente addDocente = docenteService.registerTeacher(doc);

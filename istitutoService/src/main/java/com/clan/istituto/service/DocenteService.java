@@ -2,10 +2,12 @@ package com.clan.istituto.service;
 
 
 import com.clan.istituto.entity.Docente;
+import com.clan.istituto.entity.Materia;
 import com.clan.istituto.exception.docente.CFNonCorrettoException;
 import com.clan.istituto.exception.docente.DatiNonValidiException;
 import com.clan.istituto.exception.docente.DocenteNonTrovatoException;
 import com.clan.istituto.repository.DocenteRepository;
+import com.clan.istituto.repository.MateriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,9 @@ public class DocenteService {
 
     @Autowired
     private DocenteRepository docenteRepository;
+
+    @Autowired
+    private MateriaRepository materiaRepository;
 
     public List<Docente> getAll()  {
             return docenteRepository.findAll();
@@ -42,7 +47,8 @@ public class DocenteService {
         if (doc.getCFTeacher() == null || doc.getNameTeacher() == null || doc.getSurnameTeacher() == null || doc.getPasswordTeacher() == null) {
             throw new DatiNonValidiException("mancano dei dati");
         } else {
-
+         //   Materia mat =  materiaRepository.findById(1).orElse(null);
+          //  doc.getListTeacherMatter().add(mat);
             return docenteRepository.save(doc);
         }
     }
