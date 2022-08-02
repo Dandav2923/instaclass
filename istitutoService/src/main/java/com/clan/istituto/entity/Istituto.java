@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,8 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Istituto {
     @Id
-    @SequenceGenerator(name = "istituto_generator", sequenceName = "istituto_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "istituto_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_istituto")
     private Integer id;
     @Column(name = "nome_istituto",columnDefinition = "varchar(100)",nullable = false)
@@ -26,7 +26,7 @@ public class Istituto {
     private String  passwordIstitute;
 
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "istituti_studenti",
             joinColumns = @JoinColumn(name = "istituto_fk",referencedColumnName = "id_istituto",nullable = false),
@@ -34,10 +34,10 @@ public class Istituto {
     )
     private Set<Studente> listIstituteStudent;
 
-    @OneToMany(mappedBy = "MatterIstitute",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "matterIstitute",fetch = FetchType.LAZY)
     private Set<Materia> listIstituteMatter;
 
-    @OneToMany(mappedBy = "teacherIstitute",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "teacherIstitute",fetch = FetchType.LAZY)
     private Set<Docente> listIstituteTeacher;
 
 }

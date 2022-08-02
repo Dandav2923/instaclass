@@ -11,23 +11,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.clan.DTO.DocenteDTO;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "/v1/docente",produces = MediaType.APPLICATION_JSON_VALUE)
 public class DocenteController {
 
-    @Autowired
-    private DocenteRepository docenteRepository;
 
     @Autowired
     private DocenteService docenteService;
 
+    @Autowired
+    private DocenteRepository docenteRepository;
+
     @GetMapping("/getTeacher")
     public ResponseEntity<List<Docente>> getAllTeacher(){
         try {
-            return new ResponseEntity<List<Docente>>(docenteService.getAll(), HttpStatus.OK);
+            List<Docente> doc = docenteRepository.findAll();
+            return new ResponseEntity<List<Docente>>(doc, HttpStatus.OK);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -36,10 +38,10 @@ public class DocenteController {
         }
     }
 
-    @GetMapping("/getCFTeacher/{cf}")
-    public ResponseEntity<Docente> getCFTeacher(@PathVariable("cf") String codiceFis){
+    @GetMapping("/getCFTeacher/{cf}/{idIstituto}")
+    public ResponseEntity<Docente> getCFTeacher(@PathVariable("cf") String codiceFis,@PathVariable("idIstituto") Integer idIst){
         try {
-            return new ResponseEntity<Docente>(docenteService.findTeacherByCF(codiceFis), HttpStatus.OK);
+            return new ResponseEntity<Docente>(docenteService.findTeacherByCF(codiceFis,idIst), HttpStatus.OK);
         }
         catch (CFNonCorrettoException e) {
             e.printStackTrace();
@@ -59,7 +61,7 @@ public class DocenteController {
     }
 
     @PostMapping(path = "",consumes = MediaType.APPLICATION_JSON_VALUE )
-    public ResponseEntity<Docente> addRegister(@RequestBody Docente doc) {
+    public ResponseEntity<Docente> addRegister(@RequestBody DocenteDTO doc) {
         try {
             Docente addDocente = docenteService.registerTeacher(doc);
             return new ResponseEntity<Docente>(addDocente,HttpStatus.OK);
@@ -75,6 +77,7 @@ public class DocenteController {
         }
     }
 
+    /*
     @PutMapping(path = "/updateTeacher",consumes = "application/json")
     public ResponseEntity<Docente> aggiornamentoCompleto(@RequestBody Docente doc) {
         try {
@@ -105,5 +108,6 @@ public class DocenteController {
         }
     }
 
+     */
 
 }

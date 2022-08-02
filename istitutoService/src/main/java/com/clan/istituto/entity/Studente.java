@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,8 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Studente {
     @Id
-    @SequenceGenerator(name = "studente_generator", sequenceName = "studente_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "studente_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_studente")
     private int id;
     @Column(name = "nome_studente",columnDefinition = "varchar(100)",nullable = false)
@@ -30,6 +30,5 @@ public class Studente {
     private String passwordStudent;
     @ManyToMany(mappedBy = "listIstituteStudent",fetch = FetchType.LAZY)
     private Set<Istituto> listStudentIstitute;
-
 
 }

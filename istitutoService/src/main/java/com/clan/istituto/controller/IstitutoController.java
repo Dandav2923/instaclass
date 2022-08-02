@@ -1,9 +1,8 @@
 package com.clan.istituto.controller;
 
 import com.clan.istituto.entity.Istituto;
-import com.clan.istituto.entity.Materia;
-import com.clan.istituto.repository.IstitutoRepository;
 import com.clan.istituto.repository.MateriaRepository;
+import com.clan.istituto.service.IstitutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,36 +16,22 @@ import java.util.List;
 public class IstitutoController {
 
     @Autowired
-    private IstitutoRepository istitutoRepository;
+    private IstitutoService istitutoService;
 
     @Autowired
     private MateriaRepository materiaRepository;
 
-    @GetMapping("/getIstitute")
-    public ResponseEntity<List<Istituto>> getIstitutes(){
-        try {
-            return new ResponseEntity<List<Istituto>>(istitutoRepository.findAll() , HttpStatus.OK);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-            return new ResponseEntity<List<Istituto>>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
-    @GetMapping("/registerIstituteMatter/{id}")
-    public ResponseEntity<Void> addRegister(@PathVariable("id") Integer id) {
+    @PostMapping(value = "/registerIstitute",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Istituto> addRegister(@RequestBody Istituto ist) {
         try {
-            Materia mat = materiaRepository.findById(id).orElse(null);
-            Istituto ist = istitutoRepository.findById(1).orElse(null);
-            ist.getListIstituteMatter().add(mat);
-            istitutoRepository.save(ist);
-            return new ResponseEntity<Void>(HttpStatus.OK);
+            Istituto istituto = istitutoService.register(ist);
+            return new ResponseEntity<Istituto>(istituto,HttpStatus.OK);
         }
         catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
-            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Istituto>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
