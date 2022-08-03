@@ -1,6 +1,8 @@
 package com.clan.instaclass.classService.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serial;
@@ -26,29 +28,38 @@ public class ClassEnt implements Serializable {
     private Integer institute;
 
     @OneToMany(mappedBy = "classEnt")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<ClassTeacherRel> teachers;
 
     @OneToMany(mappedBy = "classEnt")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<ClassStudentRel> students;
 
     @OneToMany(mappedBy = "classEnt")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<VoteEnt> votes;
 
     @OneToMany(mappedBy = "classEnt")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<StudentNoteEnt> studentsNotes;
 
     @OneToMany(mappedBy = "classEnt")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<ClassNoteEnt> classNotes;
 
     @OneToMany(mappedBy = "classEnt")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<PresenceEnt> presences;
 
     @OneToMany(mappedBy = "classEnt")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<HomeworkEnt> homeworks;
 
     @OneToMany(mappedBy = "classEnt")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<CommunicationEnt> communications;
 
     @OneToMany(mappedBy = "classEnt")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<EventEnt> events;
 }
