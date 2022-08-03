@@ -1,6 +1,6 @@
 package com.clan.instaclass.instituteService.controllers;
 
-import com.clan.instaclass.instituteService.exceptions.SubjectNotFoundException;
+import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
 import com.clan.instaclass.instituteService.models.subject.CreateSubjectRequest;
 import com.clan.instaclass.instituteService.models.subject.CreateSubjectResponse;
 import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;

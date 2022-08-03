@@ -1,6 +1,8 @@
 package com.clan.instaclass.instituteService.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serial;
@@ -9,20 +11,7 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "teacher", uniqueConstraints = {
-        @UniqueConstraint(
-                name = "UniqueFiscalCodeAndInstitute",
-                columnNames = {
-                        "fiscal_code",
-                        "institute_id"
-                }),
-        @UniqueConstraint(
-                name = "UniqueUsernameAndInstitute",
-                columnNames = {
-                        "username",
-                        "institute_id"
-                })
-})
+@Table(name = "teacher")
 public class TeacherEnt implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -39,11 +28,8 @@ public class TeacherEnt implements Serializable {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "fiscal_code", nullable = false)
+    @Column(name = "fiscal_code",unique = true ,nullable = false)
     private String fiscalCode;
-
-    @Column(name = "username", nullable = false)
-    private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -53,6 +39,7 @@ public class TeacherEnt implements Serializable {
     private InstituteEnt institute;
 
     @ManyToMany
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(
             name = "teachers_subjects",
             joinColumns = @JoinColumn(name = "teacher_id"),

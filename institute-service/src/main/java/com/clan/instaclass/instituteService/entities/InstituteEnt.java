@@ -1,6 +1,8 @@
 package com.clan.instaclass.instituteService.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serial;
@@ -20,21 +22,27 @@ public class InstituteEnt implements Serializable {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name",unique = true, nullable = false)
     private String name;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "institute")
+    @ManyToMany
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinTable(
+            name = "institute_students",
+            joinColumns = @JoinColumn(name = "institute_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
     private Set<StudentEnt> students;
 
     @OneToMany(mappedBy = "institute")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<SubjectEnt> subjects;
 
     @OneToMany(mappedBy = "institute")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<TeacherEnt> teachers;
 }

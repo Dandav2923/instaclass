@@ -19,8 +19,8 @@ public class VoteEnt implements Serializable {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "vote", nullable = false, columnDefinition = "TINYINT", length = 100)
-    private byte vote;
+    @Column(name = "vote", nullable = false, length = 100)
+    private Integer vote;
 
     @Column(name = "date", nullable = false)
     private LocalDate date;

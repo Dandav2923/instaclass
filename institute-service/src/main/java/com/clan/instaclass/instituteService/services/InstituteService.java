@@ -1,11 +1,16 @@
 package com.clan.instaclass.instituteService.services;
 
-import com.clan.instaclass.instituteService.exceptions.InstituteNotFoundException;
-import com.clan.instaclass.instituteService.models.institute.CreateInstituteRequest;
-import com.clan.instaclass.instituteService.models.institute.CreateInstituteResponse;
-import com.clan.instaclass.instituteService.models.institute.GetInstituteResponse;
+import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
+import com.clan.instaclass.instituteService.exceptions.institute.AlreadyExistingIstituteException;
+import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;
+import com.clan.instaclass.instituteService.models.institute.*;
 
 public interface InstituteService {
-    CreateInstituteResponse create(CreateInstituteRequest request);
+    CreateInstituteResponse create(CreateInstituteRequest request) throws DataNonValidException, AlreadyExistingIstituteException;
     GetInstituteResponse get(Integer instituteId) throws InstituteNotFoundException;
+
+    PutInstituteResponse put(PutInstituteRequest request) throws DataNonValidException, InstituteNotFoundException;
+
+    void delete(Integer id) throws DataNonValidException,InstituteNotFoundException;
+
 }

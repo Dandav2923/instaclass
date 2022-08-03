@@ -1,7 +1,7 @@
 package com.clan.instaclass.instituteService.exceptions.configs;
 
-import com.clan.instaclass.instituteService.exceptions.InstituteNotFoundException;
-import com.clan.instaclass.instituteService.exceptions.SubjectNotFoundException;
+import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;
+import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

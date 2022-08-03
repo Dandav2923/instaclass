@@ -6,5 +6,4 @@ import lombok.Data;
 public class GetInstituteResponse {
     private Integer id;
     private String name;
-    private String username;
 }
