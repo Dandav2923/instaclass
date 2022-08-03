@@ -10,14 +10,16 @@
         <module name="shared" />
         <module name="auth-service" />
         <module name="istituto" />
-        <module name="istitutoService" />
+        <module name="institute-service" />
         <module name="superAdminService" />
-        <module name="classeService" />
+        <module name="class-service" />
         <module name="classi" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="CAG" target="17" />
+      <module name="classeService" target="17" />
+      <module name="istitutoService" target="17" />
       <module name="untitled" target="17" />
     </bytecodeTargetLevel>
   </component>
