@@ -1,7 +1,7 @@
 package com.clan.instaclass.instituteService.services.impls;
 
 import com.clan.instaclass.instituteService.entities.SubjectEnt;
-import com.clan.instaclass.instituteService.exceptions.SubjectNotFoundException;
+import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
 import com.clan.instaclass.instituteService.models.subject.CreateSubjectRequest;
 import com.clan.instaclass.instituteService.models.subject.CreateSubjectResponse;
 import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;
@@ -23,7 +23,6 @@ public class SubjectServiceImpl implements SubjectService {
     public CreateSubjectResponse create(CreateSubjectRequest request) {
         SubjectEnt entity = new SubjectEnt();
         entity.setName(request.getName());
-        entity.setDescription(request.getDescription());
         entity.setInstitute(instituteRepository.getReferenceById(request.getInstituteId()));
         CreateSubjectResponse response = new CreateSubjectResponse();
         response.setId(subjectRepository.save(entity).getId());
@@ -36,7 +35,6 @@ public class SubjectServiceImpl implements SubjectService {
         SubjectEnt entity = subjectRepository.findById(subjectId).orElseThrow(SubjectNotFoundException::new);
         response.setId(entity.getId());
         response.setName(entity.getName());
-        response.setDescription(entity.getDescription());
         response.setInstituteId(entity.getInstitute().getId());
         return response;
     }
