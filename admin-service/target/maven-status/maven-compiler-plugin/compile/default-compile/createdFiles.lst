@@ -1,0 +1,4 @@
+com\clan\superAdmin\controller\SuperAdminController.class
+com\clan\superAdmin\repository\SuperAdminRepository.class
+com\clan\superAdmin\entity\SuperAdmin.class
+com\clan\superAdmin\SuperAdminSpringBootApplication.class
