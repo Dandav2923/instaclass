@@ -3,8 +3,7 @@ package com.clan.instaclass.classService.models.classes;
 import lombok.Data;
 
 @Data
-public class CreateClassRequest {
+public class PutClassResponse {
     private String name;
-    private Integer idInstitute;
-
+    private Integer instituteId;
 }

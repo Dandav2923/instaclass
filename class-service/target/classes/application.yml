@@ -9,14 +9,14 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/instaclass_db?currentSchema=schema_class
-    username: postgres
+    url: jdbc:postgresql://localhost:5433/instaclass?currentSchema=schema_class
+    username: admin
     password: password
     driver-class-name: org.postgresql.Driver
   jpa:
     generate-ddl: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         show_sql: true
