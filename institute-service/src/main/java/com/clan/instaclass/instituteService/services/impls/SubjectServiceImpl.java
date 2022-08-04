@@ -1,9 +1,11 @@
 package com.clan.instaclass.instituteService.services.impls;
 
+import com.clan.instaclass.instituteService.entities.InstituteEnt;
 import com.clan.instaclass.instituteService.entities.SubjectEnt;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
+import com.clan.instaclass.instituteService.models.institute.GetAllInstituteResponse;
 import com.clan.instaclass.instituteService.models.subject.CreateSubjectRequest;
 import com.clan.instaclass.instituteService.models.subject.CreateSubjectResponse;
 import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;
@@ -14,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -51,4 +54,19 @@ public class SubjectServiceImpl implements SubjectService {
         response.setInstituteId(entity.getInstitute().getId());
         return response;
     }
+
+    @Override
+    public List<GetSubjectResponse> getAll(Integer idInstitute) {
+        List<SubjectEnt> entity = subjectRepository.findSubjectByInstitute(idInstitute);
+        List<GetSubjectResponse> response = new ArrayList<GetSubjectResponse>();
+        for (SubjectEnt subject : entity){
+            GetSubjectResponse getAll = new GetSubjectResponse();
+            getAll.setId(subject.getId());
+            getAll.setName(subject.getName());
+            getAll.setInstituteId(subject.getInstitute().getId());
+            response.add(getAll);
+        }
+        return response;
+    }
+
 }

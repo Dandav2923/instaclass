@@ -14,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @AllArgsConstructor
 @RestController
@@ -53,6 +55,26 @@ public class SubjectController {
     private ResponseEntity<GetSubjectResponse> create(@PathVariable("id") Integer subjectId) throws SubjectNotFoundException {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(subjectService.get(subjectId));
+        }
+        catch(SubjectNotFoundException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+    }
+
+    @RequestMapping(
+            path = "/getAll/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    private ResponseEntity<List<GetSubjectResponse>> getAll(@PathVariable("id") Integer idInstitute) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(subjectService.getAll(idInstitute));
         }
         catch(Exception e) {
             e.printStackTrace();

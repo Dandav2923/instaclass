@@ -7,7 +7,11 @@ import com.clan.instaclass.instituteService.models.subject.CreateSubjectRequest;
 import com.clan.instaclass.instituteService.models.subject.CreateSubjectResponse;
 import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;
 
+import java.util.List;
+
 public interface SubjectService {
     CreateSubjectResponse create(CreateSubjectRequest request) throws DataNonValidException, SubjectAlreadyExistingException;
     GetSubjectResponse get(Integer subjectId) throws SubjectNotFoundException;
+
+    List<GetSubjectResponse> getAll(Integer idInstitute);
 }
