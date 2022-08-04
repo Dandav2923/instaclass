@@ -1,5 +1,6 @@
 package com.clan.instaclass.instituteService.controllers;
 
+import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
 import com.clan.instaclass.instituteService.models.subject.CreateSubjectRequest;
@@ -29,6 +30,10 @@ public class SubjectController {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(subjectService.create(request));
         }
+        catch (DataNonValidException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
         catch (SubjectAlreadyExistingException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
@@ -46,6 +51,13 @@ public class SubjectController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     private ResponseEntity<GetSubjectResponse> create(@PathVariable("id") Integer subjectId) throws SubjectNotFoundException {
-        return ResponseEntity.status(HttpStatus.OK).body(subjectService.get(subjectId));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(subjectService.get(subjectId));
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
     }
 }
