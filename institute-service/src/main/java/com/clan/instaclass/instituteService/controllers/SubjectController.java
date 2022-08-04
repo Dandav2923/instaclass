@@ -1,5 +1,6 @@
 package com.clan.instaclass.instituteService.controllers;
 
+import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
 import com.clan.instaclass.instituteService.models.subject.CreateSubjectRequest;
 import com.clan.instaclass.instituteService.models.subject.CreateSubjectResponse;
@@ -25,7 +26,18 @@ public class SubjectController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     private ResponseEntity<CreateSubjectResponse> create(@RequestBody CreateSubjectRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(subjectService.create(request));
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(subjectService.create(request));
+        }
+        catch (SubjectAlreadyExistingException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
     }
 
     @RequestMapping(

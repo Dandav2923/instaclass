@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @AllArgsConstructor
 @RestController
@@ -116,4 +118,23 @@ public class InstituteController {
         }
 
     }
+
+    @RequestMapping(
+            path = "/getAll",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    private ResponseEntity<List<GetAllInstituteResponse>> get() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(instituteService.getAll());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+    }
+
+
 }
