@@ -6,7 +6,6 @@ import lombok.Data;
 public class CreateClassRequest {
 
     private String name;
-
     private Integer idInstitute;
 
 }

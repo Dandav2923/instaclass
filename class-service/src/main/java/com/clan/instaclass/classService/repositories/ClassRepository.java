@@ -11,7 +11,8 @@ import java.util.List;
 
 @Repository
 public interface ClassRepository extends JpaRepository<ClassEnt, Integer> {
-    public List<ClassEnt> findByNameIgnoreCase(String name);
+    //public ClassEnt findByName(String name);
+    public ClassEnt findByInstitute(Integer id);
     public List<ClassEnt> findByNameContainsIgnoreCase(String name);
     @Query("select c from ClassEnt c where c.institute.id = :idInstitute")
     public  List<ClassEnt> findByName(@Param("idInstitute")Integer id);

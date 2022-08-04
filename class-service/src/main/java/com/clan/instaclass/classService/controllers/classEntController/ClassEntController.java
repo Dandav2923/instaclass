@@ -1,9 +1,13 @@
-package com.clan.instaclass.classService.controller;
+package com.clan.instaclass.classService.controllers.classEntController;
 
 import com.clan.instaclass.classService.entities.ClassEnt;
+import com.clan.instaclass.classService.exceptions.classes.ClassExistException;
+import com.clan.instaclass.classService.exceptions.classes.ClassNotValidException;
 import com.clan.instaclass.classService.models.classes.CreateClassRequest;
 import com.clan.instaclass.classService.models.classes.CreateClassResponse;
 import com.clan.instaclass.classService.repositories.ClassRepository;
+import com.clan.instaclass.classService.services.ClassService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,30 +16,29 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
+
 @Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("v1/classes")
-public class ClassController {
+public class ClassEntController {
 
-    @Autowired
-    private ClassRepository classRepository;
+    private final ClassService classService;
 
     @RequestMapping(
-            path = "/get",
+            path = "/getAll",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     private ResponseEntity<List<ClassEnt>> get() {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(classRepository.findAll());
+            return ResponseEntity.status(HttpStatus.OK).body(classService.findAll());
         }
         catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-
     }
 
     @RequestMapping(
@@ -45,12 +48,17 @@ public class ClassController {
     )
     private ResponseEntity<CreateClassResponse> create(@RequestBody CreateClassRequest request) {
         try {
-            ClassEnt entity = new ClassEnt();
-            entity.setName(request.getName());
-            entity.setInstitute(request.getIdInstitute());
-            CreateClassResponse response = new CreateClassResponse();
-            response.setName(classRepository.save(entity).getName());
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+            return ResponseEntity.status(HttpStatus.CREATED).body(classService.create(request));
+        }
+        catch (ClassExistException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+        catch (ClassNotValidException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         catch (Exception e) {
             e.printStackTrace();

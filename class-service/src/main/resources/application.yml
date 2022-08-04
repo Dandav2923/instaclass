@@ -11,7 +11,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/instaclass_db?currentSchema=schema_class
     username: postgres
-    password: password
+    password: root
     driver-class-name: org.postgresql.Driver
   jpa:
     generate-ddl: true
