@@ -3,9 +3,8 @@ package com.clan.instaclass.instituteService.models.institute;
 import lombok.Data;
 
 @Data
-public class CreateInstituteRequest {
-    private String name;
+public class GetAllInstituteResponse {
+    private Integer id;
     private String username;
-    private String password;
-
+    private String name;
 }

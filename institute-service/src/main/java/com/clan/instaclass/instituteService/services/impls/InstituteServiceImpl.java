@@ -11,6 +11,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @AllArgsConstructor
 @Service
@@ -19,13 +22,14 @@ public class InstituteServiceImpl implements InstituteService {
 
     @Override
     public CreateInstituteResponse create(CreateInstituteRequest request) throws DataNonValidException, AlreadyExistingIstituteException {
-        if (request.getName() == null || request.getPassword() == null) {
+        if (request.getName() == null || request.getPassword() == null || request.getUsername() == null) {
             throw new DataNonValidException("dati mancanti");
         }
-        if (instituteRepository.findByName(request.getName()) == null) {
+        if (instituteRepository.findByUsername(request.getUsername()) == null) {
             InstituteEnt entity = new InstituteEnt();
             entity.setName(request.getName());
             entity.setPassword(request.getPassword());
+            entity.setUsername(request.getUsername());
             CreateInstituteResponse response = new CreateInstituteResponse();
             response.setId(instituteRepository.save(entity).getId());
             return response;
@@ -46,7 +50,7 @@ public class InstituteServiceImpl implements InstituteService {
     }
 
     public PutInstituteResponse put(PutInstituteRequest request) throws DataNonValidException, InstituteNotFoundException {
-        if (request.getName() == null || request.getPassword() == null || request.getId() == null) {
+        if (request.getName() == null || request.getPassword() == null || request.getId() == null || request.getUsername() == null) {
             throw new DataNonValidException("dati mancanti");
         }
 
@@ -57,6 +61,7 @@ public class InstituteServiceImpl implements InstituteService {
         }
         entity.setName(request.getName());
         entity.setPassword(request.getPassword());
+        entity.setUsername(request.getUsername());
         PutInstituteResponse response = new PutInstituteResponse();
         response.setId(instituteRepository.save(entity).getId());
         return response;
@@ -71,5 +76,20 @@ public class InstituteServiceImpl implements InstituteService {
         instituteRepository.deleteById(request);
 
     }
+
+    @Override
+    public List<GetAllInstituteResponse> getAll() {
+        List<InstituteEnt> entity = instituteRepository.findAll();
+        List<GetAllInstituteResponse> response = new ArrayList<GetAllInstituteResponse>();
+        for (InstituteEnt subject : entity){
+            GetAllInstituteResponse getAll = new GetAllInstituteResponse();
+            getAll.setId(subject.getId());
+            getAll.setName(subject.getName());
+            getAll.setUsername(subject.getUsername());
+            response.add(getAll);
+        }
+        return response;
+    }
+
 
 }

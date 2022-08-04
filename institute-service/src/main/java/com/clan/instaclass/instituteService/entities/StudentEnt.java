@@ -9,7 +9,20 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "student")
+@Table(name = "student",uniqueConstraints = {
+        @UniqueConstraint(
+                name = "UniqueFiscalCodeAndInstituteStudent",
+                columnNames = {
+                        "fiscal_code",
+                        "institute_id"
+                }),
+        @UniqueConstraint(
+                name = "UniqueUsernameAndInstituteStudent",
+                columnNames = {
+                        "username",
+                        "institute_id"
+                })
+})
 public class StudentEnt implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -26,12 +39,16 @@ public class StudentEnt implements Serializable {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "fiscal_code",unique = true, nullable = false)
+    @Column(name = "username", nullable = false)
+    private String username;
+
+    @Column(name = "fiscal_code", nullable = false)
     private String fiscalCode;
 
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToMany(mappedBy = "students")
-    private Set<InstituteEnt> institute;
+    @ManyToOne
+    @JoinColumn(name="institute_id", nullable = false)
+    private InstituteEnt institute;
 }

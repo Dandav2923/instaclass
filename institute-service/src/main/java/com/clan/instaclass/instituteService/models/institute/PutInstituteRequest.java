@@ -6,5 +6,6 @@ import lombok.Data;
 public class PutInstituteRequest {
     private Integer id;
     private String name;
+    private String username;
     private String password;
 }

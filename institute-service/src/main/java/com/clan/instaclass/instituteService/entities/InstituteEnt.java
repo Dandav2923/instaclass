@@ -22,20 +22,17 @@ public class InstituteEnt implements Serializable {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "name",unique = true, nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "institute")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinTable(
-            name = "institute_students",
-            joinColumns = @JoinColumn(name = "institute_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id")
-    )
     private Set<StudentEnt> students;
 
     @OneToMany(mappedBy = "institute")
