@@ -1,17 +1,36 @@
 version: '3.8'
 services:
   db:
+    container_name: postgres_container
     image: postgres:14.1-alpine
     restart: always
     environment:
-      - POSTGRES_DB=instaclass_db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=root
+      POSTGRES_DB: instaclass_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      PGDATA: /var/lib/postgresql/data
+    expose:
+      - "5433"
     ports:
-      - '5432:5432'
+      - "5433:5433"
     volumes:
       - db:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    command: -p 5433
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4:5.5
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
 volumes:
   db:
+    driver: local
+  pgadmin-data:
     driver: local

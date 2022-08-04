@@ -5,6 +5,7 @@ import com.clan.instaclass.classService.exceptions.classes.ClassExistException;
 import com.clan.instaclass.classService.exceptions.classes.ClassNotValidException;
 import com.clan.instaclass.classService.models.classes.CreateClassRequest;
 import com.clan.instaclass.classService.models.classes.CreateClassResponse;
+import com.clan.instaclass.classService.models.classes.GetClassResponse;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.services.ClassService;
 import lombok.AllArgsConstructor;
@@ -26,13 +27,13 @@ public class ClassEntController {
     private final ClassService classService;
 
     @RequestMapping(
-            path = "/getAll",
+            path = "/getAll/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<ClassEnt>> get() {
+    private ResponseEntity<List<GetClassResponse>> get(@PathVariable("id") Integer id) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(classService.findAll());
+            return ResponseEntity.status(HttpStatus.OK).body(classService.findAll(id));
         }
         catch (Exception e) {
             e.printStackTrace();

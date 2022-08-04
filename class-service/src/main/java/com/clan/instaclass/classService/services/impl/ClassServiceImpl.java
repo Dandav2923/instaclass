@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Slf4j
 @AllArgsConstructor
@@ -51,7 +52,16 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public List<ClassEnt> findAll() {
-        return classRepository.findAll();
+    public List<GetClassResponse> findAll(Integer id) {
+    List<ClassEnt> entity= classRepository.findByName(id);
+    List<GetClassResponse> response = new ArrayList<GetClassResponse>();
+    for (ClassEnt subject : entity){
+        GetClassResponse getAll = new GetClassResponse();
+        getAll.setId(subject.getId());
+        getAll.setNome(subject.getName());
+        getAll.setInstituteId(subject.getInstitute());
+        response.add(getAll);
+    }
+        return response;
     }
 }
