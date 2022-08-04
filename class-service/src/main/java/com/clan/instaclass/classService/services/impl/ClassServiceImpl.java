@@ -79,6 +79,7 @@ public class ClassServiceImpl implements ClassService {
             }
         } else {
             throw new ClassNotValidException("Non hai inserito i dati correttamente");
+
         }
     }
 }
