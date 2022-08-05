@@ -2,10 +2,9 @@ package com.clan.instaclass.classService.controllers.classEntController;
 
 import com.clan.instaclass.classService.entities.ClassEnt;
 import com.clan.instaclass.classService.exceptions.classes.ClassExistException;
+import com.clan.instaclass.classService.exceptions.classes.ClassNotExistException;
 import com.clan.instaclass.classService.exceptions.classes.ClassNotValidException;
-import com.clan.instaclass.classService.models.classes.CreateClassRequest;
-import com.clan.instaclass.classService.models.classes.CreateClassResponse;
-import com.clan.instaclass.classService.models.classes.GetClassResponse;
+import com.clan.instaclass.classService.models.classes.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.services.ClassService;
 import lombok.AllArgsConstructor;
@@ -34,8 +33,7 @@ public class ClassEntController {
     private ResponseEntity<List<GetClassResponse>> get(@PathVariable("id") Integer id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(classService.findAll(id));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -50,22 +48,65 @@ public class ClassEntController {
     private ResponseEntity<CreateClassResponse> create(@RequestBody CreateClassRequest request) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(classService.create(request));
-        }
-        catch (ClassExistException e) {
+        } catch (ClassExistException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-        catch (ClassNotValidException e) {
+        } catch (ClassNotValidException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
+    @RequestMapping(
+            path = {"/updateClass"},
+            method = {RequestMethod.PUT},
+            consumes = {"application/json"},
+            produces = {"application/json"}
+    )
+    private ResponseEntity<PutClassResponse> updateClass(@RequestBody PutClassRequest request) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(this.classService.updateClass(request));
+        } catch (ClassNotExistException var3) {
+            var3.printStackTrace();
+            System.out.println(var3.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } catch (ClassNotValidException var4) {
+            var4.printStackTrace();
+            System.out.println(var4.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } catch (Exception var5) {
+            var5.printStackTrace();
+            System.out.println(var5.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @RequestMapping(
+            path = {"/deleteClass"},
+            method = {RequestMethod.DELETE}
+    )
+    private ResponseEntity<Void> deleteClass(@RequestBody DeleteClassRequest request) {
+        try {
+            this.classService.deleteClass(request);
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        } catch (ClassNotExistException var3) {
+            var3.printStackTrace();
+            System.out.println(var3.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } catch (ClassNotValidException var4) {
+            var4.printStackTrace();
+            System.out.println(var4.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } catch (Exception var5) {
+            var5.printStackTrace();
+            System.out.println(var5.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 }
