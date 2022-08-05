@@ -11,5 +11,5 @@ public class PutCommunicationResponse {
     private String communication;
     private LocalDate date;
     private Integer teacherId;
-    private ClassEnt classId;
+    private Integer classId;
 }

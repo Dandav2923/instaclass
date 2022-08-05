@@ -7,6 +7,6 @@ import lombok.Data;
 public class DeleteCommunicationRequest {
     private Integer id;
     private Integer teacherId;
-    private ClassEnt classId;
+    private Integer classId;
 
 }
