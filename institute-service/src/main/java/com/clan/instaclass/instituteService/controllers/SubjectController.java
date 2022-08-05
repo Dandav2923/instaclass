@@ -99,6 +99,11 @@ public class SubjectController {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
+        catch (SubjectAlreadyExistingException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
         catch (SubjectNotFoundException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -108,6 +113,33 @@ public class SubjectController {
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+    }
+
+    @RequestMapping(
+            path = "/delete/{id}",
+            method = RequestMethod.DELETE
+    )
+    private ResponseEntity<Void> delete(@PathVariable("id") Integer idSubject) {
+        try {
+            subjectService.delete(idSubject);
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        }
+        catch (SubjectNotFoundException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        }
+        catch (DataNonValidException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }

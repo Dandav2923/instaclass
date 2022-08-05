@@ -71,7 +71,7 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public PutSubjectResponse put(PutSubjectRequest request) throws DataNonValidException, SubjectNotFoundException {
+    public PutSubjectResponse put(PutSubjectRequest request) throws DataNonValidException, SubjectNotFoundException, SubjectAlreadyExistingException {
         if (request.getName() == null || request.getId() == null || request.getInstituteId() == null) {
             throw new DataNonValidException("dati mancanti");
         }
@@ -82,6 +82,13 @@ public class SubjectServiceImpl implements SubjectService {
             throw new SubjectNotFoundException("materia non trovata");
         }
 
+        List<SubjectEnt> list = subjectRepository.getAllSubjectByInstitute(request.getInstituteId());
+        for(SubjectEnt subject : list) {
+            if (subject.getName().equalsIgnoreCase(request.getName())){
+                throw new SubjectAlreadyExistingException("materia gia esistente");
+            }
+        }
+
         entity.setName(request.getName());
 
         PutSubjectResponse response = new PutSubjectResponse();
@@ -90,6 +97,14 @@ public class SubjectServiceImpl implements SubjectService {
         return response;
     }
 
+    public void delete(Integer request) throws DataNonValidException, SubjectNotFoundException {
+        if (request == null || request < 1) {
+            throw new DataNonValidException("dati mancanti");
+        }
+        SubjectEnt entity = subjectRepository.findById(request).orElseThrow(()->new SubjectNotFoundException("materia non trovato"));
 
+        subjectRepository.deleteById(request);
+
+    }
 
 }

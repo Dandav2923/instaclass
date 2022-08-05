@@ -5,6 +5,7 @@ import com.clan.instaclass.instituteService.exceptions.institute.AlreadyExisting
 import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;
 import com.clan.instaclass.instituteService.models.institute.*;
 import com.clan.instaclass.instituteService.services.InstituteService;
+import com.clan.instaclass.instituteService.services.TeacherService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,18 +18,18 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping("/v1/institutes")
-public class InstituteController {
-    private final InstituteService instituteService;
+@RequestMapping("/v1/teachers")
+public class TeacherController {
+    private final TeacherService teacherService;
 
     @RequestMapping(
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<CreateInstituteResponse> create(@RequestBody CreateInstituteRequest request) {
+    private ResponseEntity<CreateTeacherResponse> create(@RequestBody CreateTeacherRequest request) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(instituteService.create(request));
+            return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.create(request));
         }
         catch (AlreadyExistingIstituteException e) {
             e.printStackTrace();
@@ -54,7 +55,7 @@ public class InstituteController {
     )
     private ResponseEntity<GetInstituteResponse> get(@PathVariable("id") Integer instituteId) throws InstituteNotFoundException {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(instituteService.get(instituteId));
+            return ResponseEntity.status(HttpStatus.OK).body(teacherService.get(instituteId));
         }
         catch (InstituteNotFoundException e) {
             e.printStackTrace();
