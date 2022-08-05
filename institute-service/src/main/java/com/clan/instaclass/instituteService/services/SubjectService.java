@@ -3,9 +3,7 @@ package com.clan.instaclass.instituteService.services;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
-import com.clan.instaclass.instituteService.models.subject.CreateSubjectRequest;
-import com.clan.instaclass.instituteService.models.subject.CreateSubjectResponse;
-import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;
+import com.clan.instaclass.instituteService.models.subject.*;
 
 import java.util.List;
 
@@ -14,4 +12,6 @@ public interface SubjectService {
     GetSubjectResponse get(Integer subjectId) throws SubjectNotFoundException;
 
     List<GetSubjectResponse> getAll(Integer idInstitute);
+
+    PutSubjectResponse put(PutSubjectRequest request) throws DataNonValidException, SubjectNotFoundException;
 }
