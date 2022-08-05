@@ -44,7 +44,7 @@ public class ClassServiceImpl implements ClassService {
     for (ClassEnt subject : entity){
         GetClassResponse getAll = new GetClassResponse();
         getAll.setId(subject.getId());
-        getAll.setNome(subject.getName());
+        getAll.setName(subject.getName());
         getAll.setInstituteId(subject.getInstitute());
         response.add(getAll);
     }
