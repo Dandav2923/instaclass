@@ -72,17 +72,17 @@ public class ClassEntController {
     private ResponseEntity<PutClassResponse> updateClass(@RequestBody PutClassRequest request) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.classService.updateClass(request));
-        } catch (ClassNotExistException var3) {
-            var3.printStackTrace();
-            System.out.println(var3.getMessage());
+        } catch (ClassNotExistException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        } catch (ClassNotValidException var4) {
-            var4.printStackTrace();
-            System.out.println(var4.getMessage());
+        } catch (ClassNotValidException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        } catch (Exception var5) {
-            var5.printStackTrace();
-            System.out.println(var5.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
@@ -95,17 +95,17 @@ public class ClassEntController {
         try {
             this.classService.deleteClass(request);
             return new ResponseEntity(HttpStatus.NO_CONTENT);
-        } catch (ClassNotExistException var3) {
-            var3.printStackTrace();
-            System.out.println(var3.getMessage());
+        } catch (ClassNotExistException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        } catch (ClassNotValidException var4) {
-            var4.printStackTrace();
-            System.out.println(var4.getMessage());
+        } catch (ClassNotValidException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        } catch (Exception var5) {
-            var5.printStackTrace();
-            System.out.println(var5.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }

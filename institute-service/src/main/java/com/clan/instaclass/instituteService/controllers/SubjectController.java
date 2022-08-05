@@ -1,11 +1,12 @@
 package com.clan.instaclass.instituteService.controllers;
 
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
+import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
-import com.clan.instaclass.instituteService.models.subject.CreateSubjectRequest;
-import com.clan.instaclass.instituteService.models.subject.CreateSubjectResponse;
-import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;
+import com.clan.instaclass.instituteService.models.institute.PutInstituteRequest;
+import com.clan.instaclass.instituteService.models.institute.PutInstituteResponse;
+import com.clan.instaclass.instituteService.models.subject.*;
 import com.clan.instaclass.instituteService.services.SubjectService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,7 +53,7 @@ public class SubjectController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<GetSubjectResponse> create(@PathVariable("id") Integer subjectId) throws SubjectNotFoundException {
+    private ResponseEntity<GetSubjectResponse> get(@PathVariable("id") Integer subjectId) throws SubjectNotFoundException {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(subjectService.get(subjectId));
         }
@@ -78,6 +79,34 @@ public class SubjectController {
         }
         catch(Exception e) {
             e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+    }
+
+    @RequestMapping(
+            path = "/update",
+            method = RequestMethod.PUT,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    private ResponseEntity<PutSubjectResponse> put(@RequestBody PutSubjectRequest request) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(subjectService.put(request));
+        }
+        catch (DataNonValidException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        catch (SubjectNotFoundException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 

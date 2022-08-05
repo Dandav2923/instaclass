@@ -56,9 +56,6 @@ public class InstituteServiceImpl implements InstituteService {
 
         InstituteEnt entity = instituteRepository.findById(request.getId()).orElseThrow(() -> new InstituteNotFoundException("istituto non trovato"));
 
-        if (entity == null) {
-            throw new InstituteNotFoundException("istituto non trovato");
-        }
         entity.setName(request.getName());
         entity.setPassword(request.getPassword());
         entity.setUsername(request.getUsername());

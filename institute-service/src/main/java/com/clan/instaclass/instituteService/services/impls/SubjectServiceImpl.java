@@ -3,12 +3,13 @@ package com.clan.instaclass.instituteService.services.impls;
 import com.clan.instaclass.instituteService.entities.InstituteEnt;
 import com.clan.instaclass.instituteService.entities.SubjectEnt;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
+import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
 import com.clan.instaclass.instituteService.models.institute.GetAllInstituteResponse;
-import com.clan.instaclass.instituteService.models.subject.CreateSubjectRequest;
-import com.clan.instaclass.instituteService.models.subject.CreateSubjectResponse;
-import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;
+import com.clan.instaclass.instituteService.models.institute.PutInstituteRequest;
+import com.clan.instaclass.instituteService.models.institute.PutInstituteResponse;
+import com.clan.instaclass.instituteService.models.subject.*;
 import com.clan.instaclass.instituteService.repositories.InstituteRepository;
 import com.clan.instaclass.instituteService.repositories.SubjectRepository;
 import com.clan.instaclass.instituteService.services.SubjectService;
@@ -31,7 +32,7 @@ public class SubjectServiceImpl implements SubjectService {
         if (request.getName() == null || request.getInstituteId() < 1) {
             throw new DataNonValidException("dati mancanti");
         }
-        List<SubjectEnt> subjectByInstitute = subjectRepository.findSubjectByInstitute(request.getInstituteId());
+        List<SubjectEnt> subjectByInstitute = subjectRepository.getAllSubjectByInstitute(request.getInstituteId());
         for(SubjectEnt subject : subjectByInstitute) {
             if (subject.getName().equalsIgnoreCase(request.getName())){
                 throw new SubjectAlreadyExistingException("materia gia esistente");
@@ -57,7 +58,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<GetSubjectResponse> getAll(Integer idInstitute) {
-        List<SubjectEnt> entity = subjectRepository.findSubjectByInstitute(idInstitute);
+        List<SubjectEnt> entity = subjectRepository.getAllSubjectByInstitute(idInstitute);
         List<GetSubjectResponse> response = new ArrayList<GetSubjectResponse>();
         for (SubjectEnt subject : entity){
             GetSubjectResponse getAll = new GetSubjectResponse();
@@ -68,5 +69,27 @@ public class SubjectServiceImpl implements SubjectService {
         }
         return response;
     }
+
+    @Override
+    public PutSubjectResponse put(PutSubjectRequest request) throws DataNonValidException, SubjectNotFoundException {
+        if (request.getName() == null || request.getId() == null || request.getInstituteId() == null) {
+            throw new DataNonValidException("dati mancanti");
+        }
+
+        SubjectEnt entity = subjectRepository.findSubjectByIdAndByInstitute(request.getId(), request.getInstituteId());
+
+        if (entity == null) {
+            throw new SubjectNotFoundException("materia non trovata");
+        }
+
+        entity.setName(request.getName());
+
+        PutSubjectResponse response = new PutSubjectResponse();
+        response.setName(request.getName());
+        response.setId(subjectRepository.save(entity).getId());
+        return response;
+    }
+
+
 
 }
