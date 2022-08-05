@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class GetClassResponse {
     private Integer id;
-    private String nome;
+    private String name;
     private Integer InstituteId;
 }
