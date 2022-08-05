@@ -13,4 +13,5 @@ import java.util.List;
 public interface CommunicationRepository extends JpaRepository<CommunicationEnt, Integer> {
     @Query("select c from CommunicationEnt c where c.classEnt.id = :classId")
     public List<CommunicationEnt> findCommunications(@Param("classId") Integer id);
+
 }
