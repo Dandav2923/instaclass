@@ -1,10 +1,12 @@
 package com.clan.instaclass.classService.services.impl;
 
 import com.clan.instaclass.classService.entities.CommunicationEnt;
+import com.clan.instaclass.classService.exceptions.classes.ClassNotExistException;
 import com.clan.instaclass.classService.exceptions.communication.CommunicationExistException;
 import com.clan.instaclass.classService.exceptions.communication.CommunicationNotExistException;
 import com.clan.instaclass.classService.exceptions.communication.CommunicationNotValidException;
 import com.clan.instaclass.classService.models.communication.*;
+import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.CommunicationRepository;
 import com.clan.instaclass.classService.services.CommunicationService;
 import lombok.AllArgsConstructor;
@@ -18,18 +20,17 @@ import java.util.List;
 @Service
 public class CommunicationServiceImpl implements CommunicationService {
     private CommunicationRepository communicationRepository;
+    private ClassRepository classRepository;
     @Override
-    public CreateCommunicationResponse create(CreateCommunicationRequest request) throws CommunicationNotValidException, CommunicationExistException {
+    public CreateCommunicationResponse create(CreateCommunicationRequest request) throws CommunicationNotValidException, CommunicationExistException, ClassNotExistException {
         if (request.getCommunication() == null || request.getCommunication().isBlank() || request.getDate() == null || request.getTeacherId() == null || request.getTeacherId() <= 0 || request.getClassId() == null){
             throw new CommunicationNotValidException("Non hai inserito i dati correttamente");
         }
-        List<CommunicationEnt> listCommunicationEnt = communicationRepository.findCommunications(request.getClassId());
-        if (listCommunicationEnt == null || listCommunicationEnt.size() == 0){
             CommunicationEnt newCommunication = new CommunicationEnt();
             newCommunication.setCommunication(request.getCommunication());
             newCommunication.setDate(request.getDate());
             newCommunication.setTeacher(request.getTeacherId());
-            newCommunication.setClassEnt(communicationRepository.getReferenceById(request.getClassId()).getClassEnt());
+            newCommunication.setClassEnt(classRepository.getReferenceById(request.getClassId()));
             CreateCommunicationResponse response = new CreateCommunicationResponse();
             response.setId(communicationRepository.save(newCommunication).getId());
             response.setCommunication(newCommunication.getCommunication());
@@ -37,10 +38,6 @@ public class CommunicationServiceImpl implements CommunicationService {
             response.setTeacherId(newCommunication.getTeacher());
             response.setClassId(newCommunication.getClassEnt().getId());
             return response;
-        }else {
-            throw new CommunicationExistException("Comunicazione già esistente nella tua classe");
-        }
-
     }
 
     @Override
@@ -63,7 +60,7 @@ public class CommunicationServiceImpl implements CommunicationService {
 
     @Override
     public PutCommunicationResponse updateCommunication(PutCommunicationRequest request) throws CommunicationNotValidException, CommunicationNotExistException {
-        if (request.getCommunication() == null || request.getCommunication().isBlank() || request.getDate() == null || request.getTeacherId() == null || request.getTeacherId() <= 0 || request.getClassId() == null){
+        if (request.getCommunication() != null && !request.getCommunication().isBlank() && request.getDate() != null && request.getTeacherId() != null && request.getTeacherId() > 0 && request.getClassId() != null){
             CommunicationEnt communicationEnt = communicationRepository.findById(request.getId()).orElseThrow(() -> new CommunicationNotExistException("Comunicazione non trovata"));
             if (communicationEnt.getClassEnt().getId() != request.getClassId() && communicationEnt.getTeacher() != request.getTeacherId()){
                 throw new CommunicationNotValidException("Non sei autorizzato a mofificare questa comunicazione");
@@ -85,7 +82,7 @@ public class CommunicationServiceImpl implements CommunicationService {
 
     @Override
     public void deleteCommunication(DeleteCommunicationRequest request) throws CommunicationNotValidException, CommunicationNotExistException {
-        if ( request.getTeacherId() == null || request.getTeacherId() <= 0 || request.getClassId() == null) {
+        if ( request.getTeacherId() != null && request.getTeacherId() > 0 && request.getClassId() != null) {
             CommunicationEnt communicationEnt = communicationRepository.findById(request.getId()).orElseThrow(() -> new CommunicationNotExistException("Comunicazione non trovata"));
             if (communicationEnt.getClassEnt().getId() != request.getClassId() && communicationEnt.getTeacher() != request.getTeacherId()){
                 throw new CommunicationNotValidException("Non sei autorizzato a mofificare questa comunicazione");
