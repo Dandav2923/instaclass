@@ -91,7 +91,6 @@ public class CommunicationServiceImpl implements CommunicationService {
             }
         }else {
             throw new CommunicationNotValidException("Non hai inserito i dati correttamente");
-
         }
     }
 }
