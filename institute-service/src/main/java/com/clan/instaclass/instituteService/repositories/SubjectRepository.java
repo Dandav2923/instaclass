@@ -17,5 +17,4 @@ public interface SubjectRepository extends JpaRepository<SubjectEnt, Integer> {
     @Query("SELECT s FROM SubjectEnt s WHERE s.id = :idSubject AND s.institute.id = :idInstitute")
     public SubjectEnt findSubjectByIdAndByInstitute(@Param("idSubject") Integer idSubject,@Param("idInstitute") Integer idInstitute);
 
-
 }

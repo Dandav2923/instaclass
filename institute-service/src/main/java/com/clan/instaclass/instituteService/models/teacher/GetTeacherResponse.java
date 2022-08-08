@@ -3,7 +3,9 @@ package com.clan.instaclass.instituteService.models.teacher;
 import lombok.Data;
 
 @Data
-public class CreateTeacherRequest {
+public class GetTeacherResponse {
+
+    private Integer id;
 
     private String name;
 

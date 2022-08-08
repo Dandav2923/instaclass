@@ -3,7 +3,10 @@ package com.clan.instaclass.instituteService.controllers;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
 import com.clan.instaclass.instituteService.exceptions.institute.AlreadyExistingIstituteException;
 import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;
+import com.clan.instaclass.instituteService.exceptions.teacher.TeacherAlreadyExistingException;
+import com.clan.instaclass.instituteService.exceptions.teacher.TeacherNotFoundException;
 import com.clan.instaclass.instituteService.models.institute.*;
+import com.clan.instaclass.instituteService.models.teacher.*;
 import com.clan.instaclass.instituteService.services.InstituteService;
 import com.clan.instaclass.instituteService.services.TeacherService;
 import lombok.AllArgsConstructor;
@@ -22,6 +25,25 @@ import java.util.List;
 public class TeacherController {
     private final TeacherService teacherService;
 
+
+    @RequestMapping(
+            path = "/connect",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    private ResponseEntity<Void> TeacherSubjectConnect(@RequestBody ConnectTeacherSubjectRequest request) {
+        try {
+            teacherService.teacherSubjectConnect(request);
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
     @RequestMapping(
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -31,10 +53,15 @@ public class TeacherController {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.create(request));
         }
-        catch (AlreadyExistingIstituteException e) {
+        catch (TeacherNotFoundException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        catch (TeacherAlreadyExistingException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }
         catch (DataNonValidException e) {
             e.printStackTrace();
@@ -53,11 +80,11 @@ public class TeacherController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<GetInstituteResponse> get(@PathVariable("id") Integer instituteId) throws InstituteNotFoundException {
+    private ResponseEntity<GetTeacherResponse> get(@PathVariable("id") Integer instituteId) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(teacherService.get(instituteId));
         }
-        catch (InstituteNotFoundException e) {
+        catch (TeacherNotFoundException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -70,15 +97,16 @@ public class TeacherController {
     }
 
     @RequestMapping(
-            path = "/username/{username}",
+            path = "/getUsername",
             method = RequestMethod.GET,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<GetInstituteResponse> getUsername(@PathVariable("username") String instituteUsername) throws InstituteNotFoundException {
+    private ResponseEntity<GetTeacherResponse> getUsername(@RequestBody GetUsernameTeacherRequest request) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(instituteService.getUsername(instituteUsername));
+            return ResponseEntity.status(HttpStatus.OK).body(teacherService.getUsername(request));
         }
-        catch (InstituteNotFoundException e) {
+        catch (TeacherNotFoundException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -88,7 +116,10 @@ public class TeacherController {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
+
     }
+
+
 
     @RequestMapping(
             path = "/update",
@@ -96,11 +127,16 @@ public class TeacherController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<PutInstituteResponse> put(@RequestBody PutInstituteRequest request) {
+    private ResponseEntity<PutTeacherResponse> put(@RequestBody PutTeacherRequest request) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(instituteService.put(request));
+            return ResponseEntity.status(HttpStatus.OK).body(teacherService.put(request));
         }
-        catch (InstituteNotFoundException e) {
+        catch (TeacherAlreadyExistingException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+        catch (TeacherNotFoundException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -118,13 +154,14 @@ public class TeacherController {
 
     }
 
+
     @RequestMapping(
             path = "/delete/{id}",
             method = RequestMethod.DELETE
     )
     private ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
         try {
-            instituteService.delete(id);
+            teacherService.delete(id);
             return new ResponseEntity<Void>(HttpStatus.OK);
         }
         catch (DataNonValidException e) {
@@ -136,23 +173,6 @@ public class TeacherController {
             e.printStackTrace();
             System.out.println(e.getMessage());
             return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
-
-    @RequestMapping(
-            path = "/getAll",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    private ResponseEntity<List<GetAllInstituteResponse>> get() {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(instituteService.getAll());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
     }
