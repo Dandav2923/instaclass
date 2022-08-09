@@ -1,14 +1,9 @@
 package com.clan.instaclass.instituteService.services.impls;
 
-import com.clan.instaclass.instituteService.entities.InstituteEnt;
 import com.clan.instaclass.instituteService.entities.SubjectEnt;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
-import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
-import com.clan.instaclass.instituteService.models.institute.GetAllInstituteResponse;
-import com.clan.instaclass.instituteService.models.institute.PutInstituteRequest;
-import com.clan.instaclass.instituteService.models.institute.PutInstituteResponse;
 import com.clan.instaclass.instituteService.models.subject.*;
 import com.clan.instaclass.instituteService.repositories.InstituteRepository;
 import com.clan.instaclass.instituteService.repositories.SubjectRepository;
@@ -72,17 +67,14 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public PutSubjectResponse put(PutSubjectRequest request) throws DataNonValidException, SubjectNotFoundException, SubjectAlreadyExistingException {
-        if (request.getName() == null || request.getId() == null || request.getInstituteId() == null) {
+        if (request.getName() == null || request.getId() == null) {
             throw new DataNonValidException("dati mancanti");
         }
 
-        SubjectEnt entity = subjectRepository.findSubjectByIdAndByInstitute(request.getId(), request.getInstituteId());
+        SubjectEnt entity = subjectRepository.findById(request.getId()).orElseThrow(() -> new SubjectNotFoundException("materia non trovata"));
 
-        if (entity == null) {
-            throw new SubjectNotFoundException("materia non trovata");
-        }
 
-        List<SubjectEnt> list = subjectRepository.getAllSubjectByInstitute(request.getInstituteId());
+        List<SubjectEnt> list = subjectRepository.getAllSubjectByInstitute(entity.getInstitute().getId());
         for(SubjectEnt subject : list) {
             if (subject.getName().equalsIgnoreCase(request.getName())){
                 throw new SubjectAlreadyExistingException("materia gia esistente");

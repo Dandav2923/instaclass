@@ -1,13 +1,18 @@
 package com.clan.instaclass.instituteService.entities;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "subject")
 public class SubjectEnt implements Serializable {
@@ -29,5 +34,6 @@ public class SubjectEnt implements Serializable {
     private InstituteEnt institute;
 
     @ManyToMany(mappedBy = "subjects")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<TeacherEnt> teachers;
 }

@@ -1,6 +1,6 @@
 package com.clan.instaclass.instituteService.entities;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -9,7 +9,10 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "teacher", uniqueConstraints = {
         @UniqueConstraint(

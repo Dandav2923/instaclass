@@ -6,7 +6,7 @@ import com.clan.instaclass.instituteService.exceptions.general.DataNonValidExcep
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherNotFoundException;
-import com.clan.instaclass.instituteService.models.institute.ConnectTeacherSubjectRequest;
+import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;
 import com.clan.instaclass.instituteService.models.teacher.*;
 import com.clan.instaclass.instituteService.repositories.InstituteRepository;
 import com.clan.instaclass.instituteService.repositories.SubjectRepository;
@@ -15,12 +15,9 @@ import com.clan.instaclass.instituteService.services.TeacherService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Slf4j
 @AllArgsConstructor
@@ -36,16 +33,15 @@ public class TeacherServiceImpl  implements TeacherService{
     public void teacherSubjectConnect(ConnectTeacherSubjectRequest request) throws TeacherNotFoundException, SubjectNotFoundException {
         TeacherEnt teacher = teacherRepository.findById(request.getTeacherId()).orElseThrow(()-> new TeacherNotFoundException("docente non trovato"));
         for (Integer intero : request.getSubjectIdList()) {
-
             SubjectEnt sub = subjectRepository.findById(intero).orElseThrow(() -> new SubjectNotFoundException("materia non trovata"));
             teacher.getSubjects().add(sub);
         }
-
+        teacherRepository.save(teacher);
     }
 
 
     @Override
-    public CreateTeacherResponse create(CreateTeacherRequest request) throws DataNonValidException, TeacherAlreadyExistingException, TeacherNotFoundException {
+    public CreateTeacherResponse create(CreateTeacherRequest request) throws DataNonValidException, TeacherAlreadyExistingException{
         if (request.getName() == null ||
                 request.getInstituteId() < 1 ||
                 request.getFiscalCode() == null ||
@@ -87,6 +83,20 @@ public class TeacherServiceImpl  implements TeacherService{
         response.setUsername(entity.getUsername());
         response.setPassword(entity.getPassword());
         response.setInstituteId(entity.getInstitute().getId());
+        return response;
+    }
+
+    @Override
+    public List<GetSubjectResponse> getSubjects(Integer teacherId) throws TeacherNotFoundException {
+        TeacherEnt entity = teacherRepository.findById(teacherId).orElseThrow(TeacherNotFoundException::new);
+        List<GetSubjectResponse> response = new ArrayList<>();
+        for (SubjectEnt subject: entity.getSubjects()) {
+            GetSubjectResponse getSubject = new GetSubjectResponse();
+            getSubject.setName(subject.getName());
+            getSubject.setId(subject.getId());
+            getSubject.setInstituteId(subject.getInstitute().getId());
+            response.add(getSubject);
+        }
         return response;
     }
 

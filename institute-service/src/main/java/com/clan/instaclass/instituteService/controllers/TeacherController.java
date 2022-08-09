@@ -1,13 +1,11 @@
 package com.clan.instaclass.instituteService.controllers;
 
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
-import com.clan.instaclass.instituteService.exceptions.institute.AlreadyExistingIstituteException;
-import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;
+import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherNotFoundException;
-import com.clan.instaclass.instituteService.models.institute.*;
+import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;
 import com.clan.instaclass.instituteService.models.teacher.*;
-import com.clan.instaclass.instituteService.services.InstituteService;
 import com.clan.instaclass.instituteService.services.TeacherService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +36,16 @@ public class TeacherController {
             return new ResponseEntity<Void>(HttpStatus.CREATED);
 
         }
+        catch (TeacherNotFoundException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        catch (SubjectNotFoundException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
         catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -52,11 +60,6 @@ public class TeacherController {
     private ResponseEntity<CreateTeacherResponse> create(@RequestBody CreateTeacherRequest request) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.create(request));
-        }
-        catch (TeacherNotFoundException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         catch (TeacherAlreadyExistingException e) {
             e.printStackTrace();
@@ -83,6 +86,48 @@ public class TeacherController {
     private ResponseEntity<GetTeacherResponse> get(@PathVariable("id") Integer instituteId) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(teacherService.get(instituteId));
+        }
+        catch (TeacherNotFoundException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @RequestMapping(
+            path = "/getAll/{idInstitute}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    private ResponseEntity<List<GetTeacherResponse>> getAll(@PathVariable("idInstitute") Integer instituteId) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(teacherService.getAll(instituteId));
+        }
+        catch (DataNonValidException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @RequestMapping(
+            path = "/getSubjects/{idTeacher}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    private ResponseEntity<List<GetSubjectResponse>> getSubject(@PathVariable("idTeacher") Integer teacherId) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(teacherService.getSubjects(teacherId));
         }
         catch (TeacherNotFoundException e) {
             e.printStackTrace();

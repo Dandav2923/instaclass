@@ -1,4 +1,4 @@
-package com.clan.instaclass.instituteService.models.institute;
+package com.clan.instaclass.instituteService.models.teacher;
 
 import lombok.Data;
 
@@ -9,5 +9,4 @@ public class ConnectTeacherSubjectRequest {
 
     private Integer teacherId;
     private List<Integer> subjectIdList;
-    private Integer instituteId;
 }

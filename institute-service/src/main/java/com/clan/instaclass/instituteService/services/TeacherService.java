@@ -5,7 +5,6 @@ import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExi
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherNotFoundException;
-import com.clan.instaclass.instituteService.models.institute.ConnectTeacherSubjectRequest;
 import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;
 import com.clan.instaclass.instituteService.models.teacher.*;
 
@@ -26,4 +25,6 @@ public interface TeacherService {
     void delete(Integer request) throws DataNonValidException, TeacherNotFoundException;
 
     public void teacherSubjectConnect(ConnectTeacherSubjectRequest request) throws TeacherNotFoundException, SubjectNotFoundException;
+
+    List<GetSubjectResponse> getSubjects(Integer teacherId) throws TeacherNotFoundException;
 }

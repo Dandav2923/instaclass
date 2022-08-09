@@ -1,7 +1,6 @@
 package com.clan.instaclass.instituteService.services;
 
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
-import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
 import com.clan.instaclass.instituteService.models.subject.*;

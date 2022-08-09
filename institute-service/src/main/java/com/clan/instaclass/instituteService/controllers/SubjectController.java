@@ -1,11 +1,8 @@
 package com.clan.instaclass.instituteService.controllers;
 
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
-import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
-import com.clan.instaclass.instituteService.models.institute.PutInstituteRequest;
-import com.clan.instaclass.instituteService.models.institute.PutInstituteResponse;
 import com.clan.instaclass.instituteService.models.subject.*;
 import com.clan.instaclass.instituteService.services.SubjectService;
 import lombok.AllArgsConstructor;

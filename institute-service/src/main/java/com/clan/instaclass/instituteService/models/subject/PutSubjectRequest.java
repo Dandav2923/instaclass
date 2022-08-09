@@ -6,5 +6,4 @@ import lombok.Data;
 public class PutSubjectRequest {
     private Integer id;
     private String name;
-    private Integer instituteId;
 }
