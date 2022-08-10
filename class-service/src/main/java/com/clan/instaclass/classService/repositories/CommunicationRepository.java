@@ -1,5 +1,6 @@
 package com.clan.instaclass.classService.repositories;
 
+import com.clan.instaclass.classService.entities.ClassEnt;
 import com.clan.instaclass.classService.entities.CommunicationEnt;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,4 +13,5 @@ import java.util.List;
 public interface CommunicationRepository extends JpaRepository<CommunicationEnt, Integer> {
     @Query("select c from CommunicationEnt c where c.classEnt.id = :classId")
     public List<CommunicationEnt> findCommunications(@Param("classId") Integer id);
+
 }

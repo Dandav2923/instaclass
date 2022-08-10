@@ -20,7 +20,7 @@ public class PresenceEnt implements Serializable {
     private Integer id;
 
     @Column(name = "present", nullable = false)
-    private boolean present;
+    private Boolean present;
 
     @Column(name = "date", nullable = false)
     private LocalDate date;

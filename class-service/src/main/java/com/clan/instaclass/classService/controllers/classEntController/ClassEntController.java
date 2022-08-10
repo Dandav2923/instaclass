@@ -64,14 +64,14 @@ public class ClassEntController {
     }
 
     @RequestMapping(
-            path = {"/updateClass"},
-            method = {RequestMethod.PUT},
-            consumes = {"application/json"},
-            produces = {"application/json"}
+            path = "/updateClass",
+            method = RequestMethod.PUT,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     private ResponseEntity<PutClassResponse> updateClass(@RequestBody PutClassRequest request) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.classService.updateClass(request));
+            return ResponseEntity.status(HttpStatus.CREATED).body(classService.updateClass(request));
         } catch (ClassNotExistException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -88,12 +88,12 @@ public class ClassEntController {
     }
 
     @RequestMapping(
-            path = {"/deleteClass"},
-            method = {RequestMethod.DELETE}
+            path = "/deleteClass",
+            method = RequestMethod.DELETE
     )
     private ResponseEntity<Void> deleteClass(@RequestBody DeleteClassRequest request) {
         try {
-            this.classService.deleteClass(request);
+            classService.deleteClass(request);
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         } catch (ClassNotExistException e) {
             e.printStackTrace();
