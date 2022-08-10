@@ -17,4 +17,5 @@ public interface InstituteService {
 
     List<GetAllInstituteResponse> getAll();
 
+
 }
