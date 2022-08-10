@@ -17,5 +17,6 @@ public interface InstituteService {
 
     List<GetAllInstituteResponse> getAll();
 
+    GetInstituteResponse getUsername(String instituteUsername) throws InstituteNotFoundException;
 
 }

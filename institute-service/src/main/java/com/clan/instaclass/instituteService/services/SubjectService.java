@@ -13,5 +13,7 @@ public interface SubjectService {
 
     List<GetSubjectResponse> getAll(Integer idInstitute);
 
-    PutSubjectResponse put(PutSubjectRequest request) throws DataNonValidException, SubjectNotFoundException;
+    PutSubjectResponse put(PutSubjectRequest request) throws DataNonValidException, SubjectNotFoundException, SubjectAlreadyExistingException;
+
+    void delete(Integer id) throws DataNonValidException, SubjectNotFoundException;
 }

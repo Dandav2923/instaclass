@@ -1,13 +1,16 @@
 package com.clan.instaclass.instituteService.entities;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "student",uniqueConstraints = {
         @UniqueConstraint(
