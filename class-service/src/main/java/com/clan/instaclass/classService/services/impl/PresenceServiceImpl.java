@@ -10,10 +10,15 @@ import com.clan.instaclass.classService.models.presence.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.PresenceRepository;
 import com.clan.instaclass.classService.services.PresenceService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Slf4j
+@AllArgsConstructor
+@Service
 public class PresenceServiceImpl implements PresenceService {
     private ClassRepository classRepository;
     private PresenceRepository presenceRepository;
