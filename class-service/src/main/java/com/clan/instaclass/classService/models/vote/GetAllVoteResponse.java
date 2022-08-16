@@ -1,11 +1,15 @@
 package com.clan.instaclass.classService.models.vote;
 
+import com.clan.instaclass.classService.entities.ClassEnt;
 import lombok.Data;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Data
-public class GetVoteResponse {
+public class GetAllVoteResponse {
 
     private Integer id;
 
@@ -20,4 +24,5 @@ public class GetVoteResponse {
     private Integer teacher;
 
     private Integer classEnt;
+
 }

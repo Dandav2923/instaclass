@@ -13,6 +13,7 @@
         <module name="institute-service" />
         <module name="superAdminService" />
         <module name="class-service" />
+        <module name="eureka-server" />
         <module name="classi" />
       </profile>
     </annotationProcessing>

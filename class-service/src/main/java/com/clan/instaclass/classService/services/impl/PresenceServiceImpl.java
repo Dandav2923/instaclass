@@ -1,7 +1,6 @@
 package com.clan.instaclass.classService.services.impl;
 
 import com.clan.instaclass.classService.entities.PresenceEnt;
-import com.clan.instaclass.classService.exceptions.classNote.ClassNoteNotExistException;
 import com.clan.instaclass.classService.exceptions.classes.ClassNotExistException;
 import com.clan.instaclass.classService.exceptions.presence.PresenceExistException;
 import com.clan.instaclass.classService.exceptions.presence.PresenceNotExistException;

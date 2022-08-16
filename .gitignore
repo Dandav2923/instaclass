@@ -285,6 +285,8 @@ $RECYCLE.BIN/
 /auth-service/target/classes/application.yml
 /class-service/target/classes/application.yml
 /institute-service/target/classes/application.yml
+/institute-service/src/main/resources/application.yml
+/class-service/src/main/resources/application.yml
 /auth-service/target/auth-service-1.0.0-SNAPSHOT.jar.original
 /class-service/target/classes/banner.txt
 /institute-service/target/classes/banner.txt
@@ -303,3 +305,12 @@ $RECYCLE.BIN/
 /class-service/target/maven-archiver/pom.properties
 /institute-service/target/maven-archiver/pom.properties
 /admin-service/target/superAdminService-1.0.0-SNAPSHOT.jar.original
+/admin-service/target/classes/application.yml
+/eureka-server/target/classes/application.yml
+/eureka-server/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/shared/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/shared/target/maven-archiver/pom.properties
+/eureka-server/target/maven-archiver/pom.properties
+/shared/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+/eureka-server/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+/eureka-server/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
