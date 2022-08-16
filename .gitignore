@@ -314,3 +314,9 @@ $RECYCLE.BIN/
 /shared/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 /eureka-server/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
 /eureka-server/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+/api-gateway/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+/api-gateway/target/maven-archiver/pom.properties
+/api-gateway/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/api-gateway/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+/api-gateway/target/classes/application.yml
+/api-gateway/target/api-gateway-1.0.0-SNAPSHOT.jar.original

@@ -15,6 +15,7 @@
         <module>class-service</module>
         <module>admin-Service</module>
         <module>eureka-server</module>
+        <module>api-gateway</module>
     </modules>
 
     <name>instaclass</name>
