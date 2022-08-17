@@ -16,6 +16,7 @@
         <module>admin-Service</module>
         <module>eureka-server</module>
         <module>api-gateway</module>
+        <module>feign</module>
     </modules>
 
     <name>instaclass</name>

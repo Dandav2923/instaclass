@@ -5,7 +5,7 @@ application:
 server:
   servlet:
     context-path: /superAdminService
-  port: 10280
+  port: 0
 
 spring:
   application:

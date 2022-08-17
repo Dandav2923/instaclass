@@ -15,6 +15,7 @@
         <module name="api-gateway" />
         <module name="class-service" />
         <module name="eureka-server" />
+        <module name="feign" />
         <module name="classi" />
       </profile>
     </annotationProcessing>

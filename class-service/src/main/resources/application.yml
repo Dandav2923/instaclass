@@ -5,7 +5,7 @@ application:
 server:
   servlet:
     context-path: /class
-  port: 10080
+  port: 0
 
 spring:
   application:

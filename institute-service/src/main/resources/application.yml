@@ -1,11 +1,11 @@
 application:
-  title: Instaclass - Institute Service
+  title: Instaclass - institute Service
   version: 1.0.0-SNAPSHOT
 
 server:
   servlet:
     context-path: /institute
-  port: 10180
+  port: 0
 
 spring:
   application:

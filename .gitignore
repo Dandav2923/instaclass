@@ -320,3 +320,12 @@ $RECYCLE.BIN/
 /api-gateway/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 /api-gateway/target/classes/application.yml
 /api-gateway/target/api-gateway-1.0.0-SNAPSHOT.jar.original
+/feign/target/classes/application.yml
+/api-gateway/target/classes/banner.txt
+/eureka-server/target/classes/banner.txt
+/auth-service/target/classes/META-INF/MANIFEST.MF
+/shared/target/classes/META-INF/MANIFEST.MF
+/auth-service/target/classes/META-INF/maven/com.clan/auth-service/pom.properties
+/shared/target/classes/META-INF/maven/com.clan/shared/pom.properties
+/auth-service/target/classes/META-INF/maven/com.clan/auth-service/pom.xml
+/shared/target/classes/META-INF/maven/com.clan/shared/pom.xml
