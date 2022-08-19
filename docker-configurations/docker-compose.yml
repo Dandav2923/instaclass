@@ -29,8 +29,21 @@ services:
       - "8080:80"
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+  mongo:
+    container_name: mongodb_container
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: mongo_instaclass
+    ports:
+        - "27017:27017"
+    volumes:
+      - mongoDb:/data/db/
+      - ./db/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 volumes:
   db:
     driver: local
   pgadmin-data:
+    driver: local
+  mongoDb:
     driver: local
