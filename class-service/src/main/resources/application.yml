@@ -5,15 +5,15 @@ application:
 server:
   servlet:
     context-path: /class
-  port: 0
+  port: 10080
 
 spring:
   application:
     name: CLASS-SERVICE
   datasource:
-    url: jdbc:postgresql://localhost:5433/instaclass_db?currentSchema=schema_class
-    username: postgres
-    password: root
+    url: jdbc:postgresql://localhost:5433/instaclass?currentSchema=schema_class
+    username: admin
+    password: password
     driver-class-name: org.postgresql.Driver
   jpa:
     generate-ddl: true

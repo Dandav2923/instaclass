@@ -38,8 +38,8 @@ public class HomeworkServiceImpl implements HomeworkService {
         CreateHomeworkResponse response = new CreateHomeworkResponse();
         response.setId(homeworkRepository.save(newHomeworkEnt).getId());
         response.setAssignment(newHomeworkEnt.getAssignment());
-        response.setDate(request.getDate());
-        response.setSubjectId(request.getSubjectId());
+        response.setDate(newHomeworkEnt.getDueDate());
+        response.setSubjectId(newHomeworkEnt.getSubject());
         response.setClassId(newHomeworkEnt.getClassEnt().getId());
         return response;
     }
