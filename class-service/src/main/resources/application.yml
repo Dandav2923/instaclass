@@ -5,13 +5,15 @@ application:
 server:
   servlet:
     context-path: /class
-  port: 10080
+  port: 0
 
 spring:
+  application:
+    name: CLASS-SERVICE
   datasource:
-    url: jdbc:postgresql://localhost:5433/instaclass?currentSchema=schema_class
-    username: admin
-    password: password
+    url: jdbc:postgresql://localhost:5433/instaclass_db?currentSchema=schema_class
+    username: postgres
+    password: root
     driver-class-name: org.postgresql.Driver
   jpa:
     generate-ddl: true
@@ -21,3 +23,11 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance: localhost

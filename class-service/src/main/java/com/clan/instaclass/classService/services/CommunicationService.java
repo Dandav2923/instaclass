@@ -4,7 +4,6 @@ import com.clan.instaclass.classService.exceptions.classes.ClassNotExistExceptio
 import com.clan.instaclass.classService.exceptions.communication.CommunicationExistException;
 import com.clan.instaclass.classService.exceptions.communication.CommunicationNotExistException;
 import com.clan.instaclass.classService.exceptions.communication.CommunicationNotValidException;
-import com.clan.instaclass.classService.models.classes.PutClassResponse;
 import com.clan.instaclass.classService.models.communication.*;
 
 import java.util.List;

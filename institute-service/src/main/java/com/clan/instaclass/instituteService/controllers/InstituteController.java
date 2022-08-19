@@ -52,7 +52,7 @@ public class InstituteController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<GetInstituteResponse> get(@PathVariable("id") Integer instituteId) throws InstituteNotFoundException {
+    private ResponseEntity<GetInstituteResponse> get(@PathVariable("id") Integer instituteId) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(instituteService.get(instituteId));
         }
@@ -73,7 +73,7 @@ public class InstituteController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<GetInstituteResponse> getUsername(@PathVariable("username") String instituteUsername) throws InstituteNotFoundException {
+    private ResponseEntity<GetInstituteResponse> getUsername(@PathVariable("username") String instituteUsername) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(instituteService.getUsername(instituteUsername));
         }

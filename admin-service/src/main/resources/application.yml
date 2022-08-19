@@ -1,0 +1,25 @@
+application:
+  title: Instaclass - SuperAdmin Service
+  version: 1.0.0-SNAPSHOT
+
+server:
+  servlet:
+    context-path: /superAdminService
+  port: 0
+
+spring:
+  application:
+    name: SUPERADMIN-SERVICE
+  data:
+    mongodb:
+      database: mongo_instaclass
+      host: localhost
+      port: 27018
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance: localhost

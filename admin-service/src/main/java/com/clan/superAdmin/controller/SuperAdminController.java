@@ -1,32 +1,50 @@
 package com.clan.superAdmin.controller;
 
-import com.clan.superAdmin.entity.SuperAdmin;
+import com.clan.superAdmin.entities.SuperAdmin;
+import com.clan.superAdmin.exception.DataNotValidException;
+import com.clan.superAdmin.exception.SuperAdminAlreadyExistingException;
+import com.clan.superAdmin.models.CreateSuperAdminRequest;
+import com.clan.superAdmin.models.CreateSuperAdminResponse;
 import com.clan.superAdmin.repository.SuperAdminRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.clan.superAdmin.service.SuperAdminService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Slf4j
+@AllArgsConstructor
 @RequestMapping(path = "/v1/superAdmin",produces = MediaType.APPLICATION_JSON_VALUE)
 public class SuperAdminController {
 
-    @Autowired
-    private SuperAdminRepository superAdminRepository;
+    private SuperAdminService superAdminService;
 
-    @PostMapping(path = "",consumes = "application/json" )
-    public ResponseEntity<SuperAdmin> addRegisterSuperAdmin(@RequestBody SuperAdmin sa) {
+    @RequestMapping(
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    private ResponseEntity<CreateSuperAdminResponse> addRegisterSuperAdmin(@RequestBody CreateSuperAdminRequest request) {
         try {
-            SuperAdmin addSuperAdmin = superAdminRepository.save(sa);
-            return new ResponseEntity<SuperAdmin>(addSuperAdmin, HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.OK).body(superAdminService.create(request));
+        }
+        catch (SuperAdminAlreadyExistingException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+        catch (DataNotValidException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
         catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<SuperAdmin>(HttpStatus.INTERNAL_SERVER_ERROR);
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 

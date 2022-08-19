@@ -26,20 +26,19 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
       PGADMIN_LISTEN_PORT: 80
     ports:
-      - "8080:80"
+      - "8081:80"
     volumes:
       - pgadmin-data:/var/lib/pgadmin
-  mongo:
-    container_name: mongodb_container
+  mongodb:
     image: mongo:latest
+    container_name: mongodb
     restart: always
     environment:
       MONGO_INITDB_DATABASE: mongo_instaclass
     ports:
-        - "27017:27017"
+      - "27018:27017"
     volumes:
       - mongoDb:/data/db/
-      - ./db/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 volumes:
   db:
     driver: local

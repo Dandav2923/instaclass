@@ -1,15 +1,12 @@
 package com.clan.instaclass.classService.controllers.classEntController;
 
-import com.clan.instaclass.classService.entities.ClassEnt;
 import com.clan.instaclass.classService.exceptions.classes.ClassExistException;
 import com.clan.instaclass.classService.exceptions.classes.ClassNotExistException;
 import com.clan.instaclass.classService.exceptions.classes.ClassNotValidException;
 import com.clan.instaclass.classService.models.classes.*;
-import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.services.ClassService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
