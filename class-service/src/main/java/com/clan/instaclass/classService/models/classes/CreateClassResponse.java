@@ -6,4 +6,5 @@ import lombok.Data;
 public class CreateClassResponse {
     private Integer id;
     private String name;
+    private String instituteName;
 }

@@ -23,6 +23,7 @@ public class ClassEntController {
     private final ClassService classService;
 
     @RequestMapping(
+            //modificare path e nome variabile per essere chiaro idInstitute
             path = "/getAll/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE

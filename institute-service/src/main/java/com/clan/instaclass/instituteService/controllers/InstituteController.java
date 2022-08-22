@@ -1,5 +1,6 @@
 package com.clan.instaclass.instituteService.controllers;
 
+import com.clan.instaclass.feign.instituteService.models.institute.GetInstituteResponse;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
 import com.clan.instaclass.instituteService.exceptions.institute.AlreadyExistingIstituteException;
 import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;

@@ -7,6 +7,8 @@ import com.clan.instaclass.classService.exceptions.classes.ClassNotValidExceptio
 import com.clan.instaclass.classService.models.classes.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.services.ClassService;
+import com.clan.instaclass.feign.instituteService.InstituteClient;
+import com.clan.instaclass.feign.instituteService.models.institute.GetInstituteResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,12 +19,14 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class ClassServiceImpl implements ClassService {
-    private ClassRepository classRepository;
+    private final ClassRepository classRepository;
+    private final InstituteClient instituteClient;
     @Override
     public CreateClassResponse create(CreateClassRequest request) throws ClassNotValidException, ClassExistException {
         if (request.getName() == null || request.getName().isBlank() || request.getIdInstitute() == null || request.getIdInstitute() <=0){
             throw new ClassNotValidException("Non hai inserito i dati correttamente");
         }
+        GetInstituteResponse instituteResponse = instituteClient.getInstitute(request.getIdInstitute());
         List<ClassEnt> listClassEnt = classRepository.findByNameContains(request.getIdInstitute(), request.getName());
         if (listClassEnt == null || listClassEnt.size() == 0){
             ClassEnt newClass = new ClassEnt();
@@ -31,6 +35,7 @@ public class ClassServiceImpl implements ClassService {
             CreateClassResponse response = new CreateClassResponse();
             response.setId(classRepository.save(newClass).getId());
             response.setName(newClass.getName());
+            response.setInstituteName(instituteResponse.getName());
             return response;
         }
         else {
