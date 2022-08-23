@@ -21,13 +21,13 @@ import java.util.List;
 public class ClassTeacherController {
     private final ClassTeacherService classTeacherService;
     @RequestMapping(
-            path = "/getAllClassTeacher/{id}",
+            path = "/getAllClassTeacher/{idClass}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<GetClassTeacherResponse>> getAllClassTeachersByClassId(@PathVariable("id")Integer id){
+    private ResponseEntity<List<GetClassTeacherResponse>> getAllClassTeachersByClassId(@PathVariable("idClass")Integer idClass){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(classTeacherService.findAllTeacherByClass(id));
+            return ResponseEntity.status(HttpStatus.OK).body(classTeacherService.findAllTeacherByClass(idClass));
         }catch (Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());

@@ -55,11 +55,11 @@ public class ClassStudentController {
     }
 
     @RequestMapping(
-            path = "/{id}",
+            path = "/{idClass}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<GetClassStudentResponse>> get(@PathVariable("id") Integer classId) {
+    private ResponseEntity<List<GetClassStudentResponse>> get(@PathVariable("idClass") Integer classId) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(classStudentService.get(classId));
         }
@@ -81,7 +81,7 @@ public class ClassStudentController {
     }
 
     @RequestMapping(
-            path = "/update",
+            path = "/updateClassStudent",
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
@@ -115,7 +115,25 @@ public class ClassStudentController {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-
     }
-
+    @RequestMapping(
+            path = "/deleteClassStudent",
+            method = RequestMethod.DELETE,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    private ResponseEntity<Void> deleteClassStudent(@RequestBody DeleteClassStudentRequest request){
+        try{
+            classStudentService.deleteClassStudent(request);
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        } catch (ClassStudentNotExistException | StudentAlreadyExistingException | ClassNotExistException e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 }

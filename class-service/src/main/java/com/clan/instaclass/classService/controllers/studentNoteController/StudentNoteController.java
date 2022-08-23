@@ -25,13 +25,13 @@ import java.util.List;
 public class StudentNoteController {
     private final StudentNoteService studentNoteService;
     @RequestMapping(
-            path = "/getAll/{id}",
+            path = "/getAllStudentNotes/{idClass}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<GetStudentNoteResponse>> getAllStudentNotes(@PathVariable("id")Integer id){
+    private ResponseEntity<List<GetStudentNoteResponse>> getAllStudentNotes(@PathVariable("idClass")Integer idClass){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(studentNoteService.findAllStudentNotes(id));
+            return ResponseEntity.status(HttpStatus.OK).body(studentNoteService.findAllStudentNotes(idClass));
         }catch (Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());

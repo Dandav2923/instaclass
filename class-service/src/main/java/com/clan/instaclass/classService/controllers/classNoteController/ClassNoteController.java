@@ -22,13 +22,13 @@ public class ClassNoteController {
     private final ClassNoteService classNoteService;
 
     @RequestMapping(
-            path = "/getAll/{id}",
+            path = "/getAllClassNotes/{idClass}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<GetClassNoteResponse>> getAllClassNotes(@PathVariable("id")Integer id){
+    private ResponseEntity<List<GetClassNoteResponse>> getAllClassNotes(@PathVariable("idClass")Integer idClass){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(classNoteService.findAllClassNotes(id));
+            return ResponseEntity.status(HttpStatus.OK).body(classNoteService.findAllClassNotes(idClass));
         }catch (Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());

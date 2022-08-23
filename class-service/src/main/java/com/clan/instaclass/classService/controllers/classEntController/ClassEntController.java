@@ -23,14 +23,13 @@ public class ClassEntController {
     private final ClassService classService;
 
     @RequestMapping(
-            //modificare path e nome variabile per essere chiaro idInstitute
-            path = "/getAll/{id}",
+            path = "/getAllClasses/{idInstitute}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<GetClassResponse>> get(@PathVariable("id") Integer id) {
+    private ResponseEntity<List<GetClassResponse>> get(@PathVariable("idInstitute") Integer idInstitute) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(classService.findAll(id));
+            return ResponseEntity.status(HttpStatus.OK).body(classService.findAll(idInstitute));
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -43,7 +42,7 @@ public class ClassEntController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<CreateClassResponse> create(@RequestBody CreateClassRequest request) {
+    private ResponseEntity<CreateClassResponse> createClass(@RequestBody CreateClassRequest request) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(classService.create(request));
         } catch (ClassExistException e) {

@@ -15,4 +15,5 @@ public interface ClassStudentService {
     List<GetClassStudentResponse> get(Integer classId) throws ClassStudentNotValidException, ClassNotExistException;
 
     PutClassStudentResponse put(PutClassStudentRequest request) throws StudentAlreadyExistingException, ClassStudentNotValidException, ClassStudentNotExistException, ClassNotExistException;
+    void deleteClassStudent(DeleteClassStudentRequest request) throws StudentAlreadyExistingException, ClassStudentNotValidException, ClassStudentNotExistException, ClassNotExistException;
 }

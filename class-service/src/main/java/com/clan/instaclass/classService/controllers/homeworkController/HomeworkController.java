@@ -26,13 +26,13 @@ public class HomeworkController {
     private final HomeworkService homeworkService;
 
     @RequestMapping(
-            path = "/getAll/{id}",
+            path = "/getAllHomeworks/{idClass}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<GetHomeworkResponse>> getAll(@PathVariable("id") Integer id){
+    private ResponseEntity<List<GetHomeworkResponse>> getAll(@PathVariable("idClass") Integer idClass){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(homeworkService.findAllHomeworks(id));
+            return ResponseEntity.status(HttpStatus.OK).body(homeworkService.findAllHomeworks(idClass));
         }catch(Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());

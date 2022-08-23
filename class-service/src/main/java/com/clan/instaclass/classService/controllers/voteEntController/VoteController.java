@@ -58,7 +58,7 @@ public class VoteController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<GetAllVoteResponse>> getAllVoteSudent(@PathVariable("idStudent") Integer idStudent){
+    private ResponseEntity<List<GetAllVoteResponse>> getAllVoteStudent(@PathVariable("idStudent") Integer idStudent){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(voteService.getAllVoteStudent(idStudent));
         }
@@ -118,7 +118,7 @@ public class VoteController {
 
 
     @RequestMapping(
-            path = "/update",
+            path = "/updateVote",
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
@@ -171,7 +171,7 @@ public class VoteController {
 
 
     @RequestMapping(
-            path = "/delete/{idVote}",
+            path = "/deleteVote/{idVote}",
             method = RequestMethod.DELETE
     )
     private ResponseEntity<Void> delete(@PathVariable("idVote") Integer idVote){

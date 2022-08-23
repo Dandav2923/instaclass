@@ -91,7 +91,7 @@ public class ClassTeacherServiceImpl implements ClassTeacherService {
     @Override
     public void deleteClassTeacher(DeleteClassTeacherRequest request) throws ClassTeacherNotValidException, ClassTeacherNotExistException {
         if (request.getClassId() != null && request.getClassId() > 0 && request.getTeacherId() != null && request.getTeacherId() > 0 && request.getId() != null && request.getId() > 0) {
-            ClassTeacherRel classTeacherRel = classTeacherRepository.findById(request.getId()).orElseThrow(() -> new ClassTeacherNotExistException("Docente nella classe con id" + request.getTeacherId() + "non trovato"));
+            ClassTeacherRel classTeacherRel = classTeacherRepository.findById(request.getId()).orElseThrow(() -> new ClassTeacherNotExistException("Docente nella classe con id " + request.getTeacherId() + " non trovato"));
             if (classTeacherRel.getTeacher() != request.getTeacherId() && classTeacherRel.getClassEnt().getId() != request.getClassId()){
                 throw new ClassTeacherNotValidException("Non sei autorizzato a modificare questo campo");
             }else{
