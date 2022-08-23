@@ -5,13 +5,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(
-        name = "institute",
-        url = "http://INSTITUTE-SERVICE/institute"
-)
+@FeignClient("INSTITUTE-SERVICE")
 public interface InstituteClient {
     @GetMapping(
-            path = "/v1/institutes/{instituteId}"
+            path = "institute/v1/institutes/{instituteId}"
     )
     GetInstituteResponse getInstitute(@PathVariable("instituteId") Integer instituteId);
 }
