@@ -23,13 +23,13 @@ public class CommunicationEntController {
     private final CommunicationService communicationService;
 
     @RequestMapping(
-            path = "/getAll/{id}",
+            path = "/getAllCommunications/{idClass}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<GetCommunicationResponse>> getAll(@PathVariable("id") Integer id){
+    private ResponseEntity<List<GetCommunicationResponse>> getAll(@PathVariable("idClass") Integer idClass){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(communicationService.findAllCommunications(id));
+            return ResponseEntity.status(HttpStatus.OK).body(communicationService.findAllCommunications(idClass));
         }catch(Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());

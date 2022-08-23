@@ -25,13 +25,13 @@ import java.util.List;
 public class PresenceController {
     private final PresenceService presenceService;
     @RequestMapping(
-            path = "/getAll/{id}",
+            path = "/getAllPresences/{idClass}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<GetPresenceResponse>> getAllPresences(@PathVariable("id")Integer id){
+    private ResponseEntity<List<GetPresenceResponse>> getAllPresences(@PathVariable("idClass")Integer idClass){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(presenceService.findAllPresences(id));
+            return ResponseEntity.status(HttpStatus.OK).body(presenceService.findAllPresences(idClass));
         }catch (Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -39,7 +39,7 @@ public class PresenceController {
         }
     }
     @RequestMapping(
-            path = "/getAllByStudent/{idClass}/{idStudent}",
+            path = "/getAllPresencesByStudent/{idClass}/{idStudent}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )

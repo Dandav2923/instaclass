@@ -77,23 +77,31 @@ public class ClassStudentServiceImpl implements ClassStudentService {
             throw new ClassStudentNotValidException("dati mancanti");
         }
         ClassEnt classEntity = classRepository.findById(request.getClassId()).orElseThrow(() -> new ClassNotExistException("classe non trovata"));
-
         ClassStudentRel entity = classStudentRepository.findById(request.getId()).orElseThrow(() -> new ClassStudentNotExistException("Class student non trovata"));
-
         for (ClassStudentRel student: classStudentRepository.findAll()) {
             if (student.getStudent() == request.getStudentId() && student.getClassEnt().getId() == request.getClassId()){
                 throw new StudentAlreadyExistingException("studente in quella classe gia esistente");
             }
         }
-
         entity.setStudent(request.getStudentId());
         entity.setClassEnt(classEntity);
-
         PutClassStudentResponse response = new PutClassStudentResponse();
         response.setClassId(request.getClassId());
         response.setStudentId(request.getStudentId());
         response.setId(classStudentRepository.save(entity).getId());
         return response;
+    }
+
+    @Override
+    public void deleteClassStudent(DeleteClassStudentRequest request) throws StudentAlreadyExistingException, ClassStudentNotValidException, ClassStudentNotExistException, ClassNotExistException {
+        if (request.getId() == null ||
+                request.getClassId() == null ||
+                request.getStudentId() == null
+        ) {
+            throw new ClassStudentNotValidException("dati mancanti");
+        }
+        ClassStudentRel classStudentRel = classStudentRepository.findById(request.getClassId()).orElseThrow(() -> new ClassStudentNotExistException("Studente nella classe con id " + request.getClassId() + " non trovato"));
+        classStudentRepository.delete(classStudentRel);
     }
 
 }

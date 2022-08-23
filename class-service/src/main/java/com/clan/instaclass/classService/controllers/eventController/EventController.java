@@ -28,13 +28,13 @@ public class EventController {
     private final EventService eventService;
 
     @RequestMapping(
-            path = "/getAll/{id}",
+            path = "/getAllEvents/{idClass}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<GetEventResponse>> getAll(@PathVariable("id") Integer id){
+    private ResponseEntity<List<GetEventResponse>> getAll(@PathVariable("idClass") Integer idClass){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(eventService.findAllEvents(id));
+            return ResponseEntity.status(HttpStatus.OK).body(eventService.findAllEvents(idClass));
         }catch(Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());
