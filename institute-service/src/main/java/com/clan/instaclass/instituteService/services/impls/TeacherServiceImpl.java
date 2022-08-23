@@ -29,16 +29,6 @@ public class TeacherServiceImpl  implements TeacherService{
 
     private SubjectRepository subjectRepository;
 
-    @Override
-    public void teacherSubjectConnect(ConnectTeacherSubjectRequest request) throws TeacherNotFoundException, SubjectNotFoundException {
-        TeacherEnt teacher = teacherRepository.findById(request.getTeacherId()).orElseThrow(()-> new TeacherNotFoundException("docente non trovato"));
-        for (Integer intero : request.getSubjectIdList()) {
-            SubjectEnt sub = subjectRepository.findById(intero).orElseThrow(() -> new SubjectNotFoundException("materia non trovata"));
-            teacher.getSubjects().add(sub);
-        }
-        teacherRepository.save(teacher);
-    }
-
 
     @Override
     public CreateTeacherResponse create(CreateTeacherRequest request) throws DataNonValidException, TeacherAlreadyExistingException{

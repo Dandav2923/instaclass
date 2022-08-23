@@ -24,7 +24,6 @@ public interface TeacherService {
 
     void delete(Integer request) throws DataNonValidException, TeacherNotFoundException;
 
-    public void teacherSubjectConnect(ConnectTeacherSubjectRequest request) throws TeacherNotFoundException, SubjectNotFoundException;
 
     List<GetSubjectResponse> getSubjects(Integer teacherId) throws TeacherNotFoundException;
 }
