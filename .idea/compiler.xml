@@ -7,7 +7,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="shared" />
         <module name="auth-service" />
         <module name="istituto" />
         <module name="institute-service" />
@@ -23,6 +22,7 @@
       <module name="CAG" target="17" />
       <module name="classeService" target="17" />
       <module name="istitutoService" target="17" />
+      <module name="shared" target="17" />
       <module name="untitled" target="17" />
     </bytecodeTargetLevel>
   </component>

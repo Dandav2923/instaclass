@@ -329,3 +329,6 @@ $RECYCLE.BIN/
 /shared/target/classes/META-INF/maven/com.clan/shared/pom.properties
 /auth-service/target/classes/META-INF/maven/com.clan/auth-service/pom.xml
 /shared/target/classes/META-INF/maven/com.clan/shared/pom.xml
+/feign/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/feign/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+/feign/target/maven-archiver/pom.properties

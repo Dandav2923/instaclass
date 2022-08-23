@@ -24,34 +24,7 @@ public class TeacherController {
     private final TeacherService teacherService;
 
 
-    @RequestMapping(
-            path = "/connect",
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    private ResponseEntity<Void> TeacherSubjectConnect(@RequestBody ConnectTeacherSubjectRequest request) {
-        try {
-            teacherService.teacherSubjectConnect(request);
-            return new ResponseEntity<Void>(HttpStatus.CREATED);
 
-        }
-        catch (TeacherNotFoundException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-        catch (SubjectNotFoundException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
     @RequestMapping(
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -79,13 +52,13 @@ public class TeacherController {
     }
 
     @RequestMapping(
-            path = "/{id}",
+            path = "/{idTeacher}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<GetTeacherResponse> get(@PathVariable("id") Integer instituteId) {
+    private ResponseEntity<GetTeacherResponse> get(@PathVariable("idTeacher") Integer idTeacher) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(teacherService.get(instituteId));
+            return ResponseEntity.status(HttpStatus.OK).body(teacherService.get(idTeacher));
         }
         catch (TeacherNotFoundException e) {
             e.printStackTrace();
@@ -100,11 +73,11 @@ public class TeacherController {
     }
 
     @RequestMapping(
-            path = "/getAll/{idInstitute}",
+            path = "/getAllTeachers/{idInstitute}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<GetTeacherResponse>> getAll(@PathVariable("idInstitute") Integer instituteId) {
+    private ResponseEntity<List<GetTeacherResponse>> getAllTeachersByIdInstitute(@PathVariable("idInstitute") Integer instituteId) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(teacherService.getAll(instituteId));
         }
@@ -142,12 +115,12 @@ public class TeacherController {
     }
 
     @RequestMapping(
-            path = "/getUsername",
+            path = "/getUsernameTeacher",
             method = RequestMethod.GET,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<GetTeacherResponse> getUsername(@RequestBody GetUsernameTeacherRequest request) {
+    private ResponseEntity<GetTeacherResponse> getUsernameTeacher(@RequestBody GetUsernameTeacherRequest request) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(teacherService.getUsername(request));
         }
@@ -167,7 +140,7 @@ public class TeacherController {
 
 
     @RequestMapping(
-            path = "/update",
+            path = "/updateTeacher",
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
@@ -201,12 +174,12 @@ public class TeacherController {
 
 
     @RequestMapping(
-            path = "/delete/{id}",
+            path = "/delete/{idTeacher}",
             method = RequestMethod.DELETE
     )
-    private ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
+    private ResponseEntity<Void> deleteTeacher(@PathVariable("idTeacher") Integer idTeacher) {
         try {
-            teacherService.delete(id);
+            teacherService.delete(idTeacher);
             return new ResponseEntity<Void>(HttpStatus.OK);
         }
         catch (DataNonValidException e) {

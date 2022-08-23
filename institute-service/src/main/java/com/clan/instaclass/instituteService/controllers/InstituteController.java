@@ -27,7 +27,7 @@ public class InstituteController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<CreateInstituteResponse> create(@RequestBody CreateInstituteRequest request) {
+    private ResponseEntity<CreateInstituteResponse> createInstitute(@RequestBody CreateInstituteRequest request) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(instituteService.create(request));
         }
@@ -49,11 +49,11 @@ public class InstituteController {
     }
 
     @RequestMapping(
-            path = "/{id}",
+            path = "/{idInstitute}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<GetInstituteResponse> get(@PathVariable("id") Integer instituteId) {
+    private ResponseEntity<GetInstituteResponse> getInstituteById(@PathVariable("idInstitute") Integer instituteId) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(instituteService.get(instituteId));
         }
@@ -70,11 +70,11 @@ public class InstituteController {
     }
 
     @RequestMapping(
-            path = "/username/{username}",
+            path = "/username/{usernameInstitute}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<GetInstituteResponse> getUsername(@PathVariable("username") String instituteUsername) {
+    private ResponseEntity<GetInstituteResponse> getUsernameInstitute(@PathVariable("usernameInstitute") String instituteUsername) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(instituteService.getUsername(instituteUsername));
         }
@@ -91,12 +91,12 @@ public class InstituteController {
     }
 
     @RequestMapping(
-            path = "/update",
+            path = "/updateInstitute",
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<PutInstituteResponse> put(@RequestBody PutInstituteRequest request) {
+    private ResponseEntity<PutInstituteResponse> updateInstitute(@RequestBody PutInstituteRequest request) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(instituteService.put(request));
         }
@@ -119,12 +119,12 @@ public class InstituteController {
     }
 
     @RequestMapping(
-            path = "/delete/{id}",
+            path = "/delete/{idInstitute}",
             method = RequestMethod.DELETE
     )
-    private ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
+    private ResponseEntity<Void> delete(@PathVariable("idInstitute") Integer idInstitute) {
         try {
-            instituteService.delete(id);
+            instituteService.delete(idInstitute);
             return new ResponseEntity<Void>(HttpStatus.OK);
         }
         catch (DataNonValidException e) {
@@ -141,7 +141,7 @@ public class InstituteController {
     }
 
     @RequestMapping(
-            path = "/getAll",
+            path = "/getAllInstitute",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )

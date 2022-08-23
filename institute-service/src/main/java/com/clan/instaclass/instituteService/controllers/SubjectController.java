@@ -26,7 +26,7 @@ public class SubjectController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<CreateSubjectResponse> create(@RequestBody CreateSubjectRequest request) {
+    private ResponseEntity<CreateSubjectResponse> createSubject(@RequestBody CreateSubjectRequest request) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(subjectService.create(request));
         }
@@ -46,11 +46,11 @@ public class SubjectController {
     }
 
     @RequestMapping(
-            path = "/{id}",
+            path = "/{idSubject}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<GetSubjectResponse> get(@PathVariable("id") Integer subjectId) throws SubjectNotFoundException {
+    private ResponseEntity<GetSubjectResponse> getSubjectByIdInstitute(@PathVariable("idSubject") Integer subjectId)  {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(subjectService.get(subjectId));
         }
@@ -66,11 +66,11 @@ public class SubjectController {
     }
 
     @RequestMapping(
-            path = "/getAll/{id}",
+            path = "/getAllSubjects/{idInstitute}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<GetSubjectResponse>> getAll(@PathVariable("id") Integer idInstitute) {
+    private ResponseEntity<List<GetSubjectResponse>> getAllSubjects(@PathVariable("idInstitute") Integer idInstitute) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(subjectService.getAll(idInstitute));
         }
@@ -82,12 +82,12 @@ public class SubjectController {
     }
 
     @RequestMapping(
-            path = "/update",
+            path = "/updateSubject",
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<PutSubjectResponse> put(@RequestBody PutSubjectRequest request) {
+    private ResponseEntity<PutSubjectResponse> updateSubject(@RequestBody PutSubjectRequest request) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(subjectService.put(request));
         }
@@ -115,10 +115,10 @@ public class SubjectController {
     }
 
     @RequestMapping(
-            path = "/delete/{id}",
+            path = "/delete/{idSubject}",
             method = RequestMethod.DELETE
     )
-    private ResponseEntity<Void> delete(@PathVariable("id") Integer idSubject) {
+    private ResponseEntity<Void> deleteSubjectById(@PathVariable("idSubject") Integer idSubject) {
         try {
             subjectService.delete(idSubject);
             return new ResponseEntity<Void>(HttpStatus.OK);

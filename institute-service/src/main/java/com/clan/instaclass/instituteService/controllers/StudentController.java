@@ -28,7 +28,7 @@ public class StudentController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<CreateStudentResponse> create(@RequestBody CreateStudentRequest request) {
+    private ResponseEntity<CreateStudentResponse> createStudent(@RequestBody CreateStudentRequest request) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(studentService.create(request));
         }
@@ -51,11 +51,11 @@ public class StudentController {
 
 
     @RequestMapping(
-            path = "/{id}",
+            path = "/{idStudent}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<GetStudentResponse> get(@PathVariable("id") Integer studentId) {
+    private ResponseEntity<GetStudentResponse> get(@PathVariable("idStudent") Integer studentId) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(studentService.get(studentId));
         }
@@ -74,12 +74,12 @@ public class StudentController {
 
 
     @RequestMapping(
-            path = "/getUsername",
+            path = "/getUsernameStudent",
             method = RequestMethod.GET,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<GetStudentResponse> getUsername(@RequestBody GetUsernameStudentRequest request) {
+    private ResponseEntity<GetStudentResponse> getUsernameStudent(@RequestBody GetUsernameStudentRequest request) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(studentService.getUsername(request));
         }
@@ -100,12 +100,12 @@ public class StudentController {
 
 
     @RequestMapping(
-            path = "/update",
+            path = "/updateStudent",
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<PutStudentResponse> put(@RequestBody PutStudentRequest request) {
+    private ResponseEntity<PutStudentResponse> updateStudent(@RequestBody PutStudentRequest request) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(studentService.put(request));
         }
@@ -134,7 +134,7 @@ public class StudentController {
 
 
     @RequestMapping(
-            path = "/getAll/{idInstitute}",
+            path = "/getAllStudents/{idInstitute}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -159,12 +159,12 @@ public class StudentController {
 
 
     @RequestMapping(
-            path = "/delete/{id}",
+            path = "/delete/{idStudent}",
             method = RequestMethod.DELETE
     )
-    private ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
+    private ResponseEntity<Void> delete(@PathVariable("idStudent") Integer idStudent) {
         try {
-            studentService.delete(id);
+            studentService.delete(idStudent);
             return new ResponseEntity<Void>(HttpStatus.OK);
         }
         catch (DataNonValidException e) {

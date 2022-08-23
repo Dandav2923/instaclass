@@ -1,4 +1,4 @@
-package com.caln.instaclass.eurekaServer;
+package com.clan.instaclass.eurekaServer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

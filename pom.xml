@@ -10,7 +10,6 @@
     <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>auth-service</module>
-        <module>shared</module>
         <module>institute-service</module>
         <module>class-service</module>
         <module>admin-Service</module>
