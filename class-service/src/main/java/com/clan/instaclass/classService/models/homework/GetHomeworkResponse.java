@@ -9,6 +9,6 @@ public class GetHomeworkResponse {
     private Integer id;
     private String assignment;
     private LocalDate date;
-    private Integer subjectId;
+    private String subjectName;
     private Integer classId;
 }

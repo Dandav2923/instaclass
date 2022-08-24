@@ -1,10 +1,10 @@
 package com.clan.instaclass.instituteService.services.impls;
 
+import com.clan.instaclass.feign.instituteService.models.subject.*;
 import com.clan.instaclass.instituteService.entities.SubjectEnt;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
-import com.clan.instaclass.instituteService.models.subject.*;
 import com.clan.instaclass.instituteService.repositories.InstituteRepository;
 import com.clan.instaclass.instituteService.repositories.SubjectRepository;
 import com.clan.instaclass.instituteService.services.SubjectService;

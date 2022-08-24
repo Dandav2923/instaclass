@@ -1,11 +1,10 @@
 package com.clan.instaclass.instituteService.services.impls;
 
-import com.clan.instaclass.feign.instituteService.models.institute.GetInstituteResponse;
+import com.clan.instaclass.feign.instituteService.models.institute.*;
 import com.clan.instaclass.instituteService.entities.InstituteEnt;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
 import com.clan.instaclass.instituteService.exceptions.institute.AlreadyExistingIstituteException;
 import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;
-import com.clan.instaclass.instituteService.models.institute.*;
 import com.clan.instaclass.instituteService.repositories.InstituteRepository;
 import com.clan.instaclass.instituteService.services.InstituteService;
 import lombok.AllArgsConstructor;

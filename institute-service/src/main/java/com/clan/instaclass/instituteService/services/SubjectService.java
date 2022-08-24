@@ -1,9 +1,9 @@
 package com.clan.instaclass.instituteService.services;
 
+import com.clan.instaclass.feign.instituteService.models.subject.*;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
-import com.clan.instaclass.instituteService.models.subject.*;
 
 import java.util.List;
 

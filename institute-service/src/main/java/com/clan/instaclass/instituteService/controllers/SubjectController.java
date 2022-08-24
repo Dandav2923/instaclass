@@ -1,9 +1,9 @@
 package com.clan.instaclass.instituteService.controllers;
 
+import com.clan.instaclass.feign.instituteService.models.subject.*;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
-import com.clan.instaclass.instituteService.models.subject.*;
 import com.clan.instaclass.instituteService.services.SubjectService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +50,7 @@ public class SubjectController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<GetSubjectResponse> getSubjectByIdInstitute(@PathVariable("idSubject") Integer subjectId)  {
+    private ResponseEntity<GetSubjectResponse> getSubjectById(@PathVariable("idSubject") Integer subjectId)  {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(subjectService.get(subjectId));
         }

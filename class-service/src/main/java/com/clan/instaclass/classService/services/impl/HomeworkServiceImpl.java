@@ -12,6 +12,7 @@ import com.clan.instaclass.classService.models.homework.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.HomeworkRepository;
 import com.clan.instaclass.classService.services.HomeworkService;
+import com.clan.instaclass.feign.instituteService.InstituteClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,8 @@ import java.util.List;
 public class HomeworkServiceImpl implements HomeworkService {
     private ClassRepository classRepository;
     private HomeworkRepository homeworkRepository;
+
+    private InstituteClient instituteClient;
     @Override
     public CreateHomeworkResponse create(CreateHomeworkRequest request) throws HomeworkExistException, HomeworkNotValidException, ClassExistException {
         if (request.getAssignment() == null || request.getAssignment().isBlank() || request.getDate() == null || request.getSubjectId() == null || request.getSubjectId() <= 0 || request.getClassId() == null){
@@ -56,7 +59,7 @@ public class HomeworkServiceImpl implements HomeworkService {
             getAll.setId(element.getId());
             getAll.setAssignment(element.getAssignment());
             getAll.setDate(element.getDueDate());
-            getAll.setSubjectId(element.getSubject());
+            getAll.setSubjectName(instituteClient.getSubjectById(element.getSubject()).getName());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }

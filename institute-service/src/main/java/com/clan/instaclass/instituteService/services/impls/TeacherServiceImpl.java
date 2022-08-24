@@ -7,7 +7,7 @@ import com.clan.instaclass.instituteService.exceptions.general.DataNonValidExcep
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherNotFoundException;
-import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;
+import com.clan.instaclass.feign.instituteService.models.subject.GetSubjectResponse;
 import com.clan.instaclass.instituteService.repositories.InstituteRepository;
 import com.clan.instaclass.instituteService.repositories.SubjectRepository;
 import com.clan.instaclass.instituteService.repositories.TeacherRepository;
