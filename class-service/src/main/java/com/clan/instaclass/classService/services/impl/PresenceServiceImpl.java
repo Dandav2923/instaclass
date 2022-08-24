@@ -9,6 +9,7 @@ import com.clan.instaclass.classService.models.presence.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.PresenceRepository;
 import com.clan.instaclass.classService.services.PresenceService;
+import com.clan.instaclass.feign.instituteService.InstituteClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ import java.util.List;
 public class PresenceServiceImpl implements PresenceService {
     private ClassRepository classRepository;
     private PresenceRepository presenceRepository;
+
+    private InstituteClient instituteClient;
     @Override
     public CreatePresenceResponse create(CreatePresenceRequest request) throws PresenceNotValidException, PresenceExistException, ClassNotExistException {
         if (request.getPresent() == null || request.getDate() == null || request.getStudentId() == null || request.getStudentId() <= 0 || request.getClassId() <= 0){
@@ -52,7 +55,7 @@ public class PresenceServiceImpl implements PresenceService {
             getAll.setId(element.getId());
             getAll.setPresent(element.getPresent());
             getAll.setDate(element.getDate());
-            getAll.setStudentId(element.getStudent());
+            getAll.setStudentName(instituteClient.getStudent(element.getStudent()).getName());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
@@ -74,7 +77,7 @@ public class PresenceServiceImpl implements PresenceService {
             getAll.setId(element.getId());
             getAll.setPresent(element.getPresent());
             getAll.setDate(element.getDate());
-            getAll.setStudentId(element.getStudent());
+            getAll.setStudentName(instituteClient.getStudent(element.getStudent()).getName());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
