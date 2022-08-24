@@ -6,6 +6,7 @@ import com.clan.instaclass.classService.exceptions.classStudent.StudentAlreadyEx
 import com.clan.instaclass.classService.exceptions.classes.ClassNotExistException;
 import com.clan.instaclass.classService.models.classStudent.*;
 import com.clan.instaclass.classService.services.ClassStudentService;
+import feign.FeignException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -59,7 +60,7 @@ public class ClassStudentController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private ResponseEntity<List<GetClassStudentResponse>> get(@PathVariable("idClass") Integer classId) {
+    private ResponseEntity<List<GetClassStudentResponse>> getAllStudentByIdClass(@PathVariable("idClass") Integer classId) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(classStudentService.get(classId));
         }
@@ -67,6 +68,11 @@ public class ClassStudentController {
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        catch (FeignException e) {
+            e.printStackTrace();
+            System.out.println("Studente non trovato");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         catch (ClassNotExistException e) {
             e.printStackTrace();

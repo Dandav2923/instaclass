@@ -9,7 +9,7 @@ public class GetStudentNoteResponse {
     private Integer id;
     private String note;
     private LocalDate date;
-    private Integer teacherId;
-    private Integer studentId;
+    private String teacherName;
+    private String studentName;
     private Integer classId;
 }

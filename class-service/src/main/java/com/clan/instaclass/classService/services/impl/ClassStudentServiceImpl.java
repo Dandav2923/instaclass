@@ -10,6 +10,8 @@ import com.clan.instaclass.classService.models.classStudent.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.ClassStudentRepository;
 import com.clan.instaclass.classService.services.ClassStudentService;
+import com.clan.instaclass.feign.instituteService.InstituteClient;
+import com.clan.instaclass.feign.instituteService.models.student.GetStudentResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,8 @@ import java.util.List;
 public class ClassStudentServiceImpl implements ClassStudentService {
 
     private ClassStudentRepository classStudentRepository;
+
+    private InstituteClient instituteClient;
 
     private ClassRepository classRepository;
     @Override
@@ -53,16 +57,22 @@ public class ClassStudentServiceImpl implements ClassStudentService {
         if (classId == null || classId < 1) {
             throw new ClassStudentNotValidException("dati non validi");
         }
-        ClassEnt entity = classRepository.findById(classId).orElseThrow(() -> new ClassNotExistException("classe non trovata"));
+        classRepository.findById(classId).orElseThrow(() -> new ClassNotExistException("classe non trovata"));
+
+        GetStudentResponse getStudent1 = instituteClient.getStudent(92);
 
         List<GetClassStudentResponse> response = new ArrayList<>();
 
         List<ClassStudentRel> classStudentRel = classStudentRepository.findByIdClass(classId);
 
         for (ClassStudentRel student: classStudentRel) {
-            GetClassStudentResponse get = new GetClassStudentResponse();
-            get.setId(student.getStudent());
-            response.add(get);
+            GetClassStudentResponse getClassStudent = new GetClassStudentResponse();
+            GetStudentResponse getStudent = instituteClient.getStudent(student.getStudent());
+            getClassStudent.setName(getStudent.getName());
+            getClassStudent.setFiscalCode(getStudent.getFiscalCode());
+            getClassStudent.setSurname(getStudent.getSurname());
+            getClassStudent.setUsername(getStudent.getUsername());
+            response.add(getClassStudent);
         }
 
         return response;
@@ -93,7 +103,7 @@ public class ClassStudentServiceImpl implements ClassStudentService {
     }
 
     @Override
-    public void deleteClassStudent(DeleteClassStudentRequest request) throws StudentAlreadyExistingException, ClassStudentNotValidException, ClassStudentNotExistException, ClassNotExistException {
+    public void deleteClassStudent(DeleteClassStudentRequest request) throws ClassStudentNotValidException, ClassStudentNotExistException, ClassNotExistException {
         if (request.getId() == null ||
                 request.getClassId() == null ||
                 request.getStudentId() == null

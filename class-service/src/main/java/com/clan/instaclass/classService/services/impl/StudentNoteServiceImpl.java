@@ -12,6 +12,7 @@ import com.clan.instaclass.classService.models.studentNote.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.StudentNoteRepository;
 import com.clan.instaclass.classService.services.StudentNoteService;
+import com.clan.instaclass.feign.instituteService.InstituteClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,8 @@ import java.util.List;
 public class StudentNoteServiceImpl implements StudentNoteService {
     private ClassRepository classRepository;
     private StudentNoteRepository studentNoteRepository;
+
+    private InstituteClient instituteClient;
     @Override
     public CreateStudentNoteResponse create(CreateStudentNoteRequest request) throws StudentNoteNotValidException, StudentNoteExistException, ClassNotExistException {
         if (request.getNote() == null || request.getNote().isBlank() || request.getDate() == null || request.getTeacherId() == null || request.getTeacherId() <= 0 || request.getStudentId() == null || request.getStudentId() <= 0 || request.getClassId() == null){
@@ -55,14 +58,14 @@ public class StudentNoteServiceImpl implements StudentNoteService {
         if (listStudentNoteEnt.size() <= 0){
             throw new StudentNoteNotExistException("Non esiste nessuna nota studente per quella classe");
         }
-        List<GetStudentNoteResponse> response = new ArrayList<GetStudentNoteResponse>();
+        List<GetStudentNoteResponse> response = new ArrayList<>();
         for (StudentNoteEnt element : listStudentNoteEnt){
             GetStudentNoteResponse getAll = new GetStudentNoteResponse();
             getAll.setId(element.getId());
             getAll.setNote(element.getNote());
             getAll.setDate(element.getDate());
-            getAll.setTeacherId(element.getTeacher());
-            getAll.setStudentId(element.getStudent());
+            getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
+            getAll.setStudentName(instituteClient.getStudent(element.getStudent()).getName());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
@@ -84,8 +87,8 @@ public class StudentNoteServiceImpl implements StudentNoteService {
             getAll.setId(element.getId());
             getAll.setNote(element.getNote());
             getAll.setDate(element.getDate());
-            getAll.setTeacherId(element.getTeacher());
-            getAll.setStudentId(element.getStudent());
+            getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
+            getAll.setStudentName(instituteClient.getStudent(element.getStudent()).getName());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
@@ -107,8 +110,8 @@ public class StudentNoteServiceImpl implements StudentNoteService {
             getAll.setId(element.getId());
             getAll.setNote(element.getNote());
             getAll.setDate(element.getDate());
-            getAll.setTeacherId(element.getTeacher());
-            getAll.setStudentId(element.getStudent());
+            getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
+            getAll.setStudentName(instituteClient.getStudent(element.getStudent()).getName());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }

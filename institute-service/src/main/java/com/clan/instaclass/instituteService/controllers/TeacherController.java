@@ -1,11 +1,11 @@
 package com.clan.instaclass.instituteService.controllers;
 
+import com.clan.instaclass.feign.instituteService.models.teacher.*;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherNotFoundException;
 import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;
-import com.clan.instaclass.instituteService.models.teacher.*;
 import com.clan.instaclass.instituteService.services.TeacherService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +24,35 @@ public class TeacherController {
     private final TeacherService teacherService;
 
 
+
+    @RequestMapping(
+            path = "/connect",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    private ResponseEntity<Void> TeacherSubjectConnect(@RequestBody ConnectTeacherSubjectRequest request) {
+        try {
+            teacherService.teacherSubjectConnect(request);
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+
+        }
+        catch (TeacherNotFoundException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        catch (SubjectNotFoundException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 
     @RequestMapping(
             method = RequestMethod.POST,

@@ -1,9 +1,9 @@
-package com.clan.instaclass.instituteService.models.teacher;
+package com.clan.instaclass.feign.instituteService.models.teacher;
 
 import lombok.Data;
 
 @Data
-public class PutTeacherRequest {
+public class PutTeacherResponse {
     private Integer id;
 
     private String name;

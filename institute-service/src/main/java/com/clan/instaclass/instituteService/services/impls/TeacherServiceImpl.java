@@ -1,5 +1,6 @@
 package com.clan.instaclass.instituteService.services.impls;
 
+import com.clan.instaclass.feign.instituteService.models.teacher.*;
 import com.clan.instaclass.instituteService.entities.SubjectEnt;
 import com.clan.instaclass.instituteService.entities.TeacherEnt;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
@@ -7,7 +8,6 @@ import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundEx
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherNotFoundException;
 import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;
-import com.clan.instaclass.instituteService.models.teacher.*;
 import com.clan.instaclass.instituteService.repositories.InstituteRepository;
 import com.clan.instaclass.instituteService.repositories.SubjectRepository;
 import com.clan.instaclass.instituteService.repositories.TeacherRepository;
@@ -28,6 +28,16 @@ public class TeacherServiceImpl  implements TeacherService{
     private InstituteRepository instituteRepository;
 
     private SubjectRepository subjectRepository;
+
+    @Override
+    public void teacherSubjectConnect(ConnectTeacherSubjectRequest request) throws TeacherNotFoundException, SubjectNotFoundException {
+        TeacherEnt teacher = teacherRepository.findById(request.getTeacherId()).orElseThrow(()-> new TeacherNotFoundException("docente non trovato"));
+        for (Integer intero : request.getSubjectIdList()) {
+            SubjectEnt sub = subjectRepository.findById(intero).orElseThrow(() -> new SubjectNotFoundException("materia non trovata"));
+            teacher.getSubjects().add(sub);
+        }
+        teacherRepository.save(teacher);
+    }
 
 
     @Override

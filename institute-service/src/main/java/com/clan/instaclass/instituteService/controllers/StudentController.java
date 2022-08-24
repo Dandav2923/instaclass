@@ -1,9 +1,9 @@
 package com.clan.instaclass.instituteService.controllers;
 
+import com.clan.instaclass.feign.instituteService.models.student.*;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
 import com.clan.instaclass.instituteService.exceptions.student.StudentAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.student.StudentNotFoundException;
-import com.clan.instaclass.instituteService.models.student.*;
 import com.clan.instaclass.instituteService.services.StudentService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

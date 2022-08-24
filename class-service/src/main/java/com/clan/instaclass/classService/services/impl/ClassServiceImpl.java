@@ -9,6 +9,7 @@ import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.services.ClassService;
 import com.clan.instaclass.feign.instituteService.InstituteClient;
 import com.clan.instaclass.feign.instituteService.models.institute.GetInstituteResponse;
+import com.clan.instaclass.feign.instituteService.models.student.GetStudentResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

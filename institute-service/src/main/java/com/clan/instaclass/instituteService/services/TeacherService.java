@@ -1,12 +1,12 @@
 package com.clan.instaclass.instituteService.services;
 
+import com.clan.instaclass.feign.instituteService.models.teacher.*;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.teacher.TeacherNotFoundException;
 import com.clan.instaclass.instituteService.models.subject.GetSubjectResponse;
-import com.clan.instaclass.instituteService.models.teacher.*;
 
 import java.util.List;
 
@@ -24,6 +24,7 @@ public interface TeacherService {
 
     void delete(Integer request) throws DataNonValidException, TeacherNotFoundException;
 
+    public void teacherSubjectConnect(ConnectTeacherSubjectRequest request) throws TeacherNotFoundException, SubjectNotFoundException;
 
     List<GetSubjectResponse> getSubjects(Integer teacherId) throws TeacherNotFoundException;
 }
