@@ -1,4 +1,4 @@
-package com.clan.instaclass.feign.instituteService.models.subject;
+package com.clan.instaclass.instituteService.models.subject;
 
 import lombok.Data;
 

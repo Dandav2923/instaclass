@@ -9,6 +9,7 @@ import com.clan.instaclass.classService.exceptions.homework.HomeworkNotValidExce
 import com.clan.instaclass.classService.models.event.*;
 import com.clan.instaclass.classService.models.homework.*;
 import com.clan.instaclass.classService.services.HomeworkService;
+import feign.FeignException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,13 @@ public class HomeworkController {
     private ResponseEntity<List<GetHomeworkResponse>> getAll(@PathVariable("idClass") Integer idClass){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(homeworkService.findAllHomeworks(idClass));
-        }catch(Exception e){
+        }
+        catch(FeignException e){
+            e.printStackTrace();
+            System.out.println("Materia non trovata");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        catch(Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -55,7 +62,7 @@ public class HomeworkController {
         catch(HomeworkExistException e){
             e.printStackTrace();
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }
         catch(Exception e){
             e.printStackTrace();
@@ -80,7 +87,7 @@ public class HomeworkController {
         catch(HomeworkNotExistException e){
             e.printStackTrace();
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         catch(Exception e){
             e.printStackTrace();
@@ -104,7 +111,7 @@ public class HomeworkController {
         catch(HomeworkNotExistException e){
             e.printStackTrace();
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         catch(Exception e){
             e.printStackTrace();

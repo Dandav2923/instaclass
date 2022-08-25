@@ -10,6 +10,7 @@ import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.VoteRepository;
 import com.clan.instaclass.classService.services.VoteService;
 
+import com.clan.instaclass.feign.instituteService.InstituteClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,9 @@ import java.util.List;
 @Service
 public class VoteServiceImpl implements VoteService {
     private VoteRepository voteRepository;
-
     private ClassRepository classRepository;
+
+    private InstituteClient instituteClient;
     @Override
     public CreateVoteResponse create(CreateVoteRequest request) throws VoteNotValidException, ClassNotExistException {
         if (request.getVote() > 100 ||
@@ -63,9 +65,9 @@ public class VoteServiceImpl implements VoteService {
             getAll.setId(vote.getId());
             getAll.setVote(vote.getVote());
             getAll.setDate(vote.getDate());
-            getAll.setStudent(vote.getStudent());
-            getAll.setSubject(vote.getSubject());
-            getAll.setTeacher(vote.getTeacher());
+            getAll.setStudentName(instituteClient.getStudent(vote.getStudent()).getName());
+            getAll.setSubjectName(instituteClient.getSubjectById(vote.getSubject()).getName());
+            getAll.setTeacherName(instituteClient.getTeacher(vote.getTeacher()).getName());
             getAll.setClassEnt(vote.getClassEnt().getId());
             response.add(getAll);
         }
@@ -84,9 +86,9 @@ public class VoteServiceImpl implements VoteService {
             getAll.setId(vote.getId());
             getAll.setVote(vote.getVote());
             getAll.setDate(vote.getDate());
-            getAll.setStudent(vote.getStudent());
-            getAll.setSubject(vote.getSubject());
-            getAll.setTeacher(vote.getTeacher());
+            getAll.setStudentName(instituteClient.getStudent(vote.getStudent()).getName());
+            getAll.setSubjectName(instituteClient.getSubjectById(vote.getSubject()).getName());
+            getAll.setTeacherName(instituteClient.getTeacher(vote.getTeacher()).getName());
             getAll.setClassEnt(vote.getClassEnt().getId());
             response.add(getAll);
         }
@@ -105,9 +107,9 @@ public class VoteServiceImpl implements VoteService {
             getAll.setId(vote.getId());
             getAll.setVote(vote.getVote());
             getAll.setDate(vote.getDate());
-            getAll.setStudent(vote.getStudent());
-            getAll.setSubject(vote.getSubject());
-            getAll.setTeacher(vote.getTeacher());
+            getAll.setStudentName(instituteClient.getStudent(vote.getStudent()).getName());
+            getAll.setSubjectName(instituteClient.getSubjectById(vote.getSubject()).getName());
+            getAll.setTeacherName(instituteClient.getTeacher(vote.getTeacher()).getName());
             getAll.setClassEnt(vote.getClassEnt().getId());
             response.add(getAll);
         }

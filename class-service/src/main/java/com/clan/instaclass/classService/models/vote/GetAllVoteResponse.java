@@ -17,11 +17,11 @@ public class GetAllVoteResponse {
 
     private LocalDate date;
 
-    private Integer student;
+    private String studentName;
 
-    private Integer subject;
+    private String subjectName;
 
-    private Integer teacher;
+    private String teacherName;
 
     private Integer classEnt;
 

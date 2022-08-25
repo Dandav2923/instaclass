@@ -1,10 +1,9 @@
-package com.clan.instaclass.feign.instituteService.models.teacher;
+package com.clan.instaclass.instituteService.models.teacher;
 
 import lombok.Data;
 
 @Data
-public class PutTeacherRequest {
-    private Integer id;
+public class CreateTeacherRequest {
 
     private String name;
 
@@ -15,4 +14,6 @@ public class PutTeacherRequest {
     private String fiscalCode;
 
     private String password;
+
+    private Integer instituteId;
 }

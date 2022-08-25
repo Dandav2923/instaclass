@@ -9,6 +9,7 @@ import com.clan.instaclass.classService.exceptions.presence.PresenceNotValidExce
 import com.clan.instaclass.classService.models.classNote.*;
 import com.clan.instaclass.classService.models.presence.*;
 import com.clan.instaclass.classService.services.PresenceService;
+import feign.FeignException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,13 @@ public class PresenceController {
     private ResponseEntity<List<GetPresenceResponse>> getAllPresences(@PathVariable("idClass")Integer idClass){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(presenceService.findAllPresences(idClass));
-        }catch (Exception e){
+        }
+        catch (FeignException e){
+            e.printStackTrace();
+            System.out.println("Studente non trovato");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        catch (Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -46,7 +53,13 @@ public class PresenceController {
     private ResponseEntity<List<GetPresenceResponse>> getAllPresencesByStudent(@PathVariable("idClass")Integer idClass,@PathVariable("idStudent")Integer idStudent){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(presenceService.findAllPresencesByStudent(idClass,idStudent));
-        }catch (Exception e){
+        }
+        catch (FeignException e){
+            e.printStackTrace();
+            System.out.println("Studente non trovato");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        catch (Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

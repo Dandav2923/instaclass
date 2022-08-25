@@ -4,6 +4,10 @@ import com.clan.instaclass.feign.instituteService.models.subject.*;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectAlreadyExistingException;
 import com.clan.instaclass.instituteService.exceptions.subject.SubjectNotFoundException;
+import com.clan.instaclass.instituteService.models.subject.CreateSubjectRequest;
+import com.clan.instaclass.instituteService.models.subject.CreateSubjectResponse;
+import com.clan.instaclass.instituteService.models.subject.PutSubjectRequest;
+import com.clan.instaclass.instituteService.models.subject.PutSubjectResponse;
 
 import java.util.List;
 

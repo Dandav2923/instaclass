@@ -59,8 +59,6 @@ public class ClassStudentServiceImpl implements ClassStudentService {
         }
         classRepository.findById(classId).orElseThrow(() -> new ClassNotExistException("classe non trovata"));
 
-        GetStudentResponse getStudent1 = instituteClient.getStudent(92);
-
         List<GetClassStudentResponse> response = new ArrayList<>();
 
         List<ClassStudentRel> classStudentRel = classStudentRepository.findByIdClass(classId);

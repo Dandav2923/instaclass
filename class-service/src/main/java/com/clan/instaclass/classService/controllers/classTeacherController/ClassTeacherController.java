@@ -5,6 +5,7 @@ import com.clan.instaclass.classService.exceptions.classTeacher.ClassTeacherNotE
 import com.clan.instaclass.classService.exceptions.classTeacher.ClassTeacherNotValidException;
 import com.clan.instaclass.classService.models.classTeacher.*;
 import com.clan.instaclass.classService.services.ClassTeacherService;
+import feign.FeignException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,13 @@ public class ClassTeacherController {
     private ResponseEntity<List<GetClassTeacherResponse>> getAllClassTeachersByClassId(@PathVariable("idClass")Integer idClass){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(classTeacherService.findAllTeacherByClass(idClass));
-        }catch (Exception e){
+        }
+        catch (FeignException e){
+            e.printStackTrace();
+            System.out.println("Teacher o materia non trovata");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+        catch (Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -45,11 +52,11 @@ public class ClassTeacherController {
         }catch (ClassTeacherNotValidException e){
             e.printStackTrace();
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }catch (ClassTeacherExistException e){
             e.printStackTrace();
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }catch (Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());

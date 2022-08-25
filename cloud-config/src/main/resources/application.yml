@@ -1,0 +1,6 @@
+server:
+  port: 9296
+
+spring:
+  application:
+    name: CONFIG-SERVER
