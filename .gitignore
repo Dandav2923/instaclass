@@ -332,3 +332,7 @@ $RECYCLE.BIN/
 /feign/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 /feign/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 /feign/target/maven-archiver/pom.properties
+/cloud-config/target/classes/application.yml
+/institute-service/target/classes/bootstrap.yml
+/api-gateway/target/classes/bootstrap.yml
+/class-service/target/classes/bootstrap.yml
