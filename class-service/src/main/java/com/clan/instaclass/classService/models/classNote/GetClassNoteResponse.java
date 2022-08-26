@@ -8,6 +8,6 @@ public class GetClassNoteResponse {
     private Integer id;
     private String note;
     private LocalDate date;
-    private Integer teacherId;
+    private String teacherName, teacherSurname, username, fiscalCode;
     private Integer classId;
 }

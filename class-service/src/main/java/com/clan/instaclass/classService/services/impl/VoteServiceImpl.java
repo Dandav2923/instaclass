@@ -65,9 +65,15 @@ public class VoteServiceImpl implements VoteService {
             getAll.setId(vote.getId());
             getAll.setVote(vote.getVote());
             getAll.setDate(vote.getDate());
-            getAll.setStudentName(instituteClient.getStudent(vote.getStudent()).getName());
+            getAll.setNameStudent(instituteClient.getStudent(vote.getStudent()).getName());
+            getAll.setSurnameStudent(instituteClient.getStudent(vote.getStudent()).getSurname());
+            getAll.setFiscalCode(instituteClient.getStudent(vote.getStudent()).getFiscalCode());
+            getAll.setUsername(instituteClient.getStudent(vote.getStudent()).getUsername());
             getAll.setSubjectName(instituteClient.getSubjectById(vote.getSubject()).getName());
             getAll.setTeacherName(instituteClient.getTeacher(vote.getTeacher()).getName());
+            getAll.setUsername(instituteClient.getTeacher(vote.getTeacher()).getUsername());
+            getAll.setTeacherSurname(instituteClient.getTeacher(vote.getTeacher()).getSurname());
+            getAll.setFiscalCode(instituteClient.getTeacher(vote.getTeacher()).getFiscalCode());
             getAll.setClassEnt(vote.getClassEnt().getId());
             response.add(getAll);
         }
@@ -86,9 +92,15 @@ public class VoteServiceImpl implements VoteService {
             getAll.setId(vote.getId());
             getAll.setVote(vote.getVote());
             getAll.setDate(vote.getDate());
-            getAll.setStudentName(instituteClient.getStudent(vote.getStudent()).getName());
+            getAll.setNameStudent(instituteClient.getStudent(vote.getStudent()).getName());
+            getAll.setSurnameStudent(instituteClient.getStudent(vote.getStudent()).getSurname());
+            getAll.setFiscalCode(instituteClient.getStudent(vote.getStudent()).getFiscalCode());
+            getAll.setUsername(instituteClient.getStudent(vote.getStudent()).getUsername());
             getAll.setSubjectName(instituteClient.getSubjectById(vote.getSubject()).getName());
             getAll.setTeacherName(instituteClient.getTeacher(vote.getTeacher()).getName());
+            getAll.setUsername(instituteClient.getTeacher(vote.getTeacher()).getUsername());
+            getAll.setTeacherSurname(instituteClient.getTeacher(vote.getTeacher()).getSurname());
+            getAll.setFiscalCode(instituteClient.getTeacher(vote.getTeacher()).getFiscalCode());
             getAll.setClassEnt(vote.getClassEnt().getId());
             response.add(getAll);
         }
@@ -107,9 +119,15 @@ public class VoteServiceImpl implements VoteService {
             getAll.setId(vote.getId());
             getAll.setVote(vote.getVote());
             getAll.setDate(vote.getDate());
-            getAll.setStudentName(instituteClient.getStudent(vote.getStudent()).getName());
+            getAll.setNameStudent(instituteClient.getStudent(vote.getStudent()).getName());
+            getAll.setSurnameStudent(instituteClient.getStudent(vote.getStudent()).getSurname());
+            getAll.setFiscalCode(instituteClient.getStudent(vote.getStudent()).getFiscalCode());
+            getAll.setUsername(instituteClient.getStudent(vote.getStudent()).getUsername());
             getAll.setSubjectName(instituteClient.getSubjectById(vote.getSubject()).getName());
             getAll.setTeacherName(instituteClient.getTeacher(vote.getTeacher()).getName());
+            getAll.setUsername(instituteClient.getTeacher(vote.getTeacher()).getUsername());
+            getAll.setTeacherSurname(instituteClient.getTeacher(vote.getTeacher()).getSurname());
+            getAll.setFiscalCode(instituteClient.getTeacher(vote.getTeacher()).getFiscalCode());
             getAll.setClassEnt(vote.getClassEnt().getId());
             response.add(getAll);
         }
@@ -120,9 +138,7 @@ public class VoteServiceImpl implements VoteService {
         if (request.getDate() == null || request.getId() == null || request.getVote() > 100 || request.getVote() == null) {
             throw new VoteNotValidException("dati mancanti");
         }
-
         VoteEnt entity = voteRepository.findById(request.getId()).orElseThrow(() -> new VoteNotExistException("istituto non trovato"));
-
         if (entity.getTeacher() != request.getDocenteId()) {
             throw new VoteNotValidException("docente non valido ad aggiornare");
         }
@@ -145,9 +161,14 @@ public class VoteServiceImpl implements VoteService {
         GetVoteResponse response = new GetVoteResponse();
         response.setId(entity.getId());
         response.setVote(entity.getVote());
-        response.setStudent(entity.getStudent());
+        response.setNameStudent(instituteClient.getStudent(entity.getStudent()).getName());
+        response.setSurnameStudent(instituteClient.getStudent(entity.getStudent()).getSurname());
+        response.setFiscalCodeStudent(instituteClient.getStudent(entity.getStudent()).getFiscalCode());
         response.setSubject(entity.getSubject());
-        response.setTeacher(entity.getTeacher());
+        response.setUsername(instituteClient.getTeacher(entity.getTeacher()).getUsername());
+        response.setTeacherName(instituteClient.getTeacher(entity.getTeacher()).getName());
+        response.setTeacherSurname(instituteClient.getTeacher(entity.getTeacher()).getSurname());
+        response.setFiscalCode(instituteClient.getTeacher(entity.getTeacher()).getFiscalCode());
         response.setDate(entity.getDate());
         response.setClassEnt(entity.getClassEnt().getId());
         return response;

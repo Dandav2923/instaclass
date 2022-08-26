@@ -9,6 +9,7 @@ import com.clan.instaclass.classService.models.classNote.*;
 import com.clan.instaclass.classService.repositories.ClassNoteRepository;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.services.ClassNoteService;
+import com.clan.instaclass.feign.instituteService.InstituteClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import java.util.List;
 public class ClassNoteServiceImpl implements ClassNoteService {
     private ClassNoteRepository classNoteRepository;
     private ClassRepository classRepository;
-
+    private InstituteClient instituteClient;
     @Override
     public CreateClassNoteResponse create(CreateClassNoteRequest request) throws ClassNoteNotValidException, ClassNoteExistException, ClassNotExistException {
         if (request.getNote() == null || request.getNote().isBlank() || request.getDate() == null || request.getTeacherId() == null || request.getTeacherId() <= 0 || request.getClassId() == 0){
@@ -53,7 +54,10 @@ public class ClassNoteServiceImpl implements ClassNoteService {
             getAll.setId(element.getId());
             getAll.setNote(element.getNote());
             getAll.setDate(element.getDate());
-            getAll.setTeacherId(element.getTeacher());
+            getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
+            getAll.setTeacherSurname(instituteClient.getTeacher(element.getTeacher()).getSurname());
+            getAll.setFiscalCode(instituteClient.getTeacher(element.getTeacher()).getFiscalCode());
+            getAll.setUsername(instituteClient.getTeacher(element.getTeacher()).getUsername());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
@@ -75,7 +79,9 @@ public class ClassNoteServiceImpl implements ClassNoteService {
             getAll.setId(element.getId());
             getAll.setNote(element.getNote());
             getAll.setDate(element.getDate());
-            getAll.setTeacherId(element.getTeacher());
+            getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
+            getAll.setTeacherSurname(instituteClient.getTeacher(element.getTeacher()).getSurname());
+            getAll.setFiscalCode(instituteClient.getTeacher(element.getTeacher()).getFiscalCode());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }

@@ -65,7 +65,13 @@ public class StudentNoteServiceImpl implements StudentNoteService {
             getAll.setNote(element.getNote());
             getAll.setDate(element.getDate());
             getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
-            getAll.setStudentName(instituteClient.getStudent(element.getStudent()).getName());
+            getAll.setUsername(instituteClient.getTeacher(element.getTeacher()).getUsername());
+            getAll.setTeacherSurname(instituteClient.getTeacher(element.getTeacher()).getSurname());
+            getAll.setFiscalCode(instituteClient.getTeacher(element.getTeacher()).getFiscalCode());
+            getAll.setNameStudent(instituteClient.getStudent(element.getStudent()).getName());
+            getAll.setSurnameStudent(instituteClient.getStudent(element.getStudent()).getSurname());
+            getAll.setFiscalCode(instituteClient.getStudent(element.getStudent()).getFiscalCode());
+            getAll.setUsername(instituteClient.getStudent(element.getStudent()).getUsername());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
@@ -88,7 +94,10 @@ public class StudentNoteServiceImpl implements StudentNoteService {
             getAll.setNote(element.getNote());
             getAll.setDate(element.getDate());
             getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
-            getAll.setStudentName(instituteClient.getStudent(element.getStudent()).getName());
+            getAll.setNameStudent(instituteClient.getStudent(element.getStudent()).getName());
+            getAll.setSurnameStudent(instituteClient.getStudent(element.getStudent()).getSurname());
+            getAll.setFiscalCode(instituteClient.getStudent(element.getStudent()).getFiscalCode());
+            getAll.setUsername(instituteClient.getStudent(element.getStudent()).getUsername());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
@@ -111,7 +120,10 @@ public class StudentNoteServiceImpl implements StudentNoteService {
             getAll.setNote(element.getNote());
             getAll.setDate(element.getDate());
             getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
-            getAll.setStudentName(instituteClient.getStudent(element.getStudent()).getName());
+            getAll.setNameStudent(instituteClient.getStudent(element.getStudent()).getName());
+            getAll.setSurnameStudent(instituteClient.getStudent(element.getStudent()).getSurname());
+            getAll.setFiscalCode(instituteClient.getStudent(element.getStudent()).getFiscalCode());
+            getAll.setUsername(instituteClient.getStudent(element.getStudent()).getUsername());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }

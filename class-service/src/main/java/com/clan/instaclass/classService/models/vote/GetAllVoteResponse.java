@@ -10,19 +10,14 @@ import java.time.LocalDate;
 
 @Data
 public class GetAllVoteResponse {
-
     private Integer id;
-
     private Integer vote;
-
     private LocalDate date;
-
-    private String studentName;
-
+    private String nameStudent;
+    private String surnameStudent;
+    private String usernameStudent;
+    private String fiscalCodeStudent;
     private String subjectName;
-
-    private String teacherName;
-
+    private String teacherName, teacherSurname, username, fiscalCode;
     private Integer classEnt;
-
 }

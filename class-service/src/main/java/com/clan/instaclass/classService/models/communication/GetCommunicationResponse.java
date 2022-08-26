@@ -9,6 +9,6 @@ import java.time.LocalDate;
 public class GetCommunicationResponse {
     private String communication;
     private LocalDate date;
-    private Integer teacherId;
+    private String teacherName, teacherSurname, username, fiscalCode;
     private Integer classId;
 }

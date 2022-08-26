@@ -6,18 +6,14 @@ import java.time.LocalDate;
 
 @Data
 public class GetVoteResponse {
-
     private Integer id;
-
     private Integer vote;
-
     private LocalDate date;
-
-    private Integer student;
-
+    private String nameStudent;
+    private String surnameStudent;
+    private String usernameStudent;
+    private String fiscalCodeStudent;
     private Integer subject;
-
-    private Integer teacher;
-
+    private String teacherName, teacherSurname, username, fiscalCode;
     private Integer classEnt;
 }

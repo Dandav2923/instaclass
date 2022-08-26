@@ -26,7 +26,6 @@ import java.util.List;
 public class HomeworkServiceImpl implements HomeworkService {
     private ClassRepository classRepository;
     private HomeworkRepository homeworkRepository;
-
     private InstituteClient instituteClient;
     @Override
     public CreateHomeworkResponse create(CreateHomeworkRequest request) throws HomeworkExistException, HomeworkNotValidException, ClassExistException {

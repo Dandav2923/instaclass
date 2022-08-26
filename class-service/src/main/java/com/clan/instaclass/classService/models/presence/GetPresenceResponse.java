@@ -9,6 +9,9 @@ public class GetPresenceResponse {
     private Integer id;
     private Boolean present;
     private LocalDate date;
-    private String studentName;
+    private String name;
+    private String surname;
+    private String username;
+    private String fiscalCode;
     private Integer classId;
 }

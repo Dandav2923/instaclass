@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class GetClassTeacherResponse {
     private Integer id, classId;
-    private String teacherName, subjectName;
+    private String subjectName;
+    private String teacherName, teacherSurname, username, fiscalCode;
 }

@@ -23,11 +23,8 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class ClassStudentServiceImpl implements ClassStudentService {
-
     private ClassStudentRepository classStudentRepository;
-
     private InstituteClient instituteClient;
-
     private ClassRepository classRepository;
     @Override
     public CreateClassStudentResponse create(CreateClassStudentRequest request) throws ClassStudentNotValidException, ClassNotExistException, StudentAlreadyExistingException {
@@ -35,7 +32,6 @@ public class ClassStudentServiceImpl implements ClassStudentService {
             throw new ClassStudentNotValidException("dati mancanti");
         }
         ClassEnt classEnt = classRepository.findById(request.getClassId()).orElseThrow(() -> new ClassNotExistException("Classe non trovata"));
-
         for (ClassStudentRel student: classStudentRepository.findAll()) {
             if (student.getStudent() == request.getStudentId() && student.getClassEnt().getId() == request.getClassId()){
                 throw new StudentAlreadyExistingException("studente in quella classe gia esistente");
@@ -58,21 +54,16 @@ public class ClassStudentServiceImpl implements ClassStudentService {
             throw new ClassStudentNotValidException("dati non validi");
         }
         classRepository.findById(classId).orElseThrow(() -> new ClassNotExistException("classe non trovata"));
-
         List<GetClassStudentResponse> response = new ArrayList<>();
-
         List<ClassStudentRel> classStudentRel = classStudentRepository.findByIdClass(classId);
-
         for (ClassStudentRel student: classStudentRel) {
             GetClassStudentResponse getClassStudent = new GetClassStudentResponse();
-            GetStudentResponse getStudent = instituteClient.getStudent(student.getStudent());
-            getClassStudent.setName(getStudent.getName());
-            getClassStudent.setFiscalCode(getStudent.getFiscalCode());
-            getClassStudent.setSurname(getStudent.getSurname());
-            getClassStudent.setUsername(getStudent.getUsername());
+            getClassStudent.setName(instituteClient.getStudent(student.getStudent()).getName());
+            getClassStudent.setFiscalCode(instituteClient.getStudent(student.getStudent()).getFiscalCode());
+            getClassStudent.setSurname(instituteClient.getStudent(student.getStudent()).getSurname());
+            getClassStudent.setUsername(instituteClient.getStudent(student.getStudent()).getUsername());
             response.add(getClassStudent);
         }
-
         return response;
     }
 

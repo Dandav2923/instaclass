@@ -66,6 +66,9 @@ public class ClassTeacherServiceImpl implements ClassTeacherService {
             GetClassTeacherResponse getAll = new GetClassTeacherResponse();
             getAll.setId(element.getId());
             getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
+            getAll.setUsername(instituteClient.getTeacher(element.getTeacher()).getUsername());
+            getAll.setTeacherSurname(instituteClient.getTeacher(element.getTeacher()).getSurname());
+            getAll.setFiscalCode(instituteClient.getTeacher(element.getTeacher()).getFiscalCode());
             getAll.setSubjectName(instituteClient.getSubjectById(element.getSubject()).getName());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);

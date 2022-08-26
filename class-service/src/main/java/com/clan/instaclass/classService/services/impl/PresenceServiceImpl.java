@@ -21,9 +21,8 @@ import java.util.List;
 @Service
 public class PresenceServiceImpl implements PresenceService {
     private ClassRepository classRepository;
-    private PresenceRepository presenceRepository;
-
     private InstituteClient instituteClient;
+    private PresenceRepository presenceRepository;
     @Override
     public CreatePresenceResponse create(CreatePresenceRequest request) throws PresenceNotValidException, PresenceExistException, ClassNotExistException {
         if (request.getPresent() == null || request.getDate() == null || request.getStudentId() == null || request.getStudentId() <= 0 || request.getClassId() <= 0){
@@ -55,7 +54,10 @@ public class PresenceServiceImpl implements PresenceService {
             getAll.setId(element.getId());
             getAll.setPresent(element.getPresent());
             getAll.setDate(element.getDate());
-            getAll.setStudentName(instituteClient.getStudent(element.getStudent()).getName());
+            getAll.setName(instituteClient.getStudent(element.getStudent()).getName());
+            getAll.setSurname(instituteClient.getStudent(element.getStudent()).getSurname());
+            getAll.setFiscalCode(instituteClient.getStudent(element.getStudent()).getFiscalCode());
+            getAll.setUsername(instituteClient.getStudent(element.getStudent()).getUsername());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
@@ -77,7 +79,10 @@ public class PresenceServiceImpl implements PresenceService {
             getAll.setId(element.getId());
             getAll.setPresent(element.getPresent());
             getAll.setDate(element.getDate());
-            getAll.setStudentName(instituteClient.getStudent(element.getStudent()).getName());
+            getAll.setName(instituteClient.getStudent(element.getStudent()).getName());
+            getAll.setSurname(instituteClient.getStudent(element.getStudent()).getSurname());
+            getAll.setFiscalCode(instituteClient.getStudent(element.getStudent()).getFiscalCode());
+            getAll.setUsername(instituteClient.getStudent(element.getStudent()).getUsername());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
