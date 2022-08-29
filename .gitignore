@@ -336,3 +336,7 @@ $RECYCLE.BIN/
 /institute-service/target/classes/bootstrap.yml
 /api-gateway/target/classes/bootstrap.yml
 /class-service/target/classes/bootstrap.yml
+/cloud-config/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+/cloud-config/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/admin-service/target/classes/bootstrap.yml
+/cloud-config/target/maven-archiver/pom.properties

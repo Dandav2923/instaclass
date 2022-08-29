@@ -67,8 +67,8 @@ public class VoteServiceImpl implements VoteService {
             getAll.setDate(vote.getDate());
             getAll.setNameStudent(instituteClient.getStudent(vote.getStudent()).getName());
             getAll.setSurnameStudent(instituteClient.getStudent(vote.getStudent()).getSurname());
-            getAll.setFiscalCode(instituteClient.getStudent(vote.getStudent()).getFiscalCode());
-            getAll.setUsername(instituteClient.getStudent(vote.getStudent()).getUsername());
+            getAll.setFiscalCodeStudent(instituteClient.getStudent(vote.getStudent()).getFiscalCode());
+            getAll.setUsernameStudent(instituteClient.getStudent(vote.getStudent()).getUsername());
             getAll.setSubjectName(instituteClient.getSubjectById(vote.getSubject()).getName());
             getAll.setTeacherName(instituteClient.getTeacher(vote.getTeacher()).getName());
             getAll.setUsername(instituteClient.getTeacher(vote.getTeacher()).getUsername());
