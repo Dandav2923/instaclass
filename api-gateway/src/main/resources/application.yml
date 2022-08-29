@@ -11,11 +11,40 @@ spring:
           uri: lb://CLASS-SERVICE
           predicates:
             - Path=/class/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CLASS-SERVICE
+                fallbackuri: forward:/classServiceFallBack
         - id: INSTITUTE-SERVICE
           uri: lb://INSTITUTE-SERVICE
           predicates:
             - Path=/institute/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: INSTITUTE-SERVICE
+                fallbackuri: forward:/instituteServiceFallBack
         - id: SUPERADMIN-SERVICE
           uri: lb://SUPERADMIN-SERVICE
           predicates:
             - Path=/superAdminService/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: SUPERADMIN-SERVICE
+                fallbackuri: forward:/superAdminServiceFallBack
+
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream

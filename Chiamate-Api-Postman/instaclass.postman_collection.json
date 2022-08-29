@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b15ad368-9a96-48bb-92fd-6b6835a65f81",
+		"_postman_id": "cc21ec09-25d5-4adb-8bdf-9a42f6325d9b",
 		"name": "instaclass",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "19093812"
@@ -11,7 +11,225 @@
 			"item": [
 				{
 					"name": "Teacher",
-					"item": []
+					"item": [
+						{
+							"name": "create Teacher",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"luigi\",\r\n    \"surname\":\"frassica\",\r\n    \"username\":\"erBoro\",\r\n    \"fiscalCode\":\"CV567FG45612I623\",\r\n    \"password\":\"Tumadre12\",\r\n    \"instituteId\":3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/teachers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"teachers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get teacher by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/teachers/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"teachers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all teacher by id institute",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/teachers/getAllTeachers/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"teachers",
+										"getAllTeachers",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update teacher",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":1,\r\n    \"name\": \"paolo\",\r\n    \"surname\":\"paolini\",\r\n    \"username\":\"paoletto\",\r\n    \"fiscalCode\":\"CV567F3456YUI623\",\r\n    \"password\":\"Tumadre54\",\r\n    \"instituteId\":1\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/teachers/updateTeacher",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"teachers",
+										"updateTeacher"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete teacher",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/teachers/delete/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"teachers",
+										"delete",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "find teacher by username",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"pippo\",\r\n    \"idInstitute\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/teachers/getUsernameTeacher",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"teachers",
+										"getUsernameTeacher"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get subjects by id teacher",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/teachers/getSubjects/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"teachers",
+										"getSubjects",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "connect teacher to subject",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"teacherId\": 2,\r\n    \"subjectIdList\":[2,3,4]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/teachers/connectTeacherSubject",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"teachers",
+										"connectTeacherSubject"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "Institute",
@@ -23,7 +241,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n        \"name\": \"giusepponi\",\r\n        \"username\": \"marconcino\",\r\n        \"password\": \"efevcewv\"\r\n}",
+									"raw": "{\r\n        \"name\": \"giusepponi\",\r\n        \"username\": \"giuseppini\",\r\n        \"password\": \"vwvwwev\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -31,12 +249,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:10180/institute/v1/institutes",
+									"raw": "http://localhost:9191/institute/v1/institutes",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "10180",
+									"port": "9191",
 									"path": [
 										"institute",
 										"v1",
@@ -52,12 +270,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:10180/institute/v1/institutes/1",
+									"raw": "http://localhost:9191/institute/v1/institutes/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "10180",
+									"port": "9191",
 									"path": [
 										"institute",
 										"v1",
@@ -83,17 +301,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:10180/institute/v1/institutes/update",
+									"raw": "http://localhost:9191/institute/v1/institutes/updateInstitute",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "10180",
+									"port": "9191",
 									"path": [
 										"institute",
 										"v1",
 										"institutes",
-										"update"
+										"updateInstitute"
 									]
 								}
 							},
@@ -105,18 +323,18 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:10180/institute/v1/institutes/delete/1",
+									"raw": "http://localhost:9191/institute/v1/institutes/delete/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "10180",
+									"port": "9191",
 									"path": [
 										"institute",
 										"v1",
 										"institutes",
 										"delete",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -128,17 +346,40 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:10180/institute/v1/institutes/getAll",
+									"raw": "http://localhost:9191/institute/v1/institutes/getAllInstitute",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "10180",
+									"port": "9191",
 									"path": [
 										"institute",
 										"v1",
 										"institutes",
-										"getAll"
+										"getAllInstitute"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "find by username institute",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/institutes/username/marconcino",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"institutes",
+										"username",
+										"marconcino"
 									]
 								}
 							},
@@ -150,13 +391,13 @@
 					"name": "Subject",
 					"item": [
 						{
-							"name": "register materia",
+							"name": "register subject",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n        \"name\": \"geo\",\r\n        \"instituteId\":2\r\n}",
+									"raw": "{\r\n        \"name\": \"scienza\",\r\n        \"instituteId\":3\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -164,12 +405,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:10180/institute/v1/subjects",
+									"raw": "http://localhost:9191/institute/v1/subjects",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "10180",
+									"port": "9191",
 									"path": [
 										"institute",
 										"v1",
@@ -180,23 +421,99 @@
 							"response": []
 						},
 						{
-							"name": "get All Subject",
+							"name": "get Subject by id",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:10180/institute/v1/subjects/getAll/2",
+									"raw": "http://localhost:9191/institute/v1/subjects/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "10180",
+									"port": "9191",
 									"path": [
 										"institute",
 										"v1",
 										"subjects",
-										"getAll",
-										"2"
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get AllSubject By idInstitute",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/subjects/getAllSubjects/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"subjects",
+										"getAllSubjects",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update subject",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":4,\r\n    \"name\": \"geografia\",\r\n    \"instituteId\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/subjects/updateSubject",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"subjects",
+										"updateSubject"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete subject",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/subjects/delete/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"subjects",
+										"delete",
+										"1"
 									]
 								}
 							},
@@ -205,25 +522,54 @@
 					]
 				},
 				{
-					"name": "ClassService",
+					"name": "Student",
 					"item": [
 						{
-							"name": "GetAllClasses",
+							"name": "register student",
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"marco\",\r\n    \"surname\":\"polo\",\r\n    \"username\":\"marcolino\",\r\n    \"fiscalCode\":\"DL345ASG42356J34\",\r\n    \"password\":\"pippo39\",\r\n    \"instituteId\":3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "http://localhost:10080/class/v1/classes/getAll/1",
+									"raw": "http://localhost:9191/institute/v1/students",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "10080",
+									"port": "9191",
 									"path": [
-										"class",
+										"institute",
 										"v1",
-										"classes",
-										"getAll",
+										"students"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get Student by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/students/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"students",
 										"1"
 									]
 								}
@@ -231,13 +577,16 @@
 							"response": []
 						},
 						{
-							"name": "CreateClass",
+							"name": "Get Student By Username",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\":\"Quarta\",\r\n    \"idInstitute\":2\r\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -245,29 +594,30 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:10080/class/v1/classes",
+									"raw": "http://localhost:9191/institute/v1/students/getUsernameStudent",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "10080",
+									"port": "9191",
 									"path": [
-										"class",
+										"institute",
 										"v1",
-										"classes"
+										"students",
+										"getUsernameStudent"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "UpdateClass",
+							"name": "update student",
 							"request": {
 								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Settima\",\r\n    \"idInstitute\": 1\r\n}",
+									"raw": "{\r\n    \"id\":1,\r\n    \"name\": \"paolo\",\r\n    \"surname\":\"paolini\",\r\n    \"username\":\"paoletto\",\r\n    \"fiscalCode\":\"CV567F3456YUI623\",\r\n    \"password\":\"Tumadre54\",\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -275,48 +625,63 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:10080/class/v1/classes/updateClass",
+									"raw": "http://localhost:9191/institute/v1/students/updateStudent",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "10080",
+									"port": "9191",
 									"path": [
-										"class",
+										"institute",
 										"v1",
-										"classes",
-										"updateClass"
+										"students",
+										"updateStudent"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "DeleteClass",
+							"name": "Get All Student by institute",
 							"request": {
-								"method": "DELETE",
+								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Prima\",\r\n    \"idInstitute\": 1\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "http://localhost:10080/class/v1/classes/deleteClass",
+									"raw": "http://localhost:9191/institute/v1/students/getAllStudents/3",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "10080",
+									"port": "9191",
 									"path": [
-										"class",
+										"institute",
 										"v1",
-										"classes",
-										"deleteClass"
+										"students",
+										"getAllStudents",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete by id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/students/delete/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"students",
+										"delete",
+										"1"
 									]
 								}
 							},
@@ -336,7 +701,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"mario\",\r\n    \"password\":\"sola\"\r\n}",
+							"raw": "{\r\n    \"username\":\"marco\",\r\n    \"password\":\"sola\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -344,12 +709,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/superAdminService/v1/superAdmin",
+							"raw": "http://localhost:10280/superAdminService/v1/superAdmin",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "10280",
 							"path": [
 								"superAdminService",
 								"v1",
@@ -358,6 +723,1370 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "ClassServices",
+			"item": [
+				{
+					"name": "ClassService",
+					"item": [
+						{
+							"name": "CreateClass",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"terza\",\r\n    \"idInstitute\":3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateClass",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 3,\r\n    \"name\": \"Quinta\",\r\n    \"instituteId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classes/updateClass",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classes",
+										"updateClass"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteClass",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Prima\",\r\n    \"instituteId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classes/deleteClass",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classes",
+										"deleteClass"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllClasses",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classes/getAllClasses/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classes",
+										"getAllClasses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CommunicationService",
+					"item": [
+						{
+							"name": "GetAllCommunications",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/communications/getAllCommunications/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"communications",
+										"getAllCommunications",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateCommunication",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"communication\": \"Gino va a prendere la droga\",\r\n    \"date\":\"2054-05-02\",\r\n    \"teacherId\": 3,\r\n    \"classId\":3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/communications",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"communications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateCommunication",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 12,\r\n    \"communication\": \"Fulvio top di gamma assoluto\",\r\n    \"date\": \"2054-05-02\",\r\n    \"teacherId\": 3,\r\n    \"classId\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/communications/updateCommunication",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"communications",
+										"updateCommunication"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteCommunication",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 11,\r\n    \"teacherId\": 3,\r\n    \"classId\":3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/communications/deleteCommunication",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"communications",
+										"deleteCommunication"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "EventService",
+					"item": [
+						{
+							"name": "GetAllEvents",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/events/getAllEvents/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"events",
+										"getAllEvents",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateEvent",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"evento 4\",\r\n    \"description\":\"prova di aggiunta evento\",\r\n    \"date\":\"2022-07-08\",\r\n    \"classId\":3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/events",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"events"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateEvent",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 13,\r\n    \"name\": \"evento 2\",\r\n    \"description\": \"prova di modifica evento\",\r\n    \"date\": \"2022-07-08\",\r\n    \"classId\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/events/updateEvent",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"events",
+										"updateEvent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteEvent",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":14,\r\n    \"classId\":3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/events/deleteEvent",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"events",
+										"deleteEvent"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "HomeworkService",
+					"item": [
+						{
+							"name": "GetAllHomework",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/homeworks/getAllHomeworks/15",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"homeworks",
+										"getAllHomeworks",
+										"15"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateHomework",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"assignment\": \"pag 245\",\r\n    \"date\":\"2022-07-10\",\r\n    \"subjectId\": 3,\r\n    \"classId\": 15\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/homeworks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"homeworks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateHomework",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 19,\r\n    \"assignment\": \"pag upload \",\r\n    \"date\": \"2022-07-09\",\r\n    \"subjectId\": 2,\r\n    \"classId\": 3\r\n}    \r\n    ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/homeworks/updateHomework",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"homeworks",
+										"updateHomework"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteHomework",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":19,\r\n    \"classId\":3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/homeworks/deleteHomework",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"homeworks",
+										"deleteHomework"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ClassNoteService",
+					"item": [
+						{
+							"name": "GetAllClassNotes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classNotes/getAllClassNotes/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classNotes",
+										"getAllClassNotes",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllClassNotesByTeacherId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classNotes/getAllByTeacher/3/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classNotes",
+										"getAllByTeacher",
+										"3",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateClassNote",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"note\": \"La classe si comporta male mentre fulvio spiega la lezione\",\r\n    \"date\":\"2022-03-09\",\r\n    \"teacherId\": 2,\r\n    \"classId\":3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classNotes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classNotes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateClassNote",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 21,\r\n    \"note\": \"La classe si comporta male mentre Gino spiega la lezione\",\r\n    \"date\": \"2022-03-09\",\r\n    \"teacherId\": 2,\r\n    \"classId\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classNotes/updateClassNote",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classNotes",
+										"updateClassNote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteClassNote",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 21,\r\n    \"teacherId\": 2,\r\n    \"classId\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classNotes/deleteClassNote",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classNotes",
+										"deleteClassNote"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ClassStudentService",
+					"item": [
+						{
+							"name": "CreateClassStudent",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"studentId\":5,\r\n    \"classId\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classStudents",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classStudents"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllStudentsByIdClass",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classStudents/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classStudents",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateClassStudent",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":11,\r\n    \"studentId\":7,\r\n    \"classId\":10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classStudents/updateClassStudent",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classStudents",
+										"updateClassStudent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteClassStudent",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classStudents/deleteClassStudent",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classStudents",
+										"deleteClassStudent"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ClassTeacherService",
+					"item": [
+						{
+							"name": "GetAllClassTeachersByidClass",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classTeachers/getAllClassTeacher/15",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classTeachers",
+										"getAllClassTeacher",
+										"15"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateClassTeacher",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"teacherId\": 2,\r\n    \"subjectId\":2,\r\n    \"classId\":15\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classTeachers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classTeachers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateClassTeacher",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"id\": 31,\r\n        \"teacherId\": 9,\r\n        \"subjectId\": 1,\r\n        \"classId\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classTeachers/updateClassTeacher",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classTeachers",
+										"updateClassTeacher"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteClassTeacher",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"id\": 31,\r\n        \"teacherId\": 9,\r\n        \"classId\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classTeachers/deleteClassTeacher",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classTeachers",
+										"deleteClassTeacher"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PresenceService",
+					"item": [
+						{
+							"name": "GetAllPresences",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/presences/getAllPresences/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"presences",
+										"getAllPresences",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllPresencesByStudent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/presences/getAllPresencesByStudent/1/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"presences",
+										"getAllPresencesByStudent",
+										"1",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreatePresences",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"present\": false,\r\n    \"date\": \"2022-08-09\",\r\n    \"studentId\": 1,\r\n    \"classId\":3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/presences",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"presences"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdatePresences",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 22,\r\n    \"present\": false,\r\n    \"date\": \"2022-08-08\",\r\n    \"studentId\": 1,\r\n    \"classId\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/presences/updatePresence",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"presences",
+										"updatePresence"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeletePresences",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 22,\r\n    \"studentId\": 1,\r\n    \"classId\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/presences/deletePresence",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"presences",
+										"deletePresence"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "StudentNoteService",
+					"item": [
+						{
+							"name": "GetAllStudentNotes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/studentNotes/getAllStudentNotes/15",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"studentNotes",
+										"getAllStudentNotes",
+										"15"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllStudentNotesByStudent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/studentNotes/getAllNotesByStudent/15/8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"studentNotes",
+										"getAllNotesByStudent",
+										"15",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllStudentNotesByTeacher",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/studentNotes/getAllNotesByTeacher/15/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"studentNotes",
+										"getAllNotesByTeacher",
+										"15",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateStudentNote",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"note\": \"lo studente x bella\",\r\n    \"date\": \"2022-05-08\",\r\n    \"teacherId\": 2,\r\n    \"studentId\":8,\r\n    \"classId\":15\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/studentNotes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"studentNotes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateStudentNote",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"id\": 24,\r\n        \"note\": \"bla blaa\",\r\n        \"date\": \"2022-05-08\",\r\n        \"teacherId\": 1,\r\n        \"studentId\": 1,\r\n        \"classId\": 3\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:10080/class/v1/studentNotes/updateStudentNote",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "10080",
+									"path": [
+										"class",
+										"v1",
+										"studentNotes",
+										"updateStudentNote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteStudentNote",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 24,\r\n    \"teacherId\": 1,\r\n    \"studentId\": 1,\r\n    \"classId\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:10080/class/v1/studentNotes/deleteStudentNote",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "10080",
+									"path": [
+										"class",
+										"v1",
+										"studentNotes",
+										"deleteStudentNote"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "VoteService",
+					"item": [
+						{
+							"name": "Add Vote",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"vote\": 39,\r\n    \"date\": \"2021-12-03\",\r\n    \"studenId\":2,\r\n    \"subjectId\":2,\r\n    \"teacherId\":2,\r\n    \"classEntId\":15\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/votes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"votes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Vote By IdStudent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/votes/getAllVoteStudent/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"votes",
+										"getAllVoteStudent",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Vote By IdClass",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/votes/getAllVoteClass/15",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"votes",
+										"getAllVoteClass",
+										"15"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Vote By idTeacher",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/votes/getAllVoteTeacher/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"votes",
+										"getAllVoteTeacher",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update Vote",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":4,\r\n    \"date\":\"2000-10-10\",\r\n    \"vote\":56,\r\n    \"docenteId\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/class/v1/votes/updateVote",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"votes",
+										"updateVote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get vote by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/votes/getById/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"votes",
+										"getById",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete vote",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/votes/deleteVote/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"votes",
+										"deleteVote",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
