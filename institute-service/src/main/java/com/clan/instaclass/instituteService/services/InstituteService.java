@@ -2,6 +2,7 @@ package com.clan.instaclass.instituteService.services;
 
 import com.clan.instaclass.feign.instituteService.models.institute.*;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
+import com.clan.instaclass.instituteService.exceptions.general.PasswordNotValidException;
 import com.clan.instaclass.instituteService.exceptions.institute.AlreadyExistingIstituteException;
 import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;
 import com.clan.instaclass.instituteService.models.institute.*;
@@ -20,4 +21,5 @@ public interface InstituteService {
 
     GetInstituteResponse getUsername(String instituteUsername) throws InstituteNotFoundException;
 
+   // LoginInstituteResponse login(LoginInstituteRequest request) throws DataNonValidException, InstituteNotFoundException, PasswordNotValidException;
 }

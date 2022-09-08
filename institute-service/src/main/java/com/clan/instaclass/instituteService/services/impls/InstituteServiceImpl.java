@@ -1,5 +1,6 @@
 package com.clan.instaclass.instituteService.services.impls;
 
+
 import com.clan.instaclass.feign.instituteService.models.institute.*;
 import com.clan.instaclass.instituteService.entities.InstituteEnt;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
@@ -10,9 +11,17 @@ import com.clan.instaclass.instituteService.repositories.InstituteRepository;
 import com.clan.instaclass.instituteService.services.InstituteService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -20,6 +29,8 @@ import java.util.List;
 @Service
 public class InstituteServiceImpl implements InstituteService {
     private InstituteRepository instituteRepository;
+
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public CreateInstituteResponse create(CreateInstituteRequest request) throws DataNonValidException, AlreadyExistingIstituteException {
@@ -29,7 +40,8 @@ public class InstituteServiceImpl implements InstituteService {
         if (instituteRepository.findByUsername(request.getUsername()) == null) {
             InstituteEnt entity = new InstituteEnt();
             entity.setName(request.getName());
-            entity.setPassword(request.getPassword());
+            entity.setPassword(passwordEncoder.encode(request.getPassword()));
+            System.out.println(passwordEncoder.encode(request.getPassword()));
             entity.setUsername(request.getUsername());
             CreateInstituteResponse response = new CreateInstituteResponse();
             response.setId(instituteRepository.save(entity).getId());
@@ -40,6 +52,36 @@ public class InstituteServiceImpl implements InstituteService {
         }
 
     }
+
+    /*
+    @Override
+    public LoginInstituteResponse login (LoginInstituteRequest request) throws DataNonValidException, InstituteNotFoundException, PasswordNotValidException {
+        if (request.getUsername() == null || request.getPassword() == null) {
+            throw new DataNonValidException("dati mancanti");
+        }
+        InstituteEnt instituteEnt = instituteRepository.findByUsername(request.getUsername());
+        if (instituteEnt != null) {
+            if (passwordEncoder.matches(request.getPassword(), instituteEnt.getPassword())) {
+                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+                String accessToken = JWT.create()
+                        .withSubject(request.getUsername())
+                        .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                        .sign(algorithm);
+                LoginInstituteResponse response = new LoginInstituteResponse();
+                response.setUsername(request.getUsername());
+                response.setToken(accessToken);
+                return response;
+            }
+            else{
+                throw new PasswordNotValidException("password non valida");
+            }
+        }
+        else{
+            throw new InstituteNotFoundException("istituto non trovato");
+        }
+    }
+
+     */
 
     @Override
     public GetInstituteResponse get(Integer instituteId) throws InstituteNotFoundException {
@@ -102,6 +144,7 @@ public class InstituteServiceImpl implements InstituteService {
         }
         return response;
     }
+
 
 
 }
