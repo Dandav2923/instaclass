@@ -1,6 +1,6 @@
 package com.clan.instaclass.instituteService.filter;
 
-import com.clan.instaclass.instituteService.services.impls.MyUserDetailService;
+import com.clan.instaclass.instituteService.services.impls.InstituteServiceImpl;
 import com.clan.instaclass.instituteService.utility.JWTUtility;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +22,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
     private JWTUtility jwtUtility;
 
-    private MyUserDetailService myUserDetailService;
+    private InstituteServiceImpl instituteServiceimpl;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -37,7 +37,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         if(null != userName && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails
-                    = myUserDetailService.loadUserByUsername(userName);
+                    = instituteServiceimpl.loadUserByUsername(userName);
 
             if(jwtUtility.validateToken(token,userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken

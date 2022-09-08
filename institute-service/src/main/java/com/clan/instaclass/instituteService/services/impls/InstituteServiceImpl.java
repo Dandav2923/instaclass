@@ -27,10 +27,20 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @Service
-public class InstituteServiceImpl implements InstituteService {
+public class InstituteServiceImpl implements InstituteService,UserDetailsService {
     private InstituteRepository instituteRepository;
 
     private PasswordEncoder passwordEncoder;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        InstituteEnt instituteEnt = instituteRepository.findByUsername(username);
+        if (instituteEnt == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        return new User(instituteEnt.getUsername(),instituteEnt.getPassword(),new ArrayList<>());
+    }
 
     @Override
     public CreateInstituteResponse create(CreateInstituteRequest request) throws DataNonValidException, AlreadyExistingIstituteException {
@@ -53,35 +63,6 @@ public class InstituteServiceImpl implements InstituteService {
 
     }
 
-    /*
-    @Override
-    public LoginInstituteResponse login (LoginInstituteRequest request) throws DataNonValidException, InstituteNotFoundException, PasswordNotValidException {
-        if (request.getUsername() == null || request.getPassword() == null) {
-            throw new DataNonValidException("dati mancanti");
-        }
-        InstituteEnt instituteEnt = instituteRepository.findByUsername(request.getUsername());
-        if (instituteEnt != null) {
-            if (passwordEncoder.matches(request.getPassword(), instituteEnt.getPassword())) {
-                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-                String accessToken = JWT.create()
-                        .withSubject(request.getUsername())
-                        .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
-                        .sign(algorithm);
-                LoginInstituteResponse response = new LoginInstituteResponse();
-                response.setUsername(request.getUsername());
-                response.setToken(accessToken);
-                return response;
-            }
-            else{
-                throw new PasswordNotValidException("password non valida");
-            }
-        }
-        else{
-            throw new InstituteNotFoundException("istituto non trovato");
-        }
-    }
-
-     */
 
     @Override
     public GetInstituteResponse get(Integer instituteId) throws InstituteNotFoundException {

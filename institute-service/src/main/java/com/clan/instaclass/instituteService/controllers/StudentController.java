@@ -18,6 +18,7 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @RestController
+@CrossOrigin
 @RequestMapping("/v1/students")
 public class StudentController {
 

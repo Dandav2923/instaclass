@@ -2,13 +2,11 @@ package com.clan.instaclass.instituteService.controllers;
 
 import com.clan.instaclass.feign.instituteService.models.institute.*;
 import com.clan.instaclass.instituteService.exceptions.general.DataNonValidException;
-import com.clan.instaclass.instituteService.exceptions.general.PasswordNotValidException;
 import com.clan.instaclass.instituteService.exceptions.institute.AlreadyExistingIstituteException;
 import com.clan.instaclass.instituteService.exceptions.institute.InstituteNotFoundException;
 import com.clan.instaclass.instituteService.models.institute.*;
 import com.clan.instaclass.instituteService.services.InstituteService;
 import com.clan.instaclass.instituteService.services.impls.InstituteServiceImpl;
-import com.clan.instaclass.instituteService.services.impls.MyUserDetailService;
 import com.clan.instaclass.instituteService.utility.JWTUtility;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +25,7 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/v1/institutes")
 public class InstituteController {
     private final InstituteService instituteService;
@@ -35,7 +34,7 @@ public class InstituteController {
 
     private AuthenticationManager authenticationManager;
 
-    private MyUserDetailService myUserDetailService;
+    private InstituteServiceImpl instituteServiceimpl;
 
 
     @RequestMapping(
@@ -79,7 +78,7 @@ public class InstituteController {
                     )
             );
 
-             final UserDetails userDetails = myUserDetailService.loadUserByUsername(request.getUsername());
+             final UserDetails userDetails = instituteServiceimpl.loadUserByUsername(request.getUsername());
 
             final String token = jwtUtility.generateToken(userDetails);
 

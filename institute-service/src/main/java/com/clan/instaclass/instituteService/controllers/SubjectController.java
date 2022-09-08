@@ -21,6 +21,7 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/v1/subjects")
 public class SubjectController {
     private final SubjectService subjectService;

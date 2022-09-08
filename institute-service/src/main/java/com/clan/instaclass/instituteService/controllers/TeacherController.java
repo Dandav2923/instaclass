@@ -20,6 +20,7 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/v1/teachers")
 public class TeacherController {
     private final TeacherService teacherService;
