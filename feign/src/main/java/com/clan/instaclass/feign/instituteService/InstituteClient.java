@@ -7,17 +7,14 @@ import com.clan.instaclass.feign.instituteService.models.teacher.GetTeacherRespo
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient("INSTITUTE-SERVICE")
 public interface InstituteClient {
     @GetMapping(
             path = "institute/v1/institutes/{instituteId}"
     )
-    GetInstituteResponse getInstitute(@PathVariable("instituteId") Integer instituteId);
+    GetInstituteResponse getInstitute(@PathVariable("instituteId") Integer instituteId, @RequestHeader(name = "Authorization")String token);
 
     @GetMapping(
             path = "institute/v1/students/{idStudent}"

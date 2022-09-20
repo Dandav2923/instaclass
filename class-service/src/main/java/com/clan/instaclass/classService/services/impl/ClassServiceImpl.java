@@ -12,6 +12,8 @@ import com.clan.instaclass.feign.instituteService.models.institute.GetInstituteR
 import com.clan.instaclass.feign.instituteService.models.student.GetStudentResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,7 +29,8 @@ public class ClassServiceImpl implements ClassService {
         if (request.getName() == null || request.getName().isBlank() || request.getIdInstitute() == null || request.getIdInstitute() <=0){
             throw new ClassNotValidException("Non hai inserito i dati correttamente");
         }
-        GetInstituteResponse instituteResponse = instituteClient.getInstitute(request.getIdInstitute());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        GetInstituteResponse instituteResponse = instituteClient.getInstitute(request.getIdInstitute(),"Bearer " +  authentication.getName());
         List<ClassEnt> listClassEnt = classRepository.findByNameContains(request.getIdInstitute(), request.getName());
         if (listClassEnt == null || listClassEnt.size() == 0){
             ClassEnt newClass = new ClassEnt();

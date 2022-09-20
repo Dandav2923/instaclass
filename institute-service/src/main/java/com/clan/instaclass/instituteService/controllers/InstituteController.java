@@ -20,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.http.HttpHeaders;
 import java.util.List;
 
 @Slf4j
@@ -29,14 +30,9 @@ import java.util.List;
 @RequestMapping("/v1/institutes")
 public class InstituteController {
     private final InstituteService instituteService;
-
     private final JWTUtility jwtUtility;
-
     private AuthenticationManager authenticationManager;
-
     private InstituteServiceImpl instituteServiceimpl;
-
-
     @RequestMapping(
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -62,7 +58,6 @@ public class InstituteController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
     @RequestMapping(
             method = RequestMethod.POST,
             path = "/loginInstitute",
@@ -77,16 +72,11 @@ public class InstituteController {
                             request.getPassword()
                     )
             );
-
-             final UserDetails userDetails = instituteServiceimpl.loadUserByUsername(request.getUsername());
-
+            final UserDetails userDetails = instituteServiceimpl.loadUserByUsername(request.getUsername());
             final String token = jwtUtility.generateToken(userDetails);
-
             LoginInstituteResponse response = new LoginInstituteResponse();
-
             response.setUsername(request.getUsername());
             response.setToken(token);
-
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }
         catch (BadCredentialsException e) {
@@ -100,9 +90,6 @@ public class InstituteController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
-
-
     @RequestMapping(
             path = "/{idInstitute}",
             method = RequestMethod.GET,
@@ -123,7 +110,6 @@ public class InstituteController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
     @RequestMapping(
             path = "/username/{usernameInstitute}",
             method = RequestMethod.GET,
@@ -144,7 +130,6 @@ public class InstituteController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
     @RequestMapping(
             path = "/updateInstitute",
             method = RequestMethod.PUT,
@@ -172,7 +157,6 @@ public class InstituteController {
         }
 
     }
-
     @RequestMapping(
             path = "/delete/{idInstitute}",
             method = RequestMethod.DELETE
@@ -194,7 +178,6 @@ public class InstituteController {
         }
 
     }
-
     @RequestMapping(
             path = "/getAllInstitute",
             method = RequestMethod.GET,
@@ -211,6 +194,4 @@ public class InstituteController {
         }
 
     }
-
-
 }
