@@ -12,7 +12,9 @@ import com.clan.instaclass.classService.models.homework.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.HomeworkRepository;
 import com.clan.instaclass.classService.services.HomeworkService;
+import com.clan.instaclass.classService.utility.JWTUtility;
 import com.clan.instaclass.feign.instituteService.InstituteClient;
+import com.clan.instaclass.feign.instituteService.models.subject.GetSubjectResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ public class HomeworkServiceImpl implements HomeworkService {
     private ClassRepository classRepository;
     private HomeworkRepository homeworkRepository;
     private InstituteClient instituteClient;
+    private JWTUtility jwtUtility;
     @Override
     public CreateHomeworkResponse create(CreateHomeworkRequest request) throws HomeworkExistException, HomeworkNotValidException, ClassExistException {
         if (request.getAssignment() == null || request.getAssignment().isBlank() || request.getDate() == null || request.getSubjectId() == null || request.getSubjectId() <= 0 || request.getClassId() == null){
@@ -54,11 +57,12 @@ public class HomeworkServiceImpl implements HomeworkService {
         List<HomeworkEnt> listHomeworkEnt = homeworkRepository.findHomeworks(id);
         List<GetHomeworkResponse> response = new ArrayList<GetHomeworkResponse>();
         for (HomeworkEnt element : listHomeworkEnt){
+            GetSubjectResponse subjectResponse = instituteClient.getSubjectById(element.getSubject(), jwtUtility.authentication());
             GetHomeworkResponse getAll = new GetHomeworkResponse();
             getAll.setId(element.getId());
             getAll.setAssignment(element.getAssignment());
             getAll.setDate(element.getDueDate());
-            getAll.setSubjectName(instituteClient.getSubjectById(element.getSubject()).getName());
+            getAll.setSubjectName(subjectResponse.getName());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }

@@ -9,7 +9,9 @@ import com.clan.instaclass.classService.models.communication.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.CommunicationRepository;
 import com.clan.instaclass.classService.services.CommunicationService;
+import com.clan.instaclass.classService.utility.JWTUtility;
 import com.clan.instaclass.feign.instituteService.InstituteClient;
+import com.clan.instaclass.feign.instituteService.models.teacher.GetTeacherResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class CommunicationServiceImpl implements CommunicationService {
     private CommunicationRepository communicationRepository;
     private ClassRepository classRepository;
     private InstituteClient instituteClient;
+    private JWTUtility jwtUtility;
     @Override
     public CreateCommunicationResponse create(CreateCommunicationRequest request) throws CommunicationNotValidException, CommunicationExistException, ClassNotExistException {
         if (request.getCommunication() == null || request.getCommunication().isBlank() || request.getDate() == null || request.getTeacherId() == null || request.getTeacherId() <= 0 || request.getClassId() == null){
@@ -50,13 +53,14 @@ public class CommunicationServiceImpl implements CommunicationService {
         List<CommunicationEnt> listCommunicationEnt = communicationRepository.findCommunications(id);
         List<GetCommunicationResponse> response = new ArrayList<GetCommunicationResponse>();
         for (CommunicationEnt element : listCommunicationEnt){
+            GetTeacherResponse teacherResponse = instituteClient.getTeacher(element.getTeacher(), jwtUtility.authentication());
             GetCommunicationResponse getAll= new GetCommunicationResponse();
             getAll.setCommunication(element.getCommunication());
             getAll.setDate(element.getDate());
-            getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
-            getAll.setTeacherSurname(instituteClient.getTeacher(element.getTeacher()).getSurname());
-            getAll.setFiscalCode(instituteClient.getTeacher(element.getTeacher()).getFiscalCode());
-            getAll.setUsername(instituteClient.getTeacher(element.getTeacher()).getUsername());
+            getAll.setTeacherName(teacherResponse.getName());
+            getAll.setTeacherSurname(teacherResponse.getSurname());
+            getAll.setFiscalCode(teacherResponse.getFiscalCode());
+            getAll.setUsername(teacherResponse.getUsername());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }

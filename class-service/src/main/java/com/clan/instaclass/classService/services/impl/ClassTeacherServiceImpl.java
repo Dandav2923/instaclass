@@ -13,7 +13,10 @@ import com.clan.instaclass.classService.models.classTeacher.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.ClassTeacherRepository;
 import com.clan.instaclass.classService.services.ClassTeacherService;
+import com.clan.instaclass.classService.utility.JWTUtility;
 import com.clan.instaclass.feign.instituteService.InstituteClient;
+import com.clan.instaclass.feign.instituteService.models.subject.GetSubjectResponse;
+import com.clan.instaclass.feign.instituteService.models.teacher.GetTeacherResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,7 +30,7 @@ import java.util.List;
 public class ClassTeacherServiceImpl implements ClassTeacherService {
     private ClassTeacherRepository classTeacherRepository;
     private ClassRepository classRepository;
-
+    private JWTUtility jwtUtility;
     private InstituteClient instituteClient;
 
     @Override
@@ -63,13 +66,15 @@ public class ClassTeacherServiceImpl implements ClassTeacherService {
         List<ClassTeacherRel> teacherRelList = classTeacherRepository.getAllByIdClass(id);
         List<GetClassTeacherResponse> response = new ArrayList<GetClassTeacherResponse>();
         for (ClassTeacherRel element : teacherRelList){
+            GetTeacherResponse teacherResponse = instituteClient.getTeacher(element.getTeacher(), jwtUtility.authentication());
+            GetSubjectResponse subjectResponse = instituteClient.getSubjectById(element.getSubject(), jwtUtility.authentication());
             GetClassTeacherResponse getAll = new GetClassTeacherResponse();
             getAll.setId(element.getId());
-            getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
-            getAll.setUsername(instituteClient.getTeacher(element.getTeacher()).getUsername());
-            getAll.setTeacherSurname(instituteClient.getTeacher(element.getTeacher()).getSurname());
-            getAll.setFiscalCode(instituteClient.getTeacher(element.getTeacher()).getFiscalCode());
-            getAll.setSubjectName(instituteClient.getSubjectById(element.getSubject()).getName());
+            getAll.setTeacherName(teacherResponse.getName());
+            getAll.setUsername(teacherResponse.getUsername());
+            getAll.setTeacherSurname(teacherResponse.getSurname());
+            getAll.setFiscalCode(teacherResponse.getFiscalCode());
+            getAll.setSubjectName(subjectResponse.getName());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }

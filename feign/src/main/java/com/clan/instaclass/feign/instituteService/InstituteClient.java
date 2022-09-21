@@ -19,15 +19,15 @@ public interface InstituteClient {
     @GetMapping(
             path = "institute/v1/students/{idStudent}"
     )
-    GetStudentResponse getStudent(@PathVariable("idStudent") Integer studentId);
+    GetStudentResponse getStudent(@PathVariable("idStudent") Integer studentId, @RequestHeader(name = "Authorization")String token);
 
     @GetMapping(
             path = "institute/v1/teachers/{idTeacher}"
     )
-     GetTeacherResponse getTeacher(@PathVariable("idTeacher") Integer idTeacher);
+     GetTeacherResponse getTeacher(@PathVariable("idTeacher") Integer idTeacher, @RequestHeader(name = "Authorization")String token);
 
     @GetMapping(
             path = "institute/v1/subjects/{idSubject}"
     )
-    GetSubjectResponse getSubjectById(@PathVariable("idSubject") Integer subjectId);
+    GetSubjectResponse getSubjectById(@PathVariable("idSubject") Integer subjectId, @RequestHeader(name = "Authorization")String token);
 }

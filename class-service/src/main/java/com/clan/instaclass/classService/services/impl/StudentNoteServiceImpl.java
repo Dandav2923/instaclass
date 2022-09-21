@@ -12,7 +12,10 @@ import com.clan.instaclass.classService.models.studentNote.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.StudentNoteRepository;
 import com.clan.instaclass.classService.services.StudentNoteService;
+import com.clan.instaclass.classService.utility.JWTUtility;
 import com.clan.instaclass.feign.instituteService.InstituteClient;
+import com.clan.instaclass.feign.instituteService.models.student.GetStudentResponse;
+import com.clan.instaclass.feign.instituteService.models.teacher.GetTeacherResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,7 +29,7 @@ import java.util.List;
 public class StudentNoteServiceImpl implements StudentNoteService {
     private ClassRepository classRepository;
     private StudentNoteRepository studentNoteRepository;
-
+    private JWTUtility jwtUtility;
     private InstituteClient instituteClient;
     @Override
     public CreateStudentNoteResponse create(CreateStudentNoteRequest request) throws StudentNoteNotValidException, StudentNoteExistException, ClassNotExistException {
@@ -60,18 +63,20 @@ public class StudentNoteServiceImpl implements StudentNoteService {
         }
         List<GetStudentNoteResponse> response = new ArrayList<>();
         for (StudentNoteEnt element : listStudentNoteEnt){
+            GetStudentResponse studentResponse = instituteClient.getStudent(element.getStudent(), jwtUtility.authentication());
+            GetTeacherResponse teacherResponse = instituteClient.getTeacher(element.getTeacher(), jwtUtility.authentication());
             GetStudentNoteResponse getAll = new GetStudentNoteResponse();
             getAll.setId(element.getId());
             getAll.setNote(element.getNote());
             getAll.setDate(element.getDate());
-            getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
-            getAll.setUsername(instituteClient.getTeacher(element.getTeacher()).getUsername());
-            getAll.setTeacherSurname(instituteClient.getTeacher(element.getTeacher()).getSurname());
-            getAll.setFiscalCode(instituteClient.getTeacher(element.getTeacher()).getFiscalCode());
-            getAll.setNameStudent(instituteClient.getStudent(element.getStudent()).getName());
-            getAll.setSurnameStudent(instituteClient.getStudent(element.getStudent()).getSurname());
-            getAll.setFiscalCode(instituteClient.getStudent(element.getStudent()).getFiscalCode());
-            getAll.setUsername(instituteClient.getStudent(element.getStudent()).getUsername());
+            getAll.setTeacherName(teacherResponse.getName());
+            getAll.setUsername(teacherResponse.getUsername());
+            getAll.setTeacherSurname(teacherResponse.getSurname());
+            getAll.setFiscalCode(teacherResponse.getFiscalCode());
+            getAll.setNameStudent(studentResponse.getName());
+            getAll.setSurnameStudent(studentResponse.getSurname());
+            getAll.setFiscalCode(studentResponse.getFiscalCode());
+            getAll.setUsername(studentResponse.getUsername());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
@@ -89,15 +94,17 @@ public class StudentNoteServiceImpl implements StudentNoteService {
         }
         List<GetStudentNoteResponse> response = new ArrayList<GetStudentNoteResponse>();
         for (StudentNoteEnt element : listStudentNoteEnt) {
+            GetStudentResponse studentResponse = instituteClient.getStudent(element.getStudent(), jwtUtility.authentication());
+            GetTeacherResponse teacherResponse = instituteClient.getTeacher(element.getTeacher(), jwtUtility.authentication());
             GetStudentNoteResponse getAll = new GetStudentNoteResponse();
             getAll.setId(element.getId());
             getAll.setNote(element.getNote());
             getAll.setDate(element.getDate());
-            getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
-            getAll.setNameStudent(instituteClient.getStudent(element.getStudent()).getName());
-            getAll.setSurnameStudent(instituteClient.getStudent(element.getStudent()).getSurname());
-            getAll.setFiscalCode(instituteClient.getStudent(element.getStudent()).getFiscalCode());
-            getAll.setUsername(instituteClient.getStudent(element.getStudent()).getUsername());
+            getAll.setTeacherName(teacherResponse.getName());
+            getAll.setNameStudent(studentResponse.getName());
+            getAll.setSurnameStudent(studentResponse.getSurname());
+            getAll.setFiscalCode(studentResponse.getFiscalCode());
+            getAll.setUsername(studentResponse.getUsername());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
@@ -115,15 +122,17 @@ public class StudentNoteServiceImpl implements StudentNoteService {
         }
         List<GetStudentNoteResponse> response = new ArrayList<GetStudentNoteResponse>();
         for (StudentNoteEnt element : listStudentNoteEnt) {
+            GetStudentResponse studentResponse = instituteClient.getStudent(element.getStudent(), jwtUtility.authentication());
+            GetTeacherResponse teacherResponse = instituteClient.getTeacher(element.getTeacher(), jwtUtility.authentication());
             GetStudentNoteResponse getAll = new GetStudentNoteResponse();
             getAll.setId(element.getId());
             getAll.setNote(element.getNote());
             getAll.setDate(element.getDate());
-            getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
-            getAll.setNameStudent(instituteClient.getStudent(element.getStudent()).getName());
-            getAll.setSurnameStudent(instituteClient.getStudent(element.getStudent()).getSurname());
-            getAll.setFiscalCode(instituteClient.getStudent(element.getStudent()).getFiscalCode());
-            getAll.setUsername(instituteClient.getStudent(element.getStudent()).getUsername());
+            getAll.setTeacherName(teacherResponse.getName());
+            getAll.setNameStudent(studentResponse.getName());
+            getAll.setSurnameStudent(studentResponse.getSurname());
+            getAll.setFiscalCode(studentResponse.getFiscalCode());
+            getAll.setUsername(studentResponse.getUsername());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }

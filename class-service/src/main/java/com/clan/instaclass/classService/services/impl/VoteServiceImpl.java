@@ -10,7 +10,11 @@ import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.VoteRepository;
 import com.clan.instaclass.classService.services.VoteService;
 
+import com.clan.instaclass.classService.utility.JWTUtility;
 import com.clan.instaclass.feign.instituteService.InstituteClient;
+import com.clan.instaclass.feign.instituteService.models.student.GetStudentResponse;
+import com.clan.instaclass.feign.instituteService.models.subject.GetSubjectResponse;
+import com.clan.instaclass.feign.instituteService.models.teacher.GetTeacherResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,7 +28,7 @@ import java.util.List;
 public class VoteServiceImpl implements VoteService {
     private VoteRepository voteRepository;
     private ClassRepository classRepository;
-
+    private JWTUtility jwtUtility;
     private InstituteClient instituteClient;
     @Override
     public CreateVoteResponse create(CreateVoteRequest request) throws VoteNotValidException, ClassNotExistException {
@@ -38,7 +42,6 @@ public class VoteServiceImpl implements VoteService {
             throw new VoteNotValidException("dati del voto non validi");
         }
         ClassEnt classEnt = classRepository.findById(request.getClassEntId()).orElseThrow(() -> new ClassNotExistException("classe non trovata"));
-
             VoteEnt entity = new VoteEnt();
             entity.setVote(request.getVote());
             entity.setDate(request.getDate());
@@ -49,10 +52,7 @@ public class VoteServiceImpl implements VoteService {
             CreateVoteResponse response = new CreateVoteResponse();
             response.setId(voteRepository.save(entity).getId());
             return response;
-
-
     }
-
     @Override
     public List<GetAllVoteResponse> getAllVoteStudent(Integer idStudent) throws VoteNotValidException {
         if (idStudent == null || idStudent < 1) {
@@ -61,19 +61,21 @@ public class VoteServiceImpl implements VoteService {
         List<VoteEnt> entity = voteRepository.getAllVoteByStudent(idStudent);
         List<GetAllVoteResponse> response = new ArrayList<>();
         for (VoteEnt vote : entity){
+            GetStudentResponse studentResponse = instituteClient.getStudent(vote.getStudent(), jwtUtility.authentication());
+            GetTeacherResponse teacherResponse = instituteClient.getTeacher(vote.getTeacher(), jwtUtility.authentication());
             GetAllVoteResponse getAll = new GetAllVoteResponse();
             getAll.setId(vote.getId());
             getAll.setVote(vote.getVote());
             getAll.setDate(vote.getDate());
-            getAll.setNameStudent(instituteClient.getStudent(vote.getStudent()).getName());
-            getAll.setSurnameStudent(instituteClient.getStudent(vote.getStudent()).getSurname());
-            getAll.setFiscalCodeStudent(instituteClient.getStudent(vote.getStudent()).getFiscalCode());
-            getAll.setUsernameStudent(instituteClient.getStudent(vote.getStudent()).getUsername());
-            getAll.setSubjectName(instituteClient.getSubjectById(vote.getSubject()).getName());
-            getAll.setTeacherName(instituteClient.getTeacher(vote.getTeacher()).getName());
-            getAll.setUsername(instituteClient.getTeacher(vote.getTeacher()).getUsername());
-            getAll.setTeacherSurname(instituteClient.getTeacher(vote.getTeacher()).getSurname());
-            getAll.setFiscalCode(instituteClient.getTeacher(vote.getTeacher()).getFiscalCode());
+            getAll.setNameStudent(studentResponse.getName());
+            getAll.setSurnameStudent(studentResponse.getSurname());
+            getAll.setFiscalCodeStudent(studentResponse.getFiscalCode());
+            getAll.setUsernameStudent(studentResponse.getUsername());
+            getAll.setSubjectName(teacherResponse.getName());
+            getAll.setTeacherName(teacherResponse.getName());
+            getAll.setUsername(teacherResponse.getUsername());
+            getAll.setTeacherSurname(teacherResponse.getSurname());
+            getAll.setFiscalCode(teacherResponse.getFiscalCode());
             getAll.setClassEnt(vote.getClassEnt().getId());
             response.add(getAll);
         }
@@ -88,19 +90,22 @@ public class VoteServiceImpl implements VoteService {
         List<VoteEnt> entity = voteRepository.getAllVoteByClass(idClass);
         List<GetAllVoteResponse> response = new ArrayList<>();
         for (VoteEnt vote : entity){
+            GetStudentResponse studentResponse = instituteClient.getStudent(vote.getStudent(), jwtUtility.authentication());
+            GetTeacherResponse teacherResponse = instituteClient.getTeacher(vote.getTeacher(), jwtUtility.authentication());
+            GetSubjectResponse subjectResponse = instituteClient.getSubjectById(vote.getSubject(), jwtUtility.authentication());
             GetAllVoteResponse getAll = new GetAllVoteResponse();
             getAll.setId(vote.getId());
             getAll.setVote(vote.getVote());
             getAll.setDate(vote.getDate());
-            getAll.setNameStudent(instituteClient.getStudent(vote.getStudent()).getName());
-            getAll.setSurnameStudent(instituteClient.getStudent(vote.getStudent()).getSurname());
-            getAll.setFiscalCode(instituteClient.getStudent(vote.getStudent()).getFiscalCode());
-            getAll.setUsername(instituteClient.getStudent(vote.getStudent()).getUsername());
-            getAll.setSubjectName(instituteClient.getSubjectById(vote.getSubject()).getName());
-            getAll.setTeacherName(instituteClient.getTeacher(vote.getTeacher()).getName());
-            getAll.setUsername(instituteClient.getTeacher(vote.getTeacher()).getUsername());
-            getAll.setTeacherSurname(instituteClient.getTeacher(vote.getTeacher()).getSurname());
-            getAll.setFiscalCode(instituteClient.getTeacher(vote.getTeacher()).getFiscalCode());
+            getAll.setNameStudent(studentResponse.getName());
+            getAll.setSurnameStudent(studentResponse.getSurname());
+            getAll.setFiscalCode(studentResponse.getFiscalCode());
+            getAll.setUsername(studentResponse.getUsername());
+            getAll.setSubjectName(subjectResponse.getName());
+            getAll.setTeacherName(teacherResponse.getName());
+            getAll.setUsername(teacherResponse.getUsername());
+            getAll.setTeacherSurname(teacherResponse.getSurname());
+            getAll.setFiscalCode(teacherResponse.getFiscalCode());
             getAll.setClassEnt(vote.getClassEnt().getId());
             response.add(getAll);
         }
@@ -115,19 +120,22 @@ public class VoteServiceImpl implements VoteService {
         List<VoteEnt> entity = voteRepository.getAllVoteByTeacher(idTeacher);
         List<GetAllVoteResponse> response = new ArrayList<>();
         for (VoteEnt vote : entity){
+            GetStudentResponse studentResponse = instituteClient.getStudent(vote.getStudent(), jwtUtility.authentication());
+            GetSubjectResponse subjectResponse = instituteClient.getSubjectById(vote.getSubject(), jwtUtility.authentication());
+            GetTeacherResponse teacherResponse = instituteClient.getTeacher(vote.getTeacher(), jwtUtility.authentication());
             GetAllVoteResponse getAll = new GetAllVoteResponse();
             getAll.setId(vote.getId());
             getAll.setVote(vote.getVote());
             getAll.setDate(vote.getDate());
-            getAll.setNameStudent(instituteClient.getStudent(vote.getStudent()).getName());
-            getAll.setSurnameStudent(instituteClient.getStudent(vote.getStudent()).getSurname());
-            getAll.setFiscalCode(instituteClient.getStudent(vote.getStudent()).getFiscalCode());
-            getAll.setUsername(instituteClient.getStudent(vote.getStudent()).getUsername());
-            getAll.setSubjectName(instituteClient.getSubjectById(vote.getSubject()).getName());
-            getAll.setTeacherName(instituteClient.getTeacher(vote.getTeacher()).getName());
-            getAll.setUsername(instituteClient.getTeacher(vote.getTeacher()).getUsername());
-            getAll.setTeacherSurname(instituteClient.getTeacher(vote.getTeacher()).getSurname());
-            getAll.setFiscalCode(instituteClient.getTeacher(vote.getTeacher()).getFiscalCode());
+            getAll.setNameStudent(studentResponse.getName());
+            getAll.setSurnameStudent(studentResponse.getSurname());
+            getAll.setFiscalCode(studentResponse.getFiscalCode());
+            getAll.setUsername(studentResponse.getUsername());
+            getAll.setSubjectName(subjectResponse.getName());
+            getAll.setTeacherName(teacherResponse.getName());
+            getAll.setUsername(teacherResponse.getUsername());
+            getAll.setTeacherSurname(teacherResponse.getSurname());
+            getAll.setFiscalCode(teacherResponse.getFiscalCode());
             getAll.setClassEnt(vote.getClassEnt().getId());
             response.add(getAll);
         }
@@ -158,17 +166,19 @@ public class VoteServiceImpl implements VoteService {
             throw new VoteNotValidException("dati errati");
         }
         VoteEnt entity = voteRepository.findById(idVote).orElseThrow(() -> new VoteNotExistException("voto non trovato"));
+        GetStudentResponse studentResponse = instituteClient.getStudent(entity.getStudent(), jwtUtility.authentication());
+        GetTeacherResponse teacherResponse = instituteClient.getTeacher(entity.getTeacher(), jwtUtility.authentication());
         GetVoteResponse response = new GetVoteResponse();
         response.setId(entity.getId());
         response.setVote(entity.getVote());
-        response.setNameStudent(instituteClient.getStudent(entity.getStudent()).getName());
-        response.setSurnameStudent(instituteClient.getStudent(entity.getStudent()).getSurname());
-        response.setFiscalCodeStudent(instituteClient.getStudent(entity.getStudent()).getFiscalCode());
+        response.setNameStudent(studentResponse.getName());
+        response.setSurnameStudent(studentResponse.getSurname());
+        response.setFiscalCodeStudent(studentResponse.getFiscalCode());
         response.setSubject(entity.getSubject());
-        response.setUsername(instituteClient.getTeacher(entity.getTeacher()).getUsername());
-        response.setTeacherName(instituteClient.getTeacher(entity.getTeacher()).getName());
-        response.setTeacherSurname(instituteClient.getTeacher(entity.getTeacher()).getSurname());
-        response.setFiscalCode(instituteClient.getTeacher(entity.getTeacher()).getFiscalCode());
+        response.setUsername(teacherResponse.getUsername());
+        response.setTeacherName(teacherResponse.getName());
+        response.setTeacherSurname(teacherResponse.getSurname());
+        response.setFiscalCode(teacherResponse.getFiscalCode());
         response.setDate(entity.getDate());
         response.setClassEnt(entity.getClassEnt().getId());
         return response;

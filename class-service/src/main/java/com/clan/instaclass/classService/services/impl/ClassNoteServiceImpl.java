@@ -9,7 +9,9 @@ import com.clan.instaclass.classService.models.classNote.*;
 import com.clan.instaclass.classService.repositories.ClassNoteRepository;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.services.ClassNoteService;
+import com.clan.instaclass.classService.utility.JWTUtility;
 import com.clan.instaclass.feign.instituteService.InstituteClient;
+import com.clan.instaclass.feign.instituteService.models.teacher.GetTeacherResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class ClassNoteServiceImpl implements ClassNoteService {
     private ClassNoteRepository classNoteRepository;
     private ClassRepository classRepository;
     private InstituteClient instituteClient;
+    private JWTUtility jwtUtility;
     @Override
     public CreateClassNoteResponse create(CreateClassNoteRequest request) throws ClassNoteNotValidException, ClassNoteExistException, ClassNotExistException {
         if (request.getNote() == null || request.getNote().isBlank() || request.getDate() == null || request.getTeacherId() == null || request.getTeacherId() <= 0 || request.getClassId() == 0){
@@ -50,14 +53,15 @@ public class ClassNoteServiceImpl implements ClassNoteService {
         List<ClassNoteEnt> listClassNoteEnt = classNoteRepository.findClassNotes(id);
         List<GetClassNoteResponse> response = new ArrayList<GetClassNoteResponse>();
         for (ClassNoteEnt element : listClassNoteEnt){
+            GetTeacherResponse teacherResponse = instituteClient.getTeacher(element.getTeacher(), jwtUtility.authentication());
             GetClassNoteResponse getAll = new GetClassNoteResponse();
             getAll.setId(element.getId());
             getAll.setNote(element.getNote());
             getAll.setDate(element.getDate());
-            getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
-            getAll.setTeacherSurname(instituteClient.getTeacher(element.getTeacher()).getSurname());
-            getAll.setFiscalCode(instituteClient.getTeacher(element.getTeacher()).getFiscalCode());
-            getAll.setUsername(instituteClient.getTeacher(element.getTeacher()).getUsername());
+            getAll.setTeacherName(teacherResponse.getName());
+            getAll.setTeacherSurname(teacherResponse.getSurname());
+            getAll.setFiscalCode(teacherResponse.getFiscalCode());
+            getAll.setUsername(teacherResponse.getUsername());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
@@ -75,13 +79,14 @@ public class ClassNoteServiceImpl implements ClassNoteService {
         }
         List<GetClassNoteResponse> response = new ArrayList<GetClassNoteResponse>();
         for (ClassNoteEnt element : listClassNoteEnt){
+            GetTeacherResponse teacherResponse = instituteClient.getTeacher(element.getTeacher(), jwtUtility.authentication());
             GetClassNoteResponse getAll = new GetClassNoteResponse();
             getAll.setId(element.getId());
             getAll.setNote(element.getNote());
             getAll.setDate(element.getDate());
-            getAll.setTeacherName(instituteClient.getTeacher(element.getTeacher()).getName());
-            getAll.setTeacherSurname(instituteClient.getTeacher(element.getTeacher()).getSurname());
-            getAll.setFiscalCode(instituteClient.getTeacher(element.getTeacher()).getFiscalCode());
+            getAll.setTeacherName(teacherResponse.getName());
+            getAll.setTeacherSurname(teacherResponse.getSurname());
+            getAll.setFiscalCode(teacherResponse.getFiscalCode());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }

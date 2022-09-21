@@ -10,6 +10,7 @@ import com.clan.instaclass.classService.models.classStudent.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.ClassStudentRepository;
 import com.clan.instaclass.classService.services.ClassStudentService;
+import com.clan.instaclass.classService.utility.JWTUtility;
 import com.clan.instaclass.feign.instituteService.InstituteClient;
 import com.clan.instaclass.feign.instituteService.models.student.GetStudentResponse;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ public class ClassStudentServiceImpl implements ClassStudentService {
     private ClassStudentRepository classStudentRepository;
     private InstituteClient instituteClient;
     private ClassRepository classRepository;
+    private final JWTUtility jwtUtility;
     @Override
     public CreateClassStudentResponse create(CreateClassStudentRequest request) throws ClassStudentNotValidException, ClassNotExistException, StudentAlreadyExistingException {
         if (request.getClassId() == null || request.getClassId() < 1 || request.getStudentId() == null || request.getStudentId() < 1) {
@@ -57,11 +59,12 @@ public class ClassStudentServiceImpl implements ClassStudentService {
         List<GetClassStudentResponse> response = new ArrayList<>();
         List<ClassStudentRel> classStudentRel = classStudentRepository.findByIdClass(classId);
         for (ClassStudentRel student: classStudentRel) {
+            GetStudentResponse studentResponse = instituteClient.getStudent(student.getStudent(), jwtUtility.authentication());
             GetClassStudentResponse getClassStudent = new GetClassStudentResponse();
-            getClassStudent.setName(instituteClient.getStudent(student.getStudent()).getName());
-            getClassStudent.setFiscalCode(instituteClient.getStudent(student.getStudent()).getFiscalCode());
-            getClassStudent.setSurname(instituteClient.getStudent(student.getStudent()).getSurname());
-            getClassStudent.setUsername(instituteClient.getStudent(student.getStudent()).getUsername());
+            getClassStudent.setName(studentResponse.getName());
+            getClassStudent.setFiscalCode(studentResponse.getFiscalCode());
+            getClassStudent.setSurname(studentResponse.getSurname());
+            getClassStudent.setUsername(studentResponse.getUsername());
             response.add(getClassStudent);
         }
         return response;

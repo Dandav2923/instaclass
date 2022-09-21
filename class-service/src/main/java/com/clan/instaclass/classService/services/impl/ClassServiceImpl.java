@@ -7,6 +7,7 @@ import com.clan.instaclass.classService.exceptions.classes.ClassNotValidExceptio
 import com.clan.instaclass.classService.models.classes.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.services.ClassService;
+import com.clan.instaclass.classService.utility.JWTUtility;
 import com.clan.instaclass.feign.instituteService.InstituteClient;
 import com.clan.instaclass.feign.instituteService.models.institute.GetInstituteResponse;
 import com.clan.instaclass.feign.instituteService.models.student.GetStudentResponse;
@@ -24,13 +25,13 @@ import java.util.List;
 public class ClassServiceImpl implements ClassService {
     private final ClassRepository classRepository;
     private final InstituteClient instituteClient;
+    private final JWTUtility jwtUtility;
     @Override
     public CreateClassResponse create(CreateClassRequest request) throws ClassNotValidException, ClassExistException {
         if (request.getName() == null || request.getName().isBlank() || request.getIdInstitute() == null || request.getIdInstitute() <=0){
             throw new ClassNotValidException("Non hai inserito i dati correttamente");
         }
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        GetInstituteResponse instituteResponse = instituteClient.getInstitute(request.getIdInstitute(),"Bearer " +  authentication.getName());
+        GetInstituteResponse instituteResponse = instituteClient.getInstitute(request.getIdInstitute(), jwtUtility.authentication());
         List<ClassEnt> listClassEnt = classRepository.findByNameContains(request.getIdInstitute(), request.getName());
         if (listClassEnt == null || listClassEnt.size() == 0){
             ClassEnt newClass = new ClassEnt();

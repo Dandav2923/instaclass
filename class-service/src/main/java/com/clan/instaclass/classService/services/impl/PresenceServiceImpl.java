@@ -9,7 +9,9 @@ import com.clan.instaclass.classService.models.presence.*;
 import com.clan.instaclass.classService.repositories.ClassRepository;
 import com.clan.instaclass.classService.repositories.PresenceRepository;
 import com.clan.instaclass.classService.services.PresenceService;
+import com.clan.instaclass.classService.utility.JWTUtility;
 import com.clan.instaclass.feign.instituteService.InstituteClient;
+import com.clan.instaclass.feign.instituteService.models.student.GetStudentResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class PresenceServiceImpl implements PresenceService {
     private ClassRepository classRepository;
     private InstituteClient instituteClient;
     private PresenceRepository presenceRepository;
+    private final JWTUtility jwtUtility;
     @Override
     public CreatePresenceResponse create(CreatePresenceRequest request) throws PresenceNotValidException, PresenceExistException, ClassNotExistException {
         if (request.getPresent() == null || request.getDate() == null || request.getStudentId() == null || request.getStudentId() <= 0 || request.getClassId() <= 0){
@@ -50,14 +53,15 @@ public class PresenceServiceImpl implements PresenceService {
         List<PresenceEnt> listPresenceEnt = presenceRepository.findPresences(id);
         List<GetPresenceResponse> response = new ArrayList<GetPresenceResponse>();
         for (PresenceEnt element : listPresenceEnt){
+            GetStudentResponse studentResponse = instituteClient.getStudent(element.getStudent(), jwtUtility.authentication());
             GetPresenceResponse getAll = new GetPresenceResponse();
             getAll.setId(element.getId());
             getAll.setPresent(element.getPresent());
             getAll.setDate(element.getDate());
-            getAll.setName(instituteClient.getStudent(element.getStudent()).getName());
-            getAll.setSurname(instituteClient.getStudent(element.getStudent()).getSurname());
-            getAll.setFiscalCode(instituteClient.getStudent(element.getStudent()).getFiscalCode());
-            getAll.setUsername(instituteClient.getStudent(element.getStudent()).getUsername());
+            getAll.setName(studentResponse.getName());
+            getAll.setSurname(studentResponse.getSurname());
+            getAll.setFiscalCode(studentResponse.getFiscalCode());
+            getAll.setUsername(studentResponse.getUsername());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
@@ -75,14 +79,15 @@ public class PresenceServiceImpl implements PresenceService {
         }
         List<GetPresenceResponse> response = new ArrayList<GetPresenceResponse>();
         for (PresenceEnt element : listPresenceEnt){
+            GetStudentResponse studentResponse = instituteClient.getStudent(element.getStudent(), jwtUtility.authentication());
             GetPresenceResponse getAll = new GetPresenceResponse();
             getAll.setId(element.getId());
             getAll.setPresent(element.getPresent());
             getAll.setDate(element.getDate());
-            getAll.setName(instituteClient.getStudent(element.getStudent()).getName());
-            getAll.setSurname(instituteClient.getStudent(element.getStudent()).getSurname());
-            getAll.setFiscalCode(instituteClient.getStudent(element.getStudent()).getFiscalCode());
-            getAll.setUsername(instituteClient.getStudent(element.getStudent()).getUsername());
+            getAll.setName(studentResponse.getName());
+            getAll.setSurname(studentResponse.getSurname());
+            getAll.setFiscalCode(studentResponse.getFiscalCode());
+            getAll.setUsername(studentResponse.getUsername());
             getAll.setClassId(element.getClassEnt().getId());
             response.add(getAll);
         }
