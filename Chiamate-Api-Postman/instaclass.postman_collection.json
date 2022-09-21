@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "cc21ec09-25d5-4adb-8bdf-9a42f6325d9b",
+		"_postman_id": "af299156-dda6-47aa-ac59-cf43cb54b046",
 		"name": "instaclass",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19093812"
+		"_exporter_id": "19091723"
 	},
 	"item": [
 		{
@@ -16,10 +16,16 @@
 							"name": "create Teacher",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2MzE2MDg1NCwiaWF0IjoxNjYzMTQyODU0fQ.oXiyXLL7u42EdMGnT30EvPaSCl27HVYSfygJ-FLMc35vnAgxiefmGbqGws3-KNHpUSs6fmfZ_CjEO4fIuZ9lkg",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"luigi\",\r\n    \"surname\":\"frassica\",\r\n    \"username\":\"erBoro\",\r\n    \"fiscalCode\":\"CV567FG45612I623\",\r\n    \"password\":\"Tumadre12\",\r\n    \"instituteId\":3\r\n}",
+									"raw": "{\r\n    \"name\": \"Giandomenico\",\r\n    \"surname\":\"Sabato\",\r\n    \"username\":\"giando\",\r\n    \"fiscalCode\":\"CV567FG456YUI629\",\r\n    \"password\":\"Giando2022\",\r\n    \"instituteId\":2\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -181,7 +187,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/institute/v1/teachers/getSubjects/2",
+									"raw": "http://localhost:9191/institute/v1/teachers/getSubjects/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -192,20 +198,26 @@
 										"v1",
 										"teachers",
 										"getSubjects",
-										"2"
+										"1"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "connect teacher to subject",
+							"name": "ConnectTeacherToSubject",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2MzE2MDg1NCwiaWF0IjoxNjYzMTQyODU0fQ.oXiyXLL7u42EdMGnT30EvPaSCl27HVYSfygJ-FLMc35vnAgxiefmGbqGws3-KNHpUSs6fmfZ_CjEO4fIuZ9lkg",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"teacherId\": 2,\r\n    \"subjectIdList\":[2,3,4]\r\n}",
+									"raw": "{\r\n    \"teacherId\": 3,\r\n    \"subjectIdList\":[4,5,6]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -241,7 +253,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n        \"name\": \"giusepponi\",\r\n        \"username\": \"giuseppini\",\r\n        \"password\": \"vwvwwev\"\r\n}",
+									"raw": "{\r\n        \"name\": \"Volterra\",\r\n        \"username\": \"Istituto Volterra\",\r\n        \"password\": \"Volterra2022\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -268,9 +280,15 @@
 							"name": "find by id istituto",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2MzI1MTE3OSwiaWF0IjoxNjYzMjMzMTc5fQ.bHXvX-Shql-LOrCHucLyG-6YKeV39iV7kcwC623veUtJ-Oh2uFhkeQ2V30zgOjClDqDhkL6slaSkrzHbqNw21g",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "http://localhost:9191/institute/v1/institutes/1",
+									"raw": "http://localhost:9191/institute/v1/institutes/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -280,7 +298,7 @@
 										"institute",
 										"v1",
 										"institutes",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -344,7 +362,13 @@
 							"name": "get All Institute",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2MzE4OTY3MywiaWF0IjoxNjYzMTcxNjczfQ.fBm-nTmdlSjguBfMLumKDOV5NT3j2UwTzG3EY6ZcsnlIf4T3iLd-jncDM7mTr8wOZR3VQJLg30-lhTOlbbTxz",
+										"type": "text"
+									}
+								],
 								"url": {
 									"raw": "http://localhost:9191/institute/v1/institutes/getAllInstitute",
 									"protocol": "http",
@@ -357,6 +381,13 @@
 										"v1",
 										"institutes",
 										"getAllInstitute"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -366,9 +397,15 @@
 							"name": "find by username institute",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2MzE4OTY3MywiaWF0IjoxNjYzMTcxNjczfQ.fBm-nTmdlSjguBfMLumKDOV5NT3j2UwTzG3EY6ZcsnlIf4T3iLd-jncDM7mTr8wOZR3VQJLg30-lhTOlbbTxz",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "http://localhost:9191/institute/v1/institutes/username/marconcino",
+									"raw": "http://localhost:9191/institute/v1/institutes/username/Istituto Volterra",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -379,7 +416,38 @@
 										"v1",
 										"institutes",
 										"username",
-										"marconcino"
+										"Istituto Volterra"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"Istituto Volterra\",\r\n    \"password\":\"Volterra2022\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9191/institute/v1/institutes/loginInstitute",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"institute",
+										"v1",
+										"institutes",
+										"loginInstitute"
 									]
 								}
 							},
@@ -394,10 +462,16 @@
 							"name": "register subject",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2MzE2MDg1NCwiaWF0IjoxNjYzMTQyODU0fQ.oXiyXLL7u42EdMGnT30EvPaSCl27HVYSfygJ-FLMc35vnAgxiefmGbqGws3-KNHpUSs6fmfZ_CjEO4fIuZ9lkg",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n        \"name\": \"scienza\",\r\n        \"instituteId\":3\r\n}",
+									"raw": "{\r\n        \"name\": \"Matematica\",\r\n        \"instituteId\":2\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -424,9 +498,15 @@
 							"name": "get Subject by id",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2MzI1MTE3OSwiaWF0IjoxNjYzMjMzMTc5fQ.bHXvX-Shql-LOrCHucLyG-6YKeV39iV7kcwC623veUtJ-Oh2uFhkeQ2V30zgOjClDqDhkL6slaSkrzHbqNw21g",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "http://localhost:9191/institute/v1/subjects/1",
+									"raw": "http://localhost:9191/institute/v1/subjects/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -436,7 +516,7 @@
 										"institute",
 										"v1",
 										"subjects",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -446,9 +526,15 @@
 							"name": "Get AllSubject By idInstitute",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2MzE2MDg1NCwiaWF0IjoxNjYzMTQyODU0fQ.oXiyXLL7u42EdMGnT30EvPaSCl27HVYSfygJ-FLMc35vnAgxiefmGbqGws3-KNHpUSs6fmfZ_CjEO4fIuZ9lkg",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "http://localhost:9191/institute/v1/subjects/getAllSubjects/3",
+									"raw": "http://localhost:9191/institute/v1/subjects/getAllSubjects/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -459,7 +545,7 @@
 										"v1",
 										"subjects",
 										"getAllSubjects",
-										"3"
+										"2"
 									]
 								}
 							},
@@ -528,10 +614,16 @@
 							"name": "register student",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2MzE2MDg1NCwiaWF0IjoxNjYzMTQyODU0fQ.oXiyXLL7u42EdMGnT30EvPaSCl27HVYSfygJ-FLMc35vnAgxiefmGbqGws3-KNHpUSs6fmfZ_CjEO4fIuZ9lkg",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\":\"marco\",\r\n    \"surname\":\"polo\",\r\n    \"username\":\"marcolino\",\r\n    \"fiscalCode\":\"DL345ASG42356J34\",\r\n    \"password\":\"pippo39\",\r\n    \"instituteId\":3\r\n}",
+									"raw": "{\r\n    \"name\":\"Fulvio\",\r\n    \"surname\":\"Gaudenzi\",\r\n    \"username\":\"fulvioGaudenzi\",\r\n    \"fiscalCode\":\"AB385fdv423GHJ36\",\r\n    \"password\":\"Fulvio2022\",\r\n    \"instituteId\":2\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -645,9 +737,15 @@
 							"name": "Get All Student by institute",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2Mzc3MDQ0OSwiaWF0IjoxNjYzNzUyNDQ5fQ.zQCfoqAzTJpMk6TFSmi3Fhflw4lMTowlcRzTVJ2CjGeFzTOC9ajvmd6Dqqu1PJBiQL1yRP33TdXkWv67C-aH9w",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "http://localhost:9191/institute/v1/students/getAllStudents/3",
+									"raw": "http://localhost:9191/institute/v1/students/getAllStudents/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -658,7 +756,7 @@
 										"v1",
 										"students",
 										"getAllStudents",
-										"3"
+										"2"
 									]
 								}
 							},
@@ -733,13 +831,42 @@
 					"name": "ClassService",
 					"item": [
 						{
+							"name": "GetAllClasses",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9191/class/v1/classes/getAllClasses/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9191",
+									"path": [
+										"class",
+										"v1",
+										"classes",
+										"getAllClasses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "CreateClass",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2MzcwMTU2MSwiaWF0IjoxNjYzNjgzNTYxfQ.PhebrcKqgZpBnUhv5rXWhDhQ1L5JCExPTaCwYh_SpD29_qcsciQTcDjhe_JrTQJo_8SbjFBdT9S1XX_7ndPsLw",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\":\"terza\",\r\n    \"idInstitute\":3\r\n}",
+									"raw": "{\r\n    \"name\":\"Classe Matematica\",\r\n    \"idInstitute\":2\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -823,29 +950,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "GetAllClasses",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:9191/class/v1/classes/getAllClasses/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9191",
-									"path": [
-										"class",
-										"v1",
-										"classes",
-										"getAllClasses",
-										"1"
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				},
@@ -858,7 +962,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/communications/getAllCommunications/3",
+									"raw": "http://localhost:9191/class/v1/communications/getAllCommunications/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -869,7 +973,7 @@
 										"v1",
 										"communications",
 										"getAllCommunications",
-										"3"
+										"1"
 									]
 								}
 							},
@@ -882,7 +986,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"communication\": \"Gino va a prendere la droga\",\r\n    \"date\":\"2054-05-02\",\r\n    \"teacherId\": 3,\r\n    \"classId\":3\r\n}",
+									"raw": "{\r\n    \"communication\": \"Fulvio va a prendere la droga\",\r\n    \"date\":\"2054-05-02\",\r\n    \"teacherId\": 1,\r\n    \"classId\":1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -978,7 +1082,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/events/getAllEvents/3",
+									"raw": "http://localhost:9191/class/v1/events/getAllEvents/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -989,7 +1093,7 @@
 										"v1",
 										"events",
 										"getAllEvents",
-										"3"
+										"1"
 									]
 								}
 							},
@@ -1002,7 +1106,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\":\"evento 4\",\r\n    \"description\":\"prova di aggiunta evento\",\r\n    \"date\":\"2022-07-08\",\r\n    \"classId\":3\r\n}",
+									"raw": "{\r\n    \"name\":\"Gita a Ostia antica\",\r\n    \"description\":\"prova di aggiunta evento\",\r\n    \"date\":\"2022-07-08\",\r\n    \"classId\":1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1063,7 +1167,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\":14,\r\n    \"classId\":3\r\n}",
+									"raw": "{\r\n    \"id\":9,\r\n    \"classId\":1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1098,7 +1202,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/homeworks/getAllHomeworks/15",
+									"raw": "http://localhost:9191/class/v1/homeworks/getAllHomeworks/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1109,7 +1213,7 @@
 										"v1",
 										"homeworks",
 										"getAllHomeworks",
-										"15"
+										"1"
 									]
 								}
 							},
@@ -1122,7 +1226,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"assignment\": \"pag 245\",\r\n    \"date\":\"2022-07-10\",\r\n    \"subjectId\": 3,\r\n    \"classId\": 15\r\n}",
+									"raw": "{\r\n    \"assignment\": \"capitolo 5\",\r\n    \"date\":\"2022-07-09\",\r\n    \"subjectId\": 2,\r\n    \"classId\": 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1218,7 +1322,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/classNotes/getAllClassNotes/3",
+									"raw": "http://localhost:9191/class/v1/classNotes/getAllClassNotes/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1229,7 +1333,7 @@
 										"v1",
 										"classNotes",
 										"getAllClassNotes",
-										"3"
+										"1"
 									]
 								}
 							},
@@ -1241,7 +1345,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/classNotes/getAllByTeacher/3/1",
+									"raw": "http://localhost:9191/class/v1/classNotes/getAllByTeacher/1/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1252,7 +1356,7 @@
 										"v1",
 										"classNotes",
 										"getAllByTeacher",
-										"3",
+										"1",
 										"1"
 									]
 								}
@@ -1266,7 +1370,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"note\": \"La classe si comporta male mentre fulvio spiega la lezione\",\r\n    \"date\":\"2022-03-09\",\r\n    \"teacherId\": 2,\r\n    \"classId\":3\r\n}",
+									"raw": "{\r\n    \"note\": \"La classe si comporta male mentre Gino spiega la lezione\",\r\n    \"date\":\"2022-03-09\",\r\n    \"teacherId\": 1,\r\n    \"classId\":1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1360,10 +1464,16 @@
 							"name": "CreateClassStudent",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2Mzc3MDQ0OSwiaWF0IjoxNjYzNzUyNDQ5fQ.zQCfoqAzTJpMk6TFSmi3Fhflw4lMTowlcRzTVJ2CjGeFzTOC9ajvmd6Dqqu1PJBiQL1yRP33TdXkWv67C-aH9w",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"studentId\":5,\r\n    \"classId\":1\r\n}",
+									"raw": "{\r\n    \"studentId\":3,\r\n    \"classId\": 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1388,21 +1498,15 @@
 						},
 						{
 							"name": "GetAllStudentsByIdClass",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "text"
-										}
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2Mzc3MDQ0OSwiaWF0IjoxNjYzNzUyNDQ5fQ.zQCfoqAzTJpMk6TFSmi3Fhflw4lMTowlcRzTVJ2CjGeFzTOC9ajvmd6Dqqu1PJBiQL1yRP33TdXkWv67C-aH9w",
+										"type": "text"
 									}
-								},
+								],
 								"url": {
 									"raw": "http://localhost:9191/class/v1/classStudents/1",
 									"protocol": "http",
@@ -1456,6 +1560,15 @@
 							"request": {
 								"method": "DELETE",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 15,\r\n    \"studentId\":2,\r\n    \"classId\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "http://localhost:9191/class/v1/classStudents/deleteClassStudent",
 									"protocol": "http",
@@ -1482,9 +1595,15 @@
 							"name": "GetAllClassTeachersByidClass",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2Mzc2OTEyMiwiaWF0IjoxNjYzNzUxMTIyfQ.U71_IxuhOHCKFT2kgqK3K0FwtxVFMYH1jRwLBS5FBIdb5ILhDyfV9EbLGe1Z0kAs-DFSyv5ESf6jRXLk0NT7IA",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/classTeachers/getAllClassTeacher/15",
+									"raw": "http://localhost:9191/class/v1/classTeachers/getAllClassTeacher/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1495,7 +1614,7 @@
 										"v1",
 										"classTeachers",
 										"getAllClassTeacher",
-										"15"
+										"1"
 									]
 								}
 							},
@@ -1505,10 +1624,16 @@
 							"name": "CreateClassTeacher",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJc3RpdHV0byBWb2x0ZXJyYSIsImV4cCI6MTY2Mzc2OTEyMiwiaWF0IjoxNjYzNzUxMTIyfQ.U71_IxuhOHCKFT2kgqK3K0FwtxVFMYH1jRwLBS5FBIdb5ILhDyfV9EbLGe1Z0kAs-DFSyv5ESf6jRXLk0NT7IA",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"teacherId\": 2,\r\n    \"subjectId\":2,\r\n    \"classId\":15\r\n}",
+									"raw": "{\r\n    \"teacherId\": 1,\r\n    \"subjectId\":1,\r\n    \"classId\":1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1546,12 +1671,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:9191/class/v1/classTeachers/updateClassTeacher",
+									"raw": "http://localhost:10080/class/v1/classTeachers/updateClassTeacher",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "9191",
+									"port": "10080",
 									"path": [
 										"class",
 										"v1",
@@ -1577,12 +1702,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:9191/class/v1/classTeachers/deleteClassTeacher",
+									"raw": "http://localhost:10080/class/v1/classTeachers/deleteClassTeacher",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "9191",
+									"port": "10080",
 									"path": [
 										"class",
 										"v1",
@@ -1652,7 +1777,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"present\": false,\r\n    \"date\": \"2022-08-09\",\r\n    \"studentId\": 1,\r\n    \"classId\":3\r\n}",
+									"raw": "{\r\n    \"present\": true,\r\n    \"date\": \"2022-08-12\",\r\n    \"studentId\": 1,\r\n    \"classId\": 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1748,7 +1873,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/studentNotes/getAllStudentNotes/15",
+									"raw": "http://localhost:9191/class/v1/studentNotes/getAllStudentNotes/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1759,7 +1884,7 @@
 										"v1",
 										"studentNotes",
 										"getAllStudentNotes",
-										"15"
+										"1"
 									]
 								}
 							},
@@ -1771,7 +1896,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/studentNotes/getAllNotesByStudent/15/8",
+									"raw": "http://localhost:9191/class/v1/studentNotes/getAllNotesByStudent/1/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1782,8 +1907,8 @@
 										"v1",
 										"studentNotes",
 										"getAllNotesByStudent",
-										"15",
-										"8"
+										"1",
+										"1"
 									]
 								}
 							},
@@ -1795,7 +1920,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/studentNotes/getAllNotesByTeacher/15/2",
+									"raw": "http://localhost:9191/class/v1/studentNotes/getAllNotesByTeacher/1/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1806,8 +1931,8 @@
 										"v1",
 										"studentNotes",
 										"getAllNotesByTeacher",
-										"15",
-										"2"
+										"1",
+										"1"
 									]
 								}
 							},
@@ -1820,7 +1945,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"note\": \"lo studente x bella\",\r\n    \"date\": \"2022-05-08\",\r\n    \"teacherId\": 2,\r\n    \"studentId\":8,\r\n    \"classId\":15\r\n}",
+									"raw": "{\r\n    \"note\": \"lo studente Daniele manda a quel paese tutta la classe senza motivo\",\r\n    \"date\": \"2022-05-08\",\r\n    \"teacherId\": 1,\r\n    \"studentId\":1,\r\n    \"classId\":1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1881,7 +2006,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": 24,\r\n    \"teacherId\": 1,\r\n    \"studentId\": 1,\r\n    \"classId\": 3\r\n}",
+									"raw": "{\r\n    \"id\": 5,\r\n    \"teacherId\": 1,\r\n    \"studentId\": 1,\r\n    \"classId\": 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1889,12 +2014,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:10080/class/v1/studentNotes/deleteStudentNote",
+									"raw": "http://localhost:9191/class/v1/studentNotes/deleteStudentNote",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "10080",
+									"port": "9191",
 									"path": [
 										"class",
 										"v1",
@@ -1917,7 +2042,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"vote\": 39,\r\n    \"date\": \"2021-12-03\",\r\n    \"studenId\":2,\r\n    \"subjectId\":2,\r\n    \"teacherId\":2,\r\n    \"classEntId\":15\r\n}",
+									"raw": "{\r\n    \"vote\": 5.5,\r\n    \"date\": \"2021-12-07\",\r\n    \"studenId\":1,\r\n    \"subjectId\":1,\r\n    \"teacherId\":1,\r\n    \"classEntId\":1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1946,7 +2071,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/votes/getAllVoteStudent/2",
+									"raw": "http://localhost:9191/class/v1/votes/getAllVoteStudent/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1957,7 +2082,7 @@
 										"v1",
 										"votes",
 										"getAllVoteStudent",
-										"2"
+										"1"
 									]
 								}
 							},
@@ -1969,7 +2094,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/votes/getAllVoteClass/15",
+									"raw": "http://localhost:9191/class/v1/votes/getAllVoteClass/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1980,7 +2105,7 @@
 										"v1",
 										"votes",
 										"getAllVoteClass",
-										"15"
+										"1"
 									]
 								}
 							},
@@ -1992,7 +2117,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/votes/getAllVoteTeacher/2",
+									"raw": "http://localhost:9191/class/v1/votes/getAllVoteTeacher/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -2003,7 +2128,7 @@
 										"v1",
 										"votes",
 										"getAllVoteTeacher",
-										"2"
+										"1"
 									]
 								}
 							},
@@ -2046,7 +2171,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/votes/getById/5",
+									"raw": "http://localhost:9191/class/v1/votes/getById/6",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -2057,7 +2182,7 @@
 										"v1",
 										"votes",
 										"getById",
-										"5"
+										"6"
 									]
 								}
 							},
@@ -2069,7 +2194,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9191/class/v1/votes/deleteVote/4",
+									"raw": "http://localhost:9191/class/v1/votes/deleteVote/6",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -2080,7 +2205,7 @@
 										"v1",
 										"votes",
 										"deleteVote",
-										"4"
+										"6"
 									]
 								}
 							},
